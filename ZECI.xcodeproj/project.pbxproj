@@ -53,6 +53,7 @@
 		5EA183AC212125D5009C6675 /* ZMeasureNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183AB212125D5009C6675 /* ZMeasureNavView.m */; };
 		5EA183AF212126F0009C6675 /* ZMeasureTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183AE212126F0009C6675 /* ZMeasureTopView.m */; };
 		5EA183B221212F61009C6675 /* ZMeasureListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183B121212F61009C6675 /* ZMeasureListCell.m */; };
+		5EA183B521213618009C6675 /* ZMeasureEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183B421213618009C6675 /* ZMeasureEditView.m */; };
 		5EFD36A720E0EBB400B68054 /* ZHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFD36A620E0EBB400B68054 /* ZHomeVC.m */; };
 /* End PBXBuildFile section */
 
@@ -168,6 +169,8 @@
 		5EA183AE212126F0009C6675 /* ZMeasureTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureTopView.m; sourceTree = "<group>"; };
 		5EA183B021212F61009C6675 /* ZMeasureListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureListCell.h; sourceTree = "<group>"; };
 		5EA183B121212F61009C6675 /* ZMeasureListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureListCell.m; sourceTree = "<group>"; };
+		5EA183B321213618009C6675 /* ZMeasureEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureEditView.h; sourceTree = "<group>"; };
+		5EA183B421213618009C6675 /* ZMeasureEditView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureEditView.m; sourceTree = "<group>"; };
 		5EFD36A520E0EBB400B68054 /* ZHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHomeVC.h; sourceTree = "<group>"; };
 		5EFD36A620E0EBB400B68054 /* ZHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeVC.m; sourceTree = "<group>"; };
 		EAB9672F618F8828765F44A5 /* Pods-ZECI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZECI.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZECI/Pods-ZECI.release.xcconfig"; sourceTree = "<group>"; };
@@ -506,6 +509,8 @@
 				5EA183AE212126F0009C6675 /* ZMeasureTopView.m */,
 				5EA183B021212F61009C6675 /* ZMeasureListCell.h */,
 				5EA183B121212F61009C6675 /* ZMeasureListCell.m */,
+				5EA183B321213618009C6675 /* ZMeasureEditView.h */,
+				5EA183B421213618009C6675 /* ZMeasureEditView.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -707,6 +712,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EA183B521213618009C6675 /* ZMeasureEditView.m in Sources */,
 				5EA183A92121252E009C6675 /* ZMeasureVC.m in Sources */,
 				5E48F8D920C6542E00422A6F /* ViewController.m in Sources */,
 				5EA183AC212125D5009C6675 /* ZMeasureNavView.m in Sources */,

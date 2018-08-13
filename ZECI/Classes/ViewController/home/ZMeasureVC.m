@@ -14,9 +14,12 @@
 
 #import "ZMeasureListCell.h"
 
+#import "ZMeasureEditView.h"
+
 @interface ZMeasureVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) ZMeasureNavView *navView;
 @property (nonatomic,strong) ZMeasureTopView *topView;
+@property (nonatomic,strong) ZMeasureEditView *editView;
 
 @property (nonatomic,strong) UITableView *iTableView;
 
@@ -85,7 +88,14 @@
     return _topView;
 }
 
--(UITableView *)iTableView {
+- (ZMeasureEditView *)editView {
+    if (!_editView) {
+        _editView = [[ZMeasureEditView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH)];
+    }
+    return _editView;
+}
+
+- (UITableView *)iTableView {
     if (!_iTableView) {
         _iTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _iTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -117,9 +127,10 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak typeof(self) weakSelf = self;
     ZMeasureListCell *cell = [ZMeasureListCell z_cellWithTableView:tableView];
     cell.editBlock = ^(NSInteger index) {
-        
+        [weakSelf.view addSubview:weakSelf.editView];
     };
     return cell;
 }
