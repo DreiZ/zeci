@@ -63,8 +63,14 @@
 
 - (UIButton *)blueToothBtn {
     if (!_blueToothBtn) {
+        __weak typeof(self) weakSelf = self;
         _blueToothBtn = [[UIButton alloc] initWithFrame:CGRectZero];
         [_blueToothBtn setImage:[UIImage imageNamed:@"lanya"] forState:UIControlStateNormal];
+        [_blueToothBtn bk_addEventHandler:^(id sender) {
+            if (weakSelf.topSelectBlock) {
+                weakSelf.topSelectBlock(0);
+            }
+        } forControlEvents:UIControlEventTouchUpInside];
     }
     return _blueToothBtn;
 }
@@ -74,6 +80,12 @@
     if (!_listBtn) {
         _listBtn = [[UIButton alloc] initWithFrame:CGRectZero];
         [_listBtn setImage:[UIImage imageNamed:@"jilu"] forState:UIControlStateNormal];
+        __weak typeof(self) weakSelf = self;
+        [_listBtn bk_addEventHandler:^(id sender) {
+            if (weakSelf.topSelectBlock) {
+                weakSelf.topSelectBlock(2);
+            }
+        } forControlEvents:UIControlEventTouchUpInside];
     }
     return _listBtn;
 }
@@ -82,6 +94,12 @@
     if (!_companyBtn) {
         _companyBtn = [[UIButton alloc] initWithFrame:CGRectZero];
         [_companyBtn setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+        __weak typeof(self) weakSelf = self;
+        [_companyBtn bk_addEventHandler:^(id sender) {
+            if (weakSelf.topSelectBlock) {
+                weakSelf.topSelectBlock(1);
+            }
+        } forControlEvents:UIControlEventTouchUpInside];
     }
     return _companyBtn;
 }

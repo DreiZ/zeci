@@ -11,6 +11,8 @@
 #import "ZHomeConectCell.h"
 #import "ZHomeBluetoothListCell.h"
 
+#import "ZCompanyInfoVC.h"
+
 @interface ZHomeVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic,strong) UITableView *iTableView;
 @property (nonatomic,strong) ZHomeNavView *navView;
@@ -60,7 +62,14 @@
 #pragma mark lazy loading...
 -(ZHomeNavView *)navView {
     if (!_navView) {
+        __weak typeof(self) weakSelf = self;
         _navView = [[ZHomeNavView alloc] init];
+        _navView.topSelectBlock = ^(NSInteger index) {
+            if (index == 1) {
+                ZCompanyInfoVC *companyVC = [[ZCompanyInfoVC alloc] init];
+                [weakSelf.navigationController pushViewController:companyVC animated:YES];
+            }
+        };
     }
     return _navView;
 }

@@ -9,5 +9,5 @@
 #import "ZBaseView.h"
 
 @interface ZHomeNavView : ZBaseView
-
+@property (nonatomic,strong) void (^topSelectBlock)(NSInteger);
 @end

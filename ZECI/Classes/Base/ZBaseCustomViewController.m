@@ -31,15 +31,19 @@
 
 - (void)setupNavBar {
     [self.view addSubview:self.customNavBar];
+    [self.customNavBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self.view);
+        make.height.mas_equalTo(kSafeAreaTopHeight);
+    }];
     
     // 设置自定义导航栏背景图片
-    self.customNavBar.barBackgroundImage = [UIImage imageWithColor:[UIColor redColor]];
+    self.customNavBar.barBackgroundImage = [UIImage imageWithColor:kMainColor];
     
     // 设置自定义导航栏标题颜色
     self.customNavBar.titleLabelColor = [UIColor whiteColor];
     
     if (self.navigationController.childViewControllers.count != 1) {
-        [self.customNavBar wr_setLeftButtonWithTitle:@"<<" titleColor:[UIColor whiteColor]];
+        [self.customNavBar wr_setLeftButtonWithImage:[UIImage imageNamed:@"fanhuiyi"]];
     }
 }
 

@@ -45,6 +45,7 @@
 		5E543DF5211830A900EB3830 /* UITableViewCell+ZCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF1211830A900EB3830 /* UITableViewCell+ZCategory.m */; };
 		5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF72118331000EB3830 /* ZSpaceCell.m */; };
 		5E5D891B20E1D2EF0096536C /* UIView+Radio.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D891920E1D2EF0096536C /* UIView+Radio.m */; };
+		5EA1839D2121136A009C6675 /* ZCompanyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */; };
 		5EFD36A720E0EBB400B68054 /* ZHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFD36A620E0EBB400B68054 /* ZHomeVC.m */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +145,8 @@
 		5E543DF82118331000EB3830 /* ZSpaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSpaceCell.h; sourceTree = "<group>"; };
 		5E5D891920E1D2EF0096536C /* UIView+Radio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Radio.m"; sourceTree = "<group>"; };
 		5E5D891A20E1D2EF0096536C /* UIView+Radio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Radio.h"; sourceTree = "<group>"; };
+		5EA1839B2121136A009C6675 /* ZCompanyInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZCompanyInfoVC.h; sourceTree = "<group>"; };
+		5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCompanyInfoVC.m; sourceTree = "<group>"; };
 		5EFD36A520E0EBB400B68054 /* ZHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHomeVC.h; sourceTree = "<group>"; };
 		5EFD36A620E0EBB400B68054 /* ZHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeVC.m; sourceTree = "<group>"; };
 		EAB9672F618F8828765F44A5 /* Pods-ZECI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZECI.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZECI/Pods-ZECI.release.xcconfig"; sourceTree = "<group>"; };
@@ -446,6 +449,8 @@
 			children = (
 				5EFD36A520E0EBB400B68054 /* ZHomeVC.h */,
 				5EFD36A620E0EBB400B68054 /* ZHomeVC.m */,
+				5EA1839B2121136A009C6675 /* ZCompanyInfoVC.h */,
+				5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -696,6 +701,7 @@
 				5E4D81ED20C7C5C2002A12E2 /* NSObject+Hint.m in Sources */,
 				5E48F8E420C6542F00422A6F /* main.m in Sources */,
 				5E3EFF1320C8CE8B005E3E3E /* ZAdvertiseHelper.m in Sources */,
+				5EA1839D2121136A009C6675 /* ZCompanyInfoVC.m in Sources */,
 				5E48F8D620C6542E00422A6F /* AppDelegate.m in Sources */,
 				5E48F91820C67BD300422A6F /* WRCustomNavigationBar.m in Sources */,
 				5E093040211EE55100AA98DC /* ZHomeConectCell.m in Sources */,
