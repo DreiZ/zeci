@@ -12,6 +12,7 @@
 #import "ZHomeBluetoothListCell.h"
 
 #import "ZCompanyInfoVC.h"
+#import "ZDataListVC.h"
 
 @interface ZHomeVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic,strong) UITableView *iTableView;
@@ -68,11 +69,15 @@
             if (index == 1) {
                 ZCompanyInfoVC *companyVC = [[ZCompanyInfoVC alloc] init];
                 [weakSelf.navigationController pushViewController:companyVC animated:YES];
+            }else if (index == 2){
+                ZDataListVC *listVC = [[ZDataListVC alloc] init];
+                [weakSelf.navigationController pushViewController:listVC animated:YES];
             }
         };
     }
     return _navView;
 }
+
 -(UITableView *)iTableView {
     if (!_iTableView) {
         _iTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];

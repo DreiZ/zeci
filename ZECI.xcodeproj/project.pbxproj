@@ -46,6 +46,9 @@
 		5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF72118331000EB3830 /* ZSpaceCell.m */; };
 		5E5D891B20E1D2EF0096536C /* UIView+Radio.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D891920E1D2EF0096536C /* UIView+Radio.m */; };
 		5EA1839D2121136A009C6675 /* ZCompanyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */; };
+		5EA183A0212119C3009C6675 /* ZDataListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1839F212119C3009C6675 /* ZDataListVC.m */; };
+		5EA183A321211AE7009C6675 /* ZDataListSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183A221211AE7009C6675 /* ZDataListSearchView.m */; };
+		5EA183A62121213F009C6675 /* ZDataListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183A52121213F009C6675 /* ZDataListCell.m */; };
 		5EFD36A720E0EBB400B68054 /* ZHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFD36A620E0EBB400B68054 /* ZHomeVC.m */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +150,12 @@
 		5E5D891A20E1D2EF0096536C /* UIView+Radio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Radio.h"; sourceTree = "<group>"; };
 		5EA1839B2121136A009C6675 /* ZCompanyInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZCompanyInfoVC.h; sourceTree = "<group>"; };
 		5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCompanyInfoVC.m; sourceTree = "<group>"; };
+		5EA1839E212119C3009C6675 /* ZDataListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataListVC.h; sourceTree = "<group>"; };
+		5EA1839F212119C3009C6675 /* ZDataListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDataListVC.m; sourceTree = "<group>"; };
+		5EA183A121211AE7009C6675 /* ZDataListSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataListSearchView.h; sourceTree = "<group>"; };
+		5EA183A221211AE7009C6675 /* ZDataListSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDataListSearchView.m; sourceTree = "<group>"; };
+		5EA183A42121213F009C6675 /* ZDataListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataListCell.h; sourceTree = "<group>"; };
+		5EA183A52121213F009C6675 /* ZDataListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDataListCell.m; sourceTree = "<group>"; };
 		5EFD36A520E0EBB400B68054 /* ZHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHomeVC.h; sourceTree = "<group>"; };
 		5EFD36A620E0EBB400B68054 /* ZHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeVC.m; sourceTree = "<group>"; };
 		EAB9672F618F8828765F44A5 /* Pods-ZECI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZECI.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZECI/Pods-ZECI.release.xcconfig"; sourceTree = "<group>"; };
@@ -451,6 +460,8 @@
 				5EFD36A620E0EBB400B68054 /* ZHomeVC.m */,
 				5EA1839B2121136A009C6675 /* ZCompanyInfoVC.h */,
 				5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */,
+				5EA1839E212119C3009C6675 /* ZDataListVC.h */,
+				5EA1839F212119C3009C6675 /* ZDataListVC.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -471,6 +482,10 @@
 				5E09303C211ECD6A00AA98DC /* ZHomeBluetoothListCell.m */,
 				5E09303E211EE55100AA98DC /* ZHomeConectCell.h */,
 				5E09303F211EE55100AA98DC /* ZHomeConectCell.m */,
+				5EA183A121211AE7009C6675 /* ZDataListSearchView.h */,
+				5EA183A221211AE7009C6675 /* ZDataListSearchView.m */,
+				5EA183A42121213F009C6675 /* ZDataListCell.h */,
+				5EA183A52121213F009C6675 /* ZDataListCell.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -678,8 +693,10 @@
 				5E3EFF0920C8C839005E3E3E /* ZIntroductryPagesManager.m in Sources */,
 				5E4D81E920C7C592002A12E2 /* iCarousel.m in Sources */,
 				5E48F93F20C694E000422A6F /* NSArray+LYNil.m in Sources */,
+				5EA183A0212119C3009C6675 /* ZDataListVC.m in Sources */,
 				5E48F92620C67E8A00422A6F /* ZBaseViewController.m in Sources */,
 				5E48F92F20C6800000422A6F /* ZBaseNavigationController.m in Sources */,
+				5EA183A321211AE7009C6675 /* ZDataListSearchView.m in Sources */,
 				5E09303D211ECD6A00AA98DC /* ZHomeBluetoothListCell.m in Sources */,
 				5E4D81F020C7CA27002A12E2 /* ZBaseModel.m in Sources */,
 				5E48F93220C68D1400422A6F /* ZBaseCustomViewController.m in Sources */,
@@ -706,6 +723,7 @@
 				5E48F91820C67BD300422A6F /* WRCustomNavigationBar.m in Sources */,
 				5E093040211EE55100AA98DC /* ZHomeConectCell.m in Sources */,
 				5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */,
+				5EA183A62121213F009C6675 /* ZDataListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
