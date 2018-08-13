@@ -10,6 +10,7 @@
 #import "ZDataListSearchView.h"
 
 #import "ZDataListCell.h"
+#import "ZDataLineChatVC.h"
 
 @interface ZDataListVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic,strong) ZDataListSearchView *searchView;
@@ -110,6 +111,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    ZDataLineChatVC *chatvc = [[ZDataLineChatVC alloc] init];
+    [self.navigationController pushViewController:chatvc animated:YES];
 }
 @end

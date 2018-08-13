@@ -54,6 +54,12 @@
 		5EA183AF212126F0009C6675 /* ZMeasureTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183AE212126F0009C6675 /* ZMeasureTopView.m */; };
 		5EA183B221212F61009C6675 /* ZMeasureListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183B121212F61009C6675 /* ZMeasureListCell.m */; };
 		5EA183B521213618009C6675 /* ZMeasureEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183B421213618009C6675 /* ZMeasureEditView.m */; };
+		5EA183B821216C67009C6675 /* ZDataLineChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183B721216C67009C6675 /* ZDataLineChatVC.m */; };
+		5EA183BB21216EEE009C6675 /* ZDataLineChatInfomationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183BA21216EEE009C6675 /* ZDataLineChatInfomationView.m */; };
+		5EA183C52121736B009C6675 /* LFAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183BE2121736B009C6675 /* LFAxisView.m */; };
+		5EA183C62121736B009C6675 /* LFChartLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183C02121736B009C6675 /* LFChartLineView.m */; };
+		5EA183C72121736B009C6675 /* LFCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183C22121736B009C6675 /* LFCircleView.m */; };
+		5EA183C82121736B009C6675 /* LFLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183C42121736B009C6675 /* LFLineChart.m */; };
 		5EFD36A720E0EBB400B68054 /* ZHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFD36A620E0EBB400B68054 /* ZHomeVC.m */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +177,18 @@
 		5EA183B121212F61009C6675 /* ZMeasureListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureListCell.m; sourceTree = "<group>"; };
 		5EA183B321213618009C6675 /* ZMeasureEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureEditView.h; sourceTree = "<group>"; };
 		5EA183B421213618009C6675 /* ZMeasureEditView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureEditView.m; sourceTree = "<group>"; };
+		5EA183B621216C67009C6675 /* ZDataLineChatVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataLineChatVC.h; sourceTree = "<group>"; };
+		5EA183B721216C67009C6675 /* ZDataLineChatVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDataLineChatVC.m; sourceTree = "<group>"; };
+		5EA183B921216EEE009C6675 /* ZDataLineChatInfomationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataLineChatInfomationView.h; sourceTree = "<group>"; };
+		5EA183BA21216EEE009C6675 /* ZDataLineChatInfomationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDataLineChatInfomationView.m; sourceTree = "<group>"; };
+		5EA183BD2121736B009C6675 /* LFAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFAxisView.h; sourceTree = "<group>"; };
+		5EA183BE2121736B009C6675 /* LFAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFAxisView.m; sourceTree = "<group>"; };
+		5EA183BF2121736B009C6675 /* LFChartLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFChartLineView.h; sourceTree = "<group>"; };
+		5EA183C02121736B009C6675 /* LFChartLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFChartLineView.m; sourceTree = "<group>"; };
+		5EA183C12121736B009C6675 /* LFCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFCircleView.h; sourceTree = "<group>"; };
+		5EA183C22121736B009C6675 /* LFCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFCircleView.m; sourceTree = "<group>"; };
+		5EA183C32121736B009C6675 /* LFLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLineChart.h; sourceTree = "<group>"; };
+		5EA183C42121736B009C6675 /* LFLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLineChart.m; sourceTree = "<group>"; };
 		5EFD36A520E0EBB400B68054 /* ZHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHomeVC.h; sourceTree = "<group>"; };
 		5EFD36A620E0EBB400B68054 /* ZHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeVC.m; sourceTree = "<group>"; };
 		EAB9672F618F8828765F44A5 /* Pods-ZECI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZECI.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZECI/Pods-ZECI.release.xcconfig"; sourceTree = "<group>"; };
@@ -341,6 +359,7 @@
 		5E48F90D20C673A200422A6F /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				5EA183BC2121736B009C6675 /* LFLineChart */,
 				5E4D81E620C7C592002A12E2 /* iCarousel */,
 				5E48F91320C67BD300422A6F /* WRNavigationBar */,
 			);
@@ -468,6 +487,21 @@
 			path = "UIView+Radio";
 			sourceTree = "<group>";
 		};
+		5EA183BC2121736B009C6675 /* LFLineChart */ = {
+			isa = PBXGroup;
+			children = (
+				5EA183BD2121736B009C6675 /* LFAxisView.h */,
+				5EA183BE2121736B009C6675 /* LFAxisView.m */,
+				5EA183BF2121736B009C6675 /* LFChartLineView.h */,
+				5EA183C02121736B009C6675 /* LFChartLineView.m */,
+				5EA183C12121736B009C6675 /* LFCircleView.h */,
+				5EA183C22121736B009C6675 /* LFCircleView.m */,
+				5EA183C32121736B009C6675 /* LFLineChart.h */,
+				5EA183C42121736B009C6675 /* LFLineChart.m */,
+			);
+			path = LFLineChart;
+			sourceTree = "<group>";
+		};
 		5EFD369B20E0E10700B68054 /* home */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +513,8 @@
 				5EA1839F212119C3009C6675 /* ZDataListVC.m */,
 				5EA183A72121252E009C6675 /* ZMeasureVC.h */,
 				5EA183A82121252E009C6675 /* ZMeasureVC.m */,
+				5EA183B621216C67009C6675 /* ZDataLineChatVC.h */,
+				5EA183B721216C67009C6675 /* ZDataLineChatVC.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -511,6 +547,8 @@
 				5EA183B121212F61009C6675 /* ZMeasureListCell.m */,
 				5EA183B321213618009C6675 /* ZMeasureEditView.h */,
 				5EA183B421213618009C6675 /* ZMeasureEditView.m */,
+				5EA183B921216EEE009C6675 /* ZDataLineChatInfomationView.h */,
+				5EA183BA21216EEE009C6675 /* ZDataLineChatInfomationView.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -715,12 +753,14 @@
 				5EA183B521213618009C6675 /* ZMeasureEditView.m in Sources */,
 				5EA183A92121252E009C6675 /* ZMeasureVC.m in Sources */,
 				5E48F8D920C6542E00422A6F /* ViewController.m in Sources */,
+				5EA183C72121736B009C6675 /* LFCircleView.m in Sources */,
 				5EA183AC212125D5009C6675 /* ZMeasureNavView.m in Sources */,
 				5E3EFF0C20C8C971005E3E3E /* ZIntroductryPagesView.m in Sources */,
 				5E543DEB21182FA200EB3830 /* ZCellConfig.m in Sources */,
 				5E3EFF0920C8C839005E3E3E /* ZIntroductryPagesManager.m in Sources */,
 				5E4D81E920C7C592002A12E2 /* iCarousel.m in Sources */,
 				5E48F93F20C694E000422A6F /* NSArray+LYNil.m in Sources */,
+				5EA183C62121736B009C6675 /* LFChartLineView.m in Sources */,
 				5EA183A0212119C3009C6675 /* ZDataListVC.m in Sources */,
 				5E48F92620C67E8A00422A6F /* ZBaseViewController.m in Sources */,
 				5E48F92F20C6800000422A6F /* ZBaseNavigationController.m in Sources */,
@@ -730,6 +770,7 @@
 				5E48F93220C68D1400422A6F /* ZBaseCustomViewController.m in Sources */,
 				5EFD36A720E0EBB400B68054 /* ZHomeVC.m in Sources */,
 				5E48F92C20C67FA100422A6F /* ZBaseCell.m in Sources */,
+				5EA183C82121736B009C6675 /* LFLineChart.m in Sources */,
 				5E48F94120C694E000422A6F /* NSMutableArray+LYNil.m in Sources */,
 				5E48F94220C694E000422A6F /* NSMutableDictionary+LYNil.m in Sources */,
 				5E09303A211EB54B00AA98DC /* ZHomeNavView.m in Sources */,
@@ -747,13 +788,16 @@
 				5E4D81F320C7CB59002A12E2 /* ZBaseViewModel.m in Sources */,
 				5E4D81ED20C7C5C2002A12E2 /* NSObject+Hint.m in Sources */,
 				5E48F8E420C6542F00422A6F /* main.m in Sources */,
+				5EA183BB21216EEE009C6675 /* ZDataLineChatInfomationView.m in Sources */,
 				5E3EFF1320C8CE8B005E3E3E /* ZAdvertiseHelper.m in Sources */,
 				5EA1839D2121136A009C6675 /* ZCompanyInfoVC.m in Sources */,
 				5E48F8D620C6542E00422A6F /* AppDelegate.m in Sources */,
 				5E48F91820C67BD300422A6F /* WRCustomNavigationBar.m in Sources */,
+				5EA183C52121736B009C6675 /* LFAxisView.m in Sources */,
 				5E093040211EE55100AA98DC /* ZHomeConectCell.m in Sources */,
 				5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */,
 				5EA183A62121213F009C6675 /* ZDataListCell.m in Sources */,
+				5EA183B821216C67009C6675 /* ZDataLineChatVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
