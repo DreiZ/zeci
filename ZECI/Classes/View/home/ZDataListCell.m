@@ -15,7 +15,6 @@
 
 @implementation ZDataListCell
 
-
 + (instancetype)cellWithTableView:(UITableView *)tableView {
     static NSString *identifier = @"ZDataListCell";
     

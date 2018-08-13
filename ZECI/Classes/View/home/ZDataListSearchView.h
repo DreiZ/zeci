@@ -11,5 +11,4 @@
 @interface ZDataListSearchView : ZBaseView
 @property (strong, nonatomic) void (^valueChange)(NSString *value);
 @property (strong, nonatomic) void (^searchBlock)(NSString *value);
-
 @end

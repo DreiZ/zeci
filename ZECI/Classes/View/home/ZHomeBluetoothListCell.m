@@ -15,7 +15,6 @@
 
 @implementation ZHomeBluetoothListCell
 
-
 + (instancetype)cellWithTableView:(UITableView *)tableView {
     static NSString *identifier = @"ZHomeBluetoothListCell";
     

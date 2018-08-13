@@ -10,11 +10,9 @@
 
 @interface ZHomeConectCell ()
 @property (nonatomic,strong) UILabel *bluetoothLabel;
-
 @end
 
 @implementation ZHomeConectCell
-
 
 + (instancetype)cellWithTableView:(UITableView *)tableView {
     static NSString *identifier = @"ZHomeConectCell";

@@ -9,5 +9,4 @@
 #import "ZBaseCell.h"
 
 @interface ZHomeBluetoothListCell : ZBaseCell
-
 @end

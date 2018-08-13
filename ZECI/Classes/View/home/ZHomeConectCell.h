@@ -9,5 +9,4 @@
 #import "ZBaseCell.h"
 
 @interface ZHomeConectCell : ZBaseCell
-
 @end

@@ -10,8 +10,6 @@
 
 @interface ZDataListSearchView ()<UITextFieldDelegate>
 @property (nonatomic,strong) UITextField *searchTextField;
-
-
 @end
 
 @implementation ZDataListSearchView
