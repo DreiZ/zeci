@@ -1,69 +1,67 @@
 //
-//  ZHomeVC.m
+//  ZMeasureVC.m
 //  ZECI
 //
-//  Created by zzz on 2018/6/25.
+//  Created by zzz on 2018/8/13.
 //  Copyright © 2018年 zzz. All rights reserved.
 //
 
-#import "ZHomeVC.h"
-#import "ZHomeNavView.h"
-#import "ZHomeConectCell.h"
-#import "ZHomeBluetoothListCell.h"
-
+#import "ZMeasureVC.h"
+#import "ZMeasureNavView.h"
 #import "ZCompanyInfoVC.h"
 #import "ZDataListVC.h"
-#import "ZMeasureVC.h"
+#import "ZMeasureTopView.h"
 
-@interface ZHomeVC ()<UITableViewDelegate, UITableViewDataSource>
+#import "ZMeasureListCell.h"
+
+@interface ZMeasureVC ()<UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic,strong) ZMeasureNavView *navView;
+@property (nonatomic,strong) ZMeasureTopView *topView;
+
 @property (nonatomic,strong) UITableView *iTableView;
-@property (nonatomic,strong) ZHomeNavView *navView;
 
 @end
 
-@implementation ZHomeVC
-
-+(UINavigationController *)defaultNavi {
-    
-    ZHomeVC *homevc = [[ZHomeVC alloc] init];
-    
-    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:homevc];
-    
-    return navi;
-}
+@implementation ZMeasureVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setupNavigationView];
-    [self setUI];
+    [self setMainView];
 }
+
 
 - (void)setupNavigationView {
     self.customNavBar.hidden = YES;
-    
     self.view.backgroundColor = kBackColor;
 }
 
-- (void)setUI {
+- (void)setMainView {
     [self.view addSubview:self.navView];
     [self.navView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.view);
         make.height.mas_equalTo(kSafeAreaTopHeight);
     }];
     
+    [self.view addSubview:self.topView];
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(self.navView.mas_bottom);
+        make.height.mas_equalTo(CGFloatIn750(434));
+    }];
+    
     [self.view addSubview:self.iTableView];
     [self.iTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.equalTo(self.view);
-        make.top.equalTo(self.navView.mas_bottom).offset(10);
+        make.top.equalTo(self.topView.mas_bottom).offset(0);
     }];
 }
 
 #pragma mark lazy loading...
--(ZHomeNavView *)navView {
+-(ZMeasureNavView *)navView {
     if (!_navView) {
         __weak typeof(self) weakSelf = self;
-        _navView = [[ZHomeNavView alloc] init];
+        _navView = [[ZMeasureNavView alloc] init];
         _navView.topSelectBlock = ^(NSInteger index) {
             if (index == 1) {
                 ZCompanyInfoVC *companyVC = [[ZCompanyInfoVC alloc] init];
@@ -71,10 +69,20 @@
             }else if (index == 2){
                 ZDataListVC *listVC = [[ZDataListVC alloc] init];
                 [weakSelf.navigationController pushViewController:listVC animated:YES];
+            }else{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             }
         };
     }
     return _navView;
+}
+
+- (ZMeasureTopView *)topView {
+    if (!_topView) {
+        _topView = [[ZMeasureTopView alloc] init];
+    }
+    
+    return _topView;
 }
 
 -(UITableView *)iTableView {
@@ -93,8 +101,7 @@
             }
         } else {
             self.automaticallyAdjustsScrollViewInsets = NO;
-        }
-        _iTableView.delegate = self;
+        } _iTableView.delegate = self;
         _iTableView.dataSource = self;
     }
     return _iTableView;
@@ -102,42 +109,27 @@
 
 #pragma mark tableView -------datasource-----
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 1;
-    }else{
-        return 5;
-    }
+    return 10;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        ZHomeConectCell *cell = [ZHomeConectCell z_cellWithTableView:tableView];
+    ZMeasureListCell *cell = [ZMeasureListCell z_cellWithTableView:tableView];
+    cell.editBlock = ^(NSInteger index) {
         
-        return cell;
-    }else{
-        ZHomeBluetoothListCell *cell = [ZHomeBluetoothListCell z_cellWithTableView:tableView];
-        
-        return cell;
-    }
+    };
+    return cell;
 }
 
 #pragma mark tableView ------delegate-----
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return [ZHomeConectCell z_getCellHeight:nil];
-    }else{
-        return [ZHomeBluetoothListCell z_getCellHeight:nil];
-    }
+    return [ZMeasureListCell z_getCellHeight:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        return 40;
-    }
     return 0.01f;
 }
 
@@ -145,35 +137,7 @@
     return 0.01f;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, 40)];
-        sectionView.backgroundColor = kBackColor;
-        sectionView.clipsToBounds = YES;
-        
-        
-        UILabel *hintLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        hintLabel.textColor = kFont3Color;
-        hintLabel.text = @"可连接设备";
-        hintLabel.numberOfLines = 0;
-        hintLabel.textAlignment = NSTextAlignmentLeft;
-        [hintLabel setFont:[UIFont systemFontOfSize:13.0f]];
-        [sectionView addSubview:hintLabel];
-        [hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.equalTo(sectionView);
-            make.left.equalTo(sectionView.mas_left).offset(10);
-        }];
-        
-        return sectionView;
-       
-    }
-    return nil;
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        ZMeasureVC *svc = [[ZMeasureVC alloc] init];
-        [self.navigationController pushViewController:svc animated:YES];
-    }
+    
 }
 @end
