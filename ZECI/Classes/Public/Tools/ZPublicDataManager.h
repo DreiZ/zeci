@@ -10,6 +10,9 @@
 #import "ZBaseModel.h"
 
 @interface ZPublicDataManager : NSObject
++ (ZPublicDataManager *)shareInstance;
+
+
 -(BOOL)insertOrUpdateModel:(NSObject *)modelData;
 -(BOOL)addOrUpdateModel:(ZBaseModel *)modelData;
 -(void)addOrUpdateModelBlcok:(ZBaseModel *)modelData
