@@ -23,4 +23,5 @@
 + (NSString *)timeWithStr:(NSString *)timeStr format:(NSString *)format;
 
 + (BOOL)getIsIpad;
++ (NSInteger)getNowTimestamp;
 @end

@@ -7,7 +7,9 @@
 //
 
 #import "ZBaseCell.h"
-
+#import "ZHomeModel.h"
 @interface ZMeasureListCell : ZBaseCell
+@property (nonatomic,strong) ZSingeData *singeData;
+
 @property (nonatomic,strong) void (^editBlock)(NSInteger);
 @end

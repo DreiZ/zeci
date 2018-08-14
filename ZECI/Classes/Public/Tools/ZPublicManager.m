@@ -105,20 +105,6 @@
     return stringTextSize;
 }
 
-+(NSString *)timeWithStr:(NSString *)timeStr format:(NSString *)format
-{
-    NSTimeInterval time= [timeStr integerValue] + 28800;//因为时差问题要加8小时 == 28800 sec
-    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
-    //实例化一个NSDateFormatter对象
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //设定时间格式,这里可以设置成自己需要的格式
-    [dateFormatter setDateFormat:format];
-    
-    NSString *currentDateStr = [dateFormatter stringFromDate:detaildate];
-    return currentDateStr;
-}
-
-
 + (BOOL)getIsIpad {
     NSString *deviceType = [UIDevice currentDevice].model;
     
@@ -141,4 +127,44 @@
     }
     return NO;
 }
+
+#pragma mark time
++(NSInteger)getNowTimestamp {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    
+    //设置时区,这个对于时间的处理有时很重要
+    
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    
+    [formatter setTimeZone:timeZone];
+    
+    NSDate *datenow = [NSDate date];//现在时间
+    NSLog(@"设备当前的时间:%@",[formatter stringFromDate:datenow]);
+    
+    //时间转时间戳的方法:
+    NSInteger timeSp = [[NSNumber numberWithDouble:[datenow timeIntervalSince1970]] integerValue];
+    NSLog(@"设备当前的时间戳:%ld",(long)timeSp); //时间戳的值
+    
+    return timeSp;
+}
+
+
++(NSString *)timeWithStr:(NSString *)timeStr format:(NSString *)format {
+    NSTimeInterval time= [timeStr integerValue] ;//因为时差问题要加8小时 == 28800 sec
+    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:format];
+    
+    NSString *currentDateStr = [dateFormatter stringFromDate:detaildate];
+    return currentDateStr;
+}
+
 @end

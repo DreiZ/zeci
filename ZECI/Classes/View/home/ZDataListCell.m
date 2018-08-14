@@ -54,7 +54,7 @@
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(self.mas_right).offset([ZPublicManager getIsIpad] ? - 20:-15);
-        make.width.mas_equalTo(CGFloatIn750(84));
+        make.width.mas_equalTo(CGFloatIn750(124));
     }];
     
     [self.contentView addSubview:self.detaiLabel];

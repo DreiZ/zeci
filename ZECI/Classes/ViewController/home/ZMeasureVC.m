@@ -15,6 +15,7 @@
 #import "ZMeasureListCell.h"
 
 #import "ZMeasureEditView.h"
+#import "ZHomeViewModel.h"
 
 @interface ZMeasureVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) ZMeasureNavView *navView;
@@ -22,6 +23,7 @@
 @property (nonatomic,strong) ZMeasureEditView *editView;
 
 @property (nonatomic,strong) UITableView *iTableView;
+@property (nonatomic,strong) ZSingeData *selectData;
 
 @end
 
@@ -31,6 +33,18 @@
     [super viewDidLoad];
     [self setupNavigationView];
     [self setMainView];
+    
+    UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    tempBtn.backgroundColor = [UIColor blackColor];
+    [tempBtn bk_addEventHandler:^(id sender) {
+        [self addData];
+    } forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:tempBtn];
+    [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(100);
+        make.left.equalTo(self.view.mas_left).offset(50);
+        make.top.equalTo(self.view.mas_top).offset(kSafeAreaTopHeight + 50);
+    }];
 }
 
 
@@ -130,7 +144,8 @@
             }
         } else {
             self.automaticallyAdjustsScrollViewInsets = NO;
-        } _iTableView.delegate = self;
+        }
+        _iTableView.delegate = self;
         _iTableView.dataSource = self;
     }
     return _iTableView;
@@ -142,12 +157,13 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return [ZHomeViewModel shareInstance].testPigs.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak typeof(self) weakSelf = self;
     ZMeasureListCell *cell = [ZMeasureListCell z_cellWithTableView:tableView];
+    cell.singeData = [ZHomeViewModel shareInstance].testPigs[indexPath.row];
     cell.editBlock = ^(NSInteger index) {
         [weakSelf.view addSubview:weakSelf.editView];
     };
@@ -168,7 +184,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSInteger tempTime = [ZPublicManager getNowTimestamp];
+    NSLog(@"zzz date  %ld",tempTime);
+    NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYY-MM-dd"]);
 }
 
 -(void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
@@ -203,5 +221,22 @@
             make.top.equalTo(self.topView.mas_bottom).offset(0);
         }];
     }
+}
+
+- (ZSingeData *)addData {
+    NSInteger tempTime = [ZPublicManager getNowTimestamp];
+    NSLog(@"zzz date  %ld",tempTime);
+    NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]);
+    
+    ZSingeData *tempPigData = [[ZSingeData alloc] init];
+    tempPigData.earTag =  [ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"];
+    tempPigData.testTime = [NSString stringWithFormat:@"%ld",tempTime];
+    tempPigData.firstNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
+    tempPigData.secondNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
+    tempPigData.thirdNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
+    self.selectData = tempPigData;
+    [[ZHomeViewModel shareInstance].testPigs addObject:tempPigData];
+    [self.iTableView reloadData];
+    return tempPigData;
 }
 @end
