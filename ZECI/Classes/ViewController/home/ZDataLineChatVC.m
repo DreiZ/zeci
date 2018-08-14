@@ -47,12 +47,12 @@
         [self.infomationView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.right.equalTo(self.view);
             make.top.equalTo(self.view).offset(kSafeAreaTopHeight+10);
-            make.width.mas_equalTo(180.0f);
+            make.width.mas_equalTo([ZPublicManager getIsIpad] ? 230:180);
         }];
     }else{
         [self.infomationView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.equalTo(self.view);
-            make.height.mas_equalTo(130.0f);
+            make.height.mas_equalTo([ZPublicManager getIsIpad] ? 150:130);
         }];
     }
 }
@@ -145,7 +145,7 @@
     self.lineChart.firstX = 12;
     self.lineChart.secondX = 24;
     
-    self.lineChart.xScaleMarkLEN = 45;
+    self.lineChart.xScaleMarkLEN = [ZPublicManager getIsIpad] ? 65:45;
     self.lineChart.yMarkTitles = @[[NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue],
                                    [NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue + (self.lineChart.maxValue - self.lineChart.minValue)/6],
                                    [NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*2/6],
@@ -248,17 +248,17 @@
         [self.infomationView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.bottom.right.equalTo(self.view);
             make.top.equalTo(self.view).offset(kSafeAreaTopHeight+10);
-            make.width.mas_equalTo(180.0f);
+            make.width.mas_equalTo([ZPublicManager getIsIpad] ? 230:180);
         }];
     }else{
         [self.infomationView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.equalTo(self.view);
-            make.height.mas_equalTo(130.0f);
+            make.height.mas_equalTo([ZPublicManager getIsIpad] ? 150:130);
         }];
     }
     
     if (self.isHorizontal) {
-        self.lineChart.frame = CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-180-12, kWindowH - 30 - kSafeAreaTopHeight);
+        self.lineChart.frame = CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-([ZPublicManager getIsIpad] ? 230:180)-12, kWindowH - 30 - kSafeAreaTopHeight);
         [self.lineChart mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view.mas_left).offset(0);
             make.right.equalTo(self.infomationView.mas_left).offset(-12);
@@ -266,7 +266,7 @@
             make.bottom.equalTo(self.view.mas_bottom).offset(-10);
         }];
     }else{
-        self.lineChart.frame = CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-12, kWindowH - 150 - kSafeAreaTopHeight);
+        self.lineChart.frame = CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-12, kWindowH - ([ZPublicManager getIsIpad] ? 150:130) - 20 - kSafeAreaTopHeight);
         [self.lineChart mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view.mas_left).offset(0);
             make.right.equalTo(self.view.mas_right).offset(-12);

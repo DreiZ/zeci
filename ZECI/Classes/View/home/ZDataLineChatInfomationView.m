@@ -33,7 +33,7 @@
     [self addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).offset(0);
-        make.right.equalTo(self.mas_right).offset(-12);
+        make.right.equalTo(self.mas_right).offset([ZPublicManager getIsIpad] ? -16:-12);
     }];
     
     
@@ -49,7 +49,7 @@
         tempLabel.text = [NSString stringWithFormat:@"%@",titleArr[i]];
         tempLabel.numberOfLines = 1;
         tempLabel.textAlignment = NSTextAlignmentLeft;
-        [tempLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(18)]];
+        [tempLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 12:9]];
         [self addSubview:tempLabel];
         if (!tempView) {
             [tempLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -70,8 +70,8 @@
         [self addSubview:hintView];
         [hintView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(tempLabel.mas_centerY);
-            make.right.equalTo(tempLabel.mas_left).offset(-12);
-            make.height.width.mas_equalTo(8);
+            make.right.equalTo(tempLabel.mas_left).offset([ZPublicManager getIsIpad] ? -16:-12);
+            make.height.width.mas_equalTo([ZPublicManager getIsIpad] ? 14:8);
         }];
     }
     
@@ -84,7 +84,7 @@
         _titleLabel.text = @"耳标编号：23240923";
         _titleLabel.numberOfLines = 1;
         _titleLabel.textAlignment = NSTextAlignmentLeft;
-        [_titleLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(28)]];
+        [_titleLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:14]];
     }
     return _titleLabel;
 }

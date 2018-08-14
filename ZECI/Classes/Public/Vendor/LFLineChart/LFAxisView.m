@@ -17,27 +17,27 @@
 /**
  *  Y轴刻度标签  宽度
  */
-#define YMARKLAB_WIDTH 45.f
+#define YMARKLAB_WIDTH ([ZPublicManager getIsIpad] ? 60:45.f)
 
 /**
  *  Y轴刻度标签  高度
  */
-#define YMARKLAB_HEIGHT 16.f
+#define YMARKLAB_HEIGHT ([ZPublicManager getIsIpad] ? 20:16)
 /**
  *  X轴刻度标签  宽度
  */
 
-#define XMARKLAB_WIDTH 45.f
+#define XMARKLAB_WIDTH ([ZPublicManager getIsIpad] ? 60:45.f)
 
 /**
  *  X轴刻度标签  高度
  */
-#define XMARKLAB_HEIGHT 16.f
+#define XMARKLAB_HEIGHT ([ZPublicManager getIsIpad] ? 20:16)
 
 /**
  *  最上边的Y轴刻度标签距离顶部的 距离
  */
-#define YMARKLAB_TO_TOP 12.f
+#define YMARKLAB_TO_TOP ([ZPublicManager getIsIpad] ? 16:12)
 
 @interface LFAxisView() {
     
@@ -154,7 +154,7 @@
         
         UILabel *markLab = [[UILabel alloc] initWithFrame:CGRectMake(0, self.startPoint.y - YMARKLAB_HEIGHT / 2 + i * self.yScaleMarkLEN, YMARKLAB_WIDTH, YMARKLAB_HEIGHT)];
         markLab.textAlignment = NSTextAlignmentRight;
-        markLab.font = [UIFont systemFontOfSize:12.0];
+        markLab.font = [UIFont systemFontOfSize:([ZPublicManager getIsIpad] ? 16:12)];
         markLab.text = [NSString stringWithFormat:@"%@", self.yMarkTitles[self.yMarkTitles.count - 1 - i]];
 //                隐去了y轴上的标签刻度
         [self addSubview:markLab];
@@ -171,7 +171,7 @@
         }
         UILabel *markLab = [[UILabel alloc] initWithFrame:CGRectMake(self.startPoint.x - XMARKLAB_WIDTH / 2 + i * self.xScaleMarkLEN, 0, XMARKLAB_WIDTH, XMARKLAB_HEIGHT)];
         markLab.textAlignment = NSTextAlignmentCenter;
-        markLab.font = [UIFont systemFontOfSize:11.0];
+        markLab.font = [UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 13:11];
         markLab.text = self.xMarkTitles[i];
         markLab.textColor = kFont6Color;
         [self addSubview:markLab];
@@ -223,12 +223,12 @@
     [self.layer addSublayer:xAxisLayer];
     
     
-    UILabel *hintLable = [[UILabel alloc] initWithFrame:CGRectMake(110, point_Y-18, 140, 15)];
+    UILabel *hintLable = [[UILabel alloc] initWithFrame:CGRectMake(110, point_Y-18, [ZPublicManager getIsIpad] ? 180:140, 15)];
     hintLable.textColor = kFont3Color;
     hintLable.text = [NSString stringWithFormat:@"第一层膘厚建议值：%.0f",self.firstX];
     hintLable.numberOfLines = 0;
     hintLable.textAlignment = NSTextAlignmentLeft;
-    [hintLable setFont:[UIFont systemFontOfSize:12.0f]];
+    [hintLable setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:12]];
     [self addSubview:hintLable];
 }
 
@@ -248,12 +248,12 @@
     [self.layer addSublayer:xAxisLayer];
     
     
-    UILabel *hintLable = [[UILabel alloc] initWithFrame:CGRectMake(110, point_Y-18, 140, 15)];
+    UILabel *hintLable = [[UILabel alloc] initWithFrame:CGRectMake(110, point_Y-18, [ZPublicManager getIsIpad] ? 180:140, 15)];
     hintLable.textColor = kFont3Color;
     hintLable.text = [NSString stringWithFormat:@"第二层膘厚建议值：%.0f",self.secondX];
     hintLable.numberOfLines = 0;
     hintLable.textAlignment = NSTextAlignmentLeft;
-    [hintLable setFont:[UIFont systemFontOfSize:12.0f]];
+    [hintLable setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:12]];
     [self addSubview:hintLable];
 }
 

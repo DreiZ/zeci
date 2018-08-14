@@ -180,6 +180,7 @@
     [self.chartLineView mapping];
     
     self.scrollView.contentSize = self.chartLineView.bounds.size;
+    self.scrollView.contentSize = CGSizeMake(self.chartLineView.bounds.size.width, 1);
 }
 
 #pragma mark 更新数据

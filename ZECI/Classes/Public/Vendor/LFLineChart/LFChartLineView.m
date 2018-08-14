@@ -107,10 +107,10 @@
             else {
                 [pAxisPath addLineToPoint:point];
             }
-            CGSize size=[[NSString stringWithFormat:@"%.0f",value] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:9.f]}];
+            CGSize size=[[NSString stringWithFormat:@"%.0f",value] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 12:9]}];
             
             UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, size.width, 10)];
-            textLabel.font = [UIFont systemFontOfSize:9.f];
+            textLabel.font = [UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 12:9];
             textLabel.text = [NSString stringWithFormat:@"%.0f",value];
             textLabel.center = CGPointMake(point_X, point_Y - 12);
             [self addSubview:textLabel];
@@ -163,10 +163,10 @@
             else {
                 [pAxisPath addLineToPoint:point];
             }
-            CGSize size=[[NSString stringWithFormat:@"%.0f",value] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:9.f]}];
+            CGSize size=[[NSString stringWithFormat:@"%.0f",value] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 12:9]}];
             
             UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, size.width, 10)];
-            textLabel.font = [UIFont systemFontOfSize:9.f];
+            textLabel.font = [UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 12:9];
             textLabel.text = [NSString stringWithFormat:@"%.0f",value];
             textLabel.center = CGPointMake(point_X, point_Y - 12);
             [self addSubview:textLabel];
@@ -220,10 +220,10 @@
             else {
                 [pAxisPath addLineToPoint:point];
             }
-            CGSize size=[[NSString stringWithFormat:@"%.0f",value] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:9.f]}];
+            CGSize size=[[NSString stringWithFormat:@"%.0f",value] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 12:9]}];
             
             UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, size.width, 10)];
-            textLabel.font = [UIFont systemFontOfSize:9.f];
+            textLabel.font = [UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 12:9];
             textLabel.text = [NSString stringWithFormat:@"%.0f",value];
             textLabel.center = CGPointMake(point_X, point_Y - 12);
             [self addSubview:textLabel];
