@@ -33,8 +33,8 @@
     [rightBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self);
         make.bottom.equalTo(self.mas_bottom).offset(0.5);
-        make.left.equalTo(self.mas_left).offset(12);
-        make.right.equalTo(self.mas_right).offset(-12);
+        make.left.equalTo(self.mas_left).offset([ZPublicManager getIsIpad] ? 24:12);
+        make.right.equalTo(self.mas_right).offset([ZPublicManager getIsIpad] ? -24:-12);
     }];
     
     UIImageView *hintImageView = [[UIImageView alloc] init];
@@ -42,10 +42,9 @@
     hintImageView.layer.masksToBounds = YES;
     [rightBackView addSubview:hintImageView];
     [hintImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(CGFloatIn750(100));
-        make.height.mas_equalTo(CGFloatIn750(100));
+        make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 65:50);
         make.centerY.equalTo(self.mas_centerY);
-        make.left.equalTo(rightBackView.mas_left).offset(20);
+        make.left.equalTo(rightBackView.mas_left).offset([ZPublicManager getIsIpad] ? 28:20);
     }];
     
     [rightBackView addSubview:self.secondLabel];
@@ -77,8 +76,8 @@
     } forControlEvents:UIControlEventTouchUpInside];
     [rightBackView addSubview:editBtn];
     [editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(40);
-        make.right.equalTo(rightBackView.mas_right).offset(-10);
+        make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 60:40);
+        make.right.equalTo(rightBackView.mas_right).offset([ZPublicManager getIsIpad] ? -20:-10);
         make.centerY.equalTo(rightBackView.mas_centerY);
     }];
 }
@@ -91,7 +90,7 @@
         _firstLabel.text = @"3234233";
         _firstLabel.numberOfLines = 1;
         _firstLabel.textAlignment = NSTextAlignmentLeft;
-        [_firstLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(24)]];
+        [_firstLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 14:12]];
     }
     return _firstLabel;
 }
@@ -103,7 +102,7 @@
         _thridLabel.text = @"122223";
         _thridLabel.numberOfLines = 1;
         _thridLabel.textAlignment = NSTextAlignmentLeft;
-        [_thridLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(24)]];
+        [_thridLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 14:12]];
     }
     return _thridLabel;
 }
@@ -116,12 +115,12 @@
         _secondLabel.text = @"444442";
         _secondLabel.numberOfLines = 1;
         _secondLabel.textAlignment = NSTextAlignmentLeft;
-        [_secondLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(24)]];
+        [_secondLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 14:12]];
     }
     return _secondLabel;
 }
 
 +(CGFloat)z_getCellHeight:(id)sender {
-    return 80;
+    return [ZPublicManager getIsIpad] ? 100:80;
 }
 @end

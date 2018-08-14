@@ -29,11 +29,14 @@
 - (void)setMainView {
     UIImageView *companyImageView = [[UIImageView alloc] init];
     companyImageView.image = [UIImage imageNamed:@"logo"];
+    companyImageView.contentMode = UIViewContentModeScaleAspectFit;
     companyImageView.layer.masksToBounds = YES;
     [self.view addSubview:companyImageView];
     [companyImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
         make.top.equalTo(self.view.mas_top).offset(40+kSafeAreaTopHeight);
+        make.width.mas_equalTo(CGFloatIn750(94));
+        make.height.mas_equalTo(CGFloatIn750(40));
     }];
     
     
@@ -47,13 +50,13 @@
         UILabel *tempLabel = [self getLabel:titleArr[i]];
         if (tempView) {
             [tempLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.view).offset(56);
-                make.top.equalTo(tempView.mas_bottom).offset(27);
+                make.left.equalTo(self.view).offset(CGFloatIn750(132));
+                make.top.equalTo(tempView.mas_bottom).offset(CGFloatIn750(54));
             }];
         }else{
             [tempLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.view).offset(56);
-                make.top.equalTo(companyImageView.mas_bottom).offset(45);
+                make.left.equalTo(self.view).offset(CGFloatIn750(132));
+                make.top.equalTo(companyImageView.mas_bottom).offset(CGFloatIn750(90));
             }];
         }
         tempView = tempLabel;
@@ -67,7 +70,7 @@
     tempLabel.text = title;
     tempLabel.numberOfLines = 1;
     tempLabel.textAlignment = NSTextAlignmentLeft;
-    [tempLabel setFont:[UIFont systemFontOfSize:14]];
+    [tempLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(28)]];
     [self.view addSubview:tempLabel];
     return tempLabel;
 }

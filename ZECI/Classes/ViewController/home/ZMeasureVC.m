@@ -61,6 +61,7 @@
             make.top.equalTo(self.navView.mas_bottom).offset(0);
             make.left.equalTo(self.topView.mas_right);
         }];
+        [self.topView resetUIWith:[ZPublicManager getIsIpad]];
     }else{
         [self.view addSubview:self.topView];
         [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -186,7 +187,10 @@
             make.top.equalTo(self.navView.mas_bottom).offset(0);
             make.left.equalTo(self.topView.mas_right);
         }];
+        
+        [self.topView resetUIWith:[ZPublicManager getIsIpad]];
     }else{
+        [self.topView resetUIWith:NO];
         [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.view);
             make.top.equalTo(self.navView.mas_bottom);

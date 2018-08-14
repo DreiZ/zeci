@@ -16,6 +16,8 @@
 		5E3EFF1320C8CE8B005E3E3E /* ZAdvertiseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3EFF1220C8CE8B005E3E3E /* ZAdvertiseHelper.m */; };
 		5E3EFF1620C8CEB9005E3E3E /* ZAdvertiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3EFF1520C8CEB9005E3E3E /* ZAdvertiseView.m */; };
 		5E45CC642122663C00469A30 /* ZShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CC632122663C00469A30 /* ZShareView.m */; };
+		5E45CC672122AD5B00469A30 /* ZHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CC662122AD5B00469A30 /* ZHomeModel.m */; };
+		5E45CC6A2122AEF200469A30 /* ZHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CC692122AEF200469A30 /* ZHomeViewModel.m */; };
 		5E48F8D620C6542E00422A6F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E48F8D520C6542E00422A6F /* AppDelegate.m */; };
 		5E48F8D920C6542E00422A6F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E48F8D820C6542E00422A6F /* ViewController.m */; };
 		5E48F8DC20C6542E00422A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E48F8DA20C6542E00422A6F /* Main.storyboard */; };
@@ -100,6 +102,10 @@
 		5E3EFF1520C8CEB9005E3E3E /* ZAdvertiseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZAdvertiseView.m; sourceTree = "<group>"; };
 		5E45CC622122663C00469A30 /* ZShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZShareView.h; sourceTree = "<group>"; };
 		5E45CC632122663C00469A30 /* ZShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZShareView.m; sourceTree = "<group>"; };
+		5E45CC652122AD5B00469A30 /* ZHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHomeModel.h; sourceTree = "<group>"; };
+		5E45CC662122AD5B00469A30 /* ZHomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeModel.m; sourceTree = "<group>"; };
+		5E45CC682122AEF200469A30 /* ZHomeViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHomeViewModel.h; sourceTree = "<group>"; };
+		5E45CC692122AEF200469A30 /* ZHomeViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeViewModel.m; sourceTree = "<group>"; };
 		5E48F8D120C6542E00422A6F /* ZECI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZECI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E48F8D420C6542E00422A6F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5E48F8D520C6542E00422A6F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -525,6 +531,8 @@
 		5EFD369C20E0E14A00B68054 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				5E45CC652122AD5B00469A30 /* ZHomeModel.h */,
+				5E45CC662122AD5B00469A30 /* ZHomeModel.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -561,6 +569,8 @@
 		5EFD36A020E0E17300B68054 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				5E45CC682122AEF200469A30 /* ZHomeViewModel.h */,
+				5E45CC692122AEF200469A30 /* ZHomeViewModel.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -778,11 +788,13 @@
 				5EA183C82121736B009C6675 /* LFLineChart.m in Sources */,
 				5E48F94120C694E000422A6F /* NSMutableArray+LYNil.m in Sources */,
 				5E48F94220C694E000422A6F /* NSMutableDictionary+LYNil.m in Sources */,
+				5E45CC672122AD5B00469A30 /* ZHomeModel.m in Sources */,
 				5E09303A211EB54B00AA98DC /* ZHomeNavView.m in Sources */,
 				5E4D81E520C7B5B6002A12E2 /* ZPublicDataManager.m in Sources */,
 				5E48F91920C67BD300422A6F /* WRNavigationBar.m in Sources */,
 				5EA183AF212126F0009C6675 /* ZMeasureTopView.m in Sources */,
 				5EA183B221212F61009C6675 /* ZMeasureListCell.m in Sources */,
+				5E45CC6A2122AEF200469A30 /* ZHomeViewModel.m in Sources */,
 				5E5D891B20E1D2EF0096536C /* UIView+Radio.m in Sources */,
 				5E3EFF1620C8CEB9005E3E3E /* ZAdvertiseView.m in Sources */,
 				5E48F92920C67E9F00422A6F /* ZBaseView.m in Sources */,
@@ -984,7 +996,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzz.ZECI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1004,7 +1016,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzz.ZECI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

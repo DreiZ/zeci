@@ -45,7 +45,7 @@
     [self.contentView addSubview:hintImageView];
     [hintImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
-        make.left.equalTo(self.mas_left).offset(15);
+        make.left.equalTo(self.mas_left).offset([ZPublicManager getIsIpad] ? 20:15);
         make.width.height.mas_equalTo(32);
     }];
     
@@ -53,14 +53,14 @@
     [self.contentView addSubview:self.timeLabel];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
-        make.right.equalTo(self.mas_right).offset(-15);
-        make.width.mas_equalTo(84);
+        make.right.equalTo(self.mas_right).offset([ZPublicManager getIsIpad] ? - 20:-15);
+        make.width.mas_equalTo(CGFloatIn750(84));
     }];
     
     [self.contentView addSubview:self.detaiLabel];
     [self.detaiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(hintImageView.mas_right).offset(20);
-        make.right.equalTo(self.timeLabel.mas_left).offset(-20);
+        make.left.equalTo(hintImageView.mas_right).offset([ZPublicManager getIsIpad] ? 30:20);
+        make.right.equalTo(self.timeLabel.mas_left).offset([ZPublicManager getIsIpad] ? -30:-20);
         make.centerY.equalTo(self.mas_centerY);
     }];
     
@@ -80,7 +80,7 @@
         _detaiLabel.text = @"2018022:12 12 32";
         _detaiLabel.numberOfLines = 1;
         _detaiLabel.textAlignment = NSTextAlignmentLeft;
-        [_detaiLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(28)]];
+        [_detaiLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:14]];
     }
     return _detaiLabel;
 }
@@ -93,12 +93,12 @@
         _timeLabel.text = @"2018-12-12";
         _timeLabel.numberOfLines = 1;
         _timeLabel.textAlignment = NSTextAlignmentRight;
-        [_timeLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(24)]];
+        [_timeLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 14:12]];
     }
     return _timeLabel;
 }
 
 + (CGFloat)z_getCellHeight:(id)sender {
-    return 50;
+    return [ZPublicManager getIsIpad] ? 80:50;
 }
 @end

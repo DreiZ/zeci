@@ -20,5 +20,7 @@
 
 + (CGSize)stringSizeWithString:(NSString *)stringText Font:(CGFloat)font limitSize:(CGSize)limitSize ;
 
-+(NSString *)timeWithStr:(NSString *)timeStr format:(NSString *)format;
++ (NSString *)timeWithStr:(NSString *)timeStr format:(NSString *)format;
+
++ (BOOL)getIsIpad;
 @end

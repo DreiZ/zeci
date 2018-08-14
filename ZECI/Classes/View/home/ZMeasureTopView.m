@@ -9,9 +9,9 @@
 #import "ZMeasureTopView.h"
 
 @interface ZMeasureTopView ()
-@property (nonatomic,strong) UILabel *firstLabel;
-@property (nonatomic,strong) UILabel *secondLabel;
-@property (nonatomic,strong) UILabel *thridLabel;
+@property (nonatomic,strong) UIView *rightBackView;
+@property (nonatomic,strong) UIImageView *hintImageView;
+
 @end
 
 @implementation ZMeasureTopView
@@ -41,12 +41,13 @@
         make.right.equalTo(self.mas_centerX).multipliedBy(1.2);
         make.centerY.equalTo(self.mas_centerY);
     }];
-    
+    _hintImageView = hintImageView;
     
     UIView *rightBackView = [[UIView alloc] initWithFrame:CGRectZero];
     rightBackView.backgroundColor = kMainColor;
     rightBackView.layer.masksToBounds = YES;
     rightBackView.layer.cornerRadius = 10;
+    _rightBackView = rightBackView;
     [self addSubview:rightBackView];
     [rightBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
@@ -74,9 +75,7 @@
         make.left.right.equalTo(rightBackView);
         make.centerY.equalTo(rightBackView.mas_bottom).multipliedBy(0.8);
     }];
-    
 }
-
 
 - (UILabel *)firstLabel {
     if (!_firstLabel) {
@@ -85,7 +84,7 @@
         _firstLabel.text = @"33";
         _firstLabel.numberOfLines = 1;
         _firstLabel.textAlignment = NSTextAlignmentCenter;
-        [_firstLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(50)]];
+        [_firstLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
     }
     return _firstLabel;
 }
@@ -97,7 +96,7 @@
         _thridLabel.text = @"12";
         _thridLabel.numberOfLines = 1;
         _thridLabel.textAlignment = NSTextAlignmentCenter;
-        [_thridLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(50)]];
+        [_thridLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
     }
     return _thridLabel;
 }
@@ -110,8 +109,73 @@
         _secondLabel.text = @"42";
         _secondLabel.numberOfLines = 1;
         _secondLabel.textAlignment = NSTextAlignmentCenter;
-        [_secondLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(50)]];
+        [_secondLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
     }
     return _secondLabel;
+}
+
+- (void)resetUIWith:(BOOL)isPad {
+    if (isPad) {
+        [_hintImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(CGFloatIn750(300));
+            make.height.mas_equalTo(CGFloatIn750(250));
+            make.centerX.equalTo(self.mas_centerX);
+            make.bottom.equalTo(self.mas_centerY).offset(-10);
+        }];
+        
+        [_rightBackView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_centerY).offset(20);
+            make.centerX.equalTo(self.mas_centerX);
+            make.width.mas_equalTo(CGFloatIn750(282));
+            make.height.mas_equalTo(CGFloatIn750(132));
+        }];
+        
+        [self.secondLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo(self.rightBackView);
+            make.centerX.equalTo(self.rightBackView.mas_centerX);
+        }];
+        
+        
+        [self.firstLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo(self.rightBackView);
+            make.centerX.equalTo(self.rightBackView.mas_right).multipliedBy(0.2);
+        }];
+        
+        [self.thridLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo(self.rightBackView);
+            make.centerX.equalTo(self.rightBackView.mas_right).multipliedBy(0.8);
+        }];
+    }else{
+        [_hintImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(CGFloatIn750(352));
+            make.height.mas_equalTo(CGFloatIn750(293));
+            make.right.equalTo(self.mas_centerX).multipliedBy(1.2);
+            make.centerY.equalTo(self.mas_centerY);
+        }];
+        
+        [_rightBackView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.mas_centerY);
+            make.right.equalTo(self.mas_right).multipliedBy(0.9);
+            make.height.mas_equalTo(CGFloatIn750(272));
+            make.width.mas_equalTo(CGFloatIn750(172));
+        }];
+        
+        [self.secondLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.rightBackView);
+            make.centerY.equalTo(self.rightBackView.mas_centerY);
+        }];
+        
+    
+        [self.firstLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.rightBackView);
+            make.centerY.equalTo(self.rightBackView.mas_bottom).multipliedBy(0.2);
+        }];
+        
+        
+        [self.thridLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.rightBackView);
+            make.centerY.equalTo(self.rightBackView.mas_bottom).multipliedBy(0.8);
+        }];
+    }
 }
 @end

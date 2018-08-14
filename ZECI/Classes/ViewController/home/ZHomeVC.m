@@ -136,7 +136,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 1) {
-        return 40;
+        return [ZPublicManager getIsIpad] ? 60:40;
     }
     return 0.01f;
 }
@@ -147,7 +147,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 1) {
-        UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, 40)];
+        UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, [ZPublicManager getIsIpad] ? 60:40)];
         sectionView.backgroundColor = kBackColor;
         sectionView.clipsToBounds = YES;
         
@@ -157,7 +157,7 @@
         hintLabel.text = @"可连接设备";
         hintLabel.numberOfLines = 0;
         hintLabel.textAlignment = NSTextAlignmentLeft;
-        [hintLabel setFont:[UIFont systemFontOfSize:13.0f]];
+        [hintLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:13]];
         [sectionView addSubview:hintLabel];
         [hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.equalTo(sectionView);
@@ -185,6 +185,5 @@
     }else{
        
     }
-    
 }
 @end

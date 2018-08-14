@@ -32,11 +32,11 @@
     [self addSubview:self.searchTextField];
     [self.searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.height.mas_equalTo(30);
-        make.left.equalTo(self.mas_left).offset(15);
-        make.right.equalTo(self.mas_right).offset(-15);
+        make.top.equalTo(self).offset(12);
+        make.bottom.equalTo(self).offset(-12);
+        make.left.equalTo(self.mas_left).offset([ZPublicManager getIsIpad]? 25:15);
+        make.right.equalTo(self.mas_right).offset([ZPublicManager getIsIpad]? -25:-15);
     }];
-    
 }
 
 - (UITextField *)searchTextField {
@@ -46,7 +46,7 @@
         _searchTextField.layer.cornerRadius = 10;
         _searchTextField.layer.borderColor = kMainColor.CGColor;
         _searchTextField.layer.borderWidth = 1;
-        [_searchTextField setFont:[UIFont systemFontOfSize:13]];
+        [_searchTextField setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad]? 16:13]];
         [_searchTextField setBorderStyle:UITextBorderStyleNone];
         [_searchTextField setBackgroundColor:[UIColor clearColor]];
         [_searchTextField setReturnKeyType:UIReturnKeySearch];

@@ -43,7 +43,7 @@
     hintLabel.text = @"设备名称";
     hintLabel.numberOfLines = 0;
     hintLabel.textAlignment = NSTextAlignmentLeft;
-    [hintLabel setFont:[UIFont systemFontOfSize:16.0f]];
+    [hintLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:16]];
     [self.contentView addSubview:hintLabel];
     [hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(84);
@@ -84,13 +84,13 @@
         _bluetoothLabel.text = @"sdfrfgsdg";
         _bluetoothLabel.numberOfLines = 1;
         _bluetoothLabel.textAlignment = NSTextAlignmentLeft;
-        [_bluetoothLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(30)]];
+        [_bluetoothLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:15]];
     }
     return _bluetoothLabel;
 }
 
 + (CGFloat)z_getCellHeight:(id)sender {
-    return 50;
+    return [ZPublicManager getIsIpad] ? 80:50;
 }
 @end
 

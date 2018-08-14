@@ -44,7 +44,7 @@
     [self.contentView addSubview:hintImageView];
     [hintImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
-        make.left.equalTo(self.mas_left).offset(10);
+        make.left.equalTo(self.mas_left).offset([ZPublicManager getIsIpad] ? 20:10);
     }];
     
     
@@ -54,12 +54,12 @@
     [self.contentView addSubview:arrowImageView];
     [arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
-        make.right.equalTo(self.mas_right).offset(-10);
+        make.right.equalTo(self.mas_right).offset([ZPublicManager getIsIpad] ? -20:10);
     }];
     [self.contentView addSubview:self.bluetoothLabel];
     [self.bluetoothLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
-        make.left.equalTo(hintImageView.mas_right).offset(10);
+        make.left.equalTo(hintImageView.mas_right).offset([ZPublicManager getIsIpad] ? 20:10);
     }];
     
     UIView *bottomLineView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -78,12 +78,12 @@
         _bluetoothLabel.text = @"dasfgasdgas";
         _bluetoothLabel.numberOfLines = 1;
         _bluetoothLabel.textAlignment = NSTextAlignmentLeft;
-        [_bluetoothLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(30)]];
+        [_bluetoothLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:15]];
     }
     return _bluetoothLabel;
 }
 
 + (CGFloat)z_getCellHeight:(id)sender {
-    return 50;
+    return [ZPublicManager getIsIpad] ? 80:50;
 }
 @end

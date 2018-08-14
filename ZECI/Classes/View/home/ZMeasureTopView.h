@@ -9,5 +9,9 @@
 #import "ZBaseView.h"
 
 @interface ZMeasureTopView : ZBaseView
+@property (nonatomic,strong) UILabel *firstLabel;
+@property (nonatomic,strong) UILabel *secondLabel;
+@property (nonatomic,strong) UILabel *thridLabel;
 
+- (void)resetUIWith:(BOOL)isPad;
 @end

@@ -38,13 +38,13 @@
     [self.searchView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(kSafeAreaTopHeight);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(55);
+        make.height.mas_equalTo([ZPublicManager getIsIpad] ? 70:55);
     }];
     
     [self.view addSubview:self.iTableView];
     [self.iTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.equalTo(self.view);
-        make.top.equalTo(self.searchView.mas_bottom).offset(10);
+        make.top.equalTo(self.searchView.mas_bottom).offset([ZPublicManager getIsIpad] ? 15:10);
     }];
 }
 
