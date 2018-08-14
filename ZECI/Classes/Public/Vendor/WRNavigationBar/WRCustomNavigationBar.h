@@ -39,7 +39,7 @@
 - (void)wr_setRightButtonWithImage:(UIImage *)image;
 - (void)wr_setRightButtonWithTitle:(NSString *)title titleColor:(UIColor *)titleColor;
 
-
+-(void)updateFrame;
 
 @end
 

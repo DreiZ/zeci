@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface LFLineChart : UIView
-
+/**
+ *  显示折线图的可滑动视图
+ */
+@property (nonatomic, strong) UIScrollView *scrollView;
 /**
  *  表名
  */

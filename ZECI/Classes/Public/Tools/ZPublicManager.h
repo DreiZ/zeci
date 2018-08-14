@@ -10,6 +10,8 @@
 
 @interface ZPublicManager : NSObject
 + (ZPublicManager *)shareInstance;
+
+-(void)umenShare;
 /** 清理缓存 */
 - (void)cleanCachesVC:(UIViewController *)vc completionHandler:(void (^)(NSString *))completionHandler;
 /** 遍历文件夹获得文件夹大小，返回多少M */

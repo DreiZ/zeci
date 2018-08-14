@@ -9,10 +9,17 @@
 #import "ZDataLineChatVC.h"
 #import "ZDataLineChatInfomationView.h"
 #import "LFLineChart.h"
+#import "ZShareView.h"
+
+#import <UMShare/UMShare.h>
+//微信好友和朋友圈
+#import "WXApi.h"
 
 @interface ZDataLineChatVC ()
 @property (nonatomic,strong) ZDataLineChatInfomationView *infomationView;
-@property (nonatomic, strong) LFLineChart *lineChart;
+@property (nonatomic,strong) LFLineChart *lineChart;
+@property (nonatomic,strong) ZShareView *shareView;
+
 @end
 
 @implementation ZDataLineChatVC
@@ -28,14 +35,26 @@
     self.customNavBar.hidden = NO;
     self.customNavBar.title = @"背膘详情";
     [self.customNavBar wr_setRightButtonWithImage:[UIImage imageNamed:@"fenxiang"]];
+    __weak typeof(self) weakSelf = self;
+    self.customNavBar.onClickRightButton = ^{
+        [weakSelf.view addSubview:weakSelf.shareView];
+    };
 }
 
 - (void)setMainView {
     [self.view addSubview:self.infomationView];
-    [self.infomationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.equalTo(self.view);
-        make.height.mas_equalTo(130.0f);
-    }];
+    if (self.isHorizontal) {
+        [self.infomationView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.right.equalTo(self.view);
+            make.top.equalTo(self.view).offset(kSafeAreaTopHeight+10);
+            make.width.mas_equalTo(180.0f);
+        }];
+    }else{
+        [self.infomationView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.right.equalTo(self.view);
+            make.height.mas_equalTo(130.0f);
+        }];
+    }
 }
 
 
@@ -48,10 +67,26 @@
     return _infomationView;
 }
 
+- (ZShareView *)shareView {
+    if (!_shareView) {
+        __weak typeof(self) weakSelf = self;
+        _shareView = [[ZShareView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH)];
+        _shareView.sureBlock = ^(NSInteger tag) {
+            if(tag == 0){
+                [weakSelf shareImageToPlatformType:UMSocialPlatformType_WechatSession image:[weakSelf screenShot]];
+            }else {
+                [weakSelf shareImageToPlatformType:UMSocialPlatformType_WechatTimeLine image:[weakSelf screenShot]];
+            }
+        };
+    }
+    return _shareView;
+}
+
+
 - (void)setLineChat {
     self.lineChart = [[LFLineChart alloc] initWithFrame:CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-12, kWindowH - 160 - kSafeAreaTopHeight)];
-    self.lineChart.backgroundColor = [UIColor whiteColor];
-    NSMutableArray *orderedArray = [[NSMutableArray alloc]init];
+    self.lineChart.clipsToBounds = YES;
+    NSMutableArray *orderedArray = [[NSMutableArray alloc] init];
 //    NSArray *temp = @[@"23",@"33",@"27",@"37",@"48",@"23",@"58"];
 //    NSArray *temp1 = @[@"30",@"46",@"32",@"44",@"52",@"31",@"62"];
 //    NSArray *temp2 = @[@"48",@"55",@"45",@"52",@"61",@"43",@"78"];
@@ -111,19 +146,136 @@
     self.lineChart.secondX = 24;
     
     self.lineChart.xScaleMarkLEN = 45;
-    self.lineChart.yMarkTitles = @[[NSString stringWithFormat:@"%.0f",self.lineChart.minValue],
-                                   [NSString stringWithFormat:@"%.0f",self.lineChart.minValue + (self.lineChart.maxValue - self.lineChart.minValue)/6],
-                                   [NSString stringWithFormat:@"%.0f",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*2/6],
-                                   [NSString stringWithFormat:@"%.0f",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*3/6],
-                                   [NSString stringWithFormat:@"%.0f",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*4/6],
-                                   [NSString stringWithFormat:@"%.0f",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*5/6],
-                                   [NSString stringWithFormat:@"%.0f",self.lineChart.maxValue]]; // Y轴刻度标签
+    self.lineChart.yMarkTitles = @[[NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue],
+                                   [NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue + (self.lineChart.maxValue - self.lineChart.minValue)/6],
+                                   [NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*2/6],
+                                   [NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*3/6],
+                                   [NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*4/6],
+                                   [NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*5/6],
+                                   [NSString stringWithFormat:@"%.0fmm",self.lineChart.maxValue]]; // Y轴刻度标签
     
     [self.lineChart setXMarkTitlesAndValues:orderedArray titleKey:@"item" valueKey:@"count" value1Key:@"count1" value2Key:@"count2"]; // X轴刻度标签及相应的值
     
-    //设置完数据等属性后绘图折线图
-    [self.lineChart mapping];
+    
     
     [self.view addSubview:self.lineChart];
+    if (self.isHorizontal) {
+        self.lineChart.frame = CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-180-12, kWindowH - 30 - kSafeAreaTopHeight);
+        [self.lineChart mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left).offset(0);
+            make.right.equalTo(self.infomationView.mas_left).offset(-12);
+            make.top.equalTo(self.view).offset(kSafeAreaTopHeight+20);
+            make.bottom.equalTo(self.view.mas_bottom).offset(-10);
+        }];
+    }else{
+        self.lineChart.frame = CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-12, kWindowH - 130 - kSafeAreaTopHeight-20);
+        [self.lineChart mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left).offset(0);
+            make.right.equalTo(self.view.mas_right).offset(-12);
+            make.top.equalTo(self.view).offset(kSafeAreaTopHeight+20);
+            make.bottom.equalTo(self.infomationView.mas_top).offset(0);
+        }];
+    }
+    //设置完数据等属性后绘图折线图
+    [self.lineChart mapping];
+}
+
+#pragma mark 截图处理
+
+- (UIImage *)screenShot {
+    UIImage* image = nil;
+    UIGraphicsBeginImageContextWithOptions(self.lineChart.scrollView.contentSize, YES, 0.0);
+    
+    //保存collectionView当前的偏移量
+    CGPoint savedContentOffset = self.lineChart.scrollView.contentOffset;
+    CGRect saveFrame = self.lineChart.scrollView.frame;
+    
+    //将collectionView的偏移量设置为(0,0)
+    self.lineChart.scrollView.contentOffset = CGPointZero;
+    self.lineChart.scrollView.frame = CGRectMake(0, 0, self.lineChart.scrollView.contentSize.width, self.lineChart.scrollView.contentSize.height);
+    
+    //在当前上下文中渲染出collectionView
+    [self.lineChart.scrollView.layer renderInContext: UIGraphicsGetCurrentContext()];
+    //截取当前上下文生成Image
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    //恢复collectionView的偏移量
+    self.lineChart.scrollView.contentOffset = savedContentOffset;
+    self.lineChart.scrollView.frame = saveFrame;
+    
+    UIGraphicsEndImageContext();
+    
+    if (image != nil) {
+        return image;
+    }else {
+        return nil;
+    }
+}
+
+
+
+- (void)shareImageToPlatformType:(UMSocialPlatformType)platformType image:(UIImage *)image
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建图片内容对象
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    //如果有缩略图，则设置缩略图
+    shareObject.thumbImage = [UIImage imageNamed:@"biceicon"];
+    [shareObject setShareImage:image];
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            NSLog(@"response data is %@",data);
+        }
+    }];
+}
+
+
+
+-(void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
+    if (!_infomationView || !_lineChart) {
+        return;
+    }
+    if (self.isHorizontal) {
+        [self.infomationView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.right.equalTo(self.view);
+            make.top.equalTo(self.view).offset(kSafeAreaTopHeight+10);
+            make.width.mas_equalTo(180.0f);
+        }];
+    }else{
+        [self.infomationView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.right.equalTo(self.view);
+            make.height.mas_equalTo(130.0f);
+        }];
+    }
+    
+    if (self.isHorizontal) {
+        self.lineChart.frame = CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-180-12, kWindowH - 30 - kSafeAreaTopHeight);
+        [self.lineChart mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left).offset(0);
+            make.right.equalTo(self.infomationView.mas_left).offset(-12);
+            make.top.equalTo(self.view).offset(kSafeAreaTopHeight+20);
+            make.bottom.equalTo(self.view.mas_bottom).offset(-10);
+        }];
+    }else{
+        self.lineChart.frame = CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-12, kWindowH - 150 - kSafeAreaTopHeight);
+        [self.lineChart mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left).offset(0);
+            make.right.equalTo(self.view.mas_right).offset(-12);
+            make.top.equalTo(self.view).offset(kSafeAreaTopHeight+20);
+            make.bottom.equalTo(self.infomationView.mas_top).offset(0);
+        }];
+    }
+    
+    //设置完数据等属性后绘图折线图
+    [self.lineChart reloadDatas];
 }
 @end

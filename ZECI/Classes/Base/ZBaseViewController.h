@@ -12,8 +12,11 @@
 
 @interface ZBaseViewController : UIViewController
 @property (nonatomic, getter=isLoading) BOOL loading;
-
+//是否是横屏
+@property (nonatomic,assign) BOOL isHorizontal;
 
 +(UINavigationController *)defaultNavi;
+
+- (void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal;
 - (void)refreshData;
 @end

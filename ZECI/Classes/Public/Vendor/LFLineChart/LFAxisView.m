@@ -112,7 +112,7 @@
         NSLog(@"x轴只有一条数据");
 //        return;
     }
-    
+
     self.yScaleMarkLEN = (self.frame.size.height - YMARKLAB_HEIGHT - XMARKLAB_HEIGHT - YMARKLAB_TO_TOP) / (self.yMarkTitles.count - 1);
     
     self.yAxis_L = self.yScaleMarkLEN * (self.yMarkTitles.count - 1);

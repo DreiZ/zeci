@@ -46,18 +46,35 @@
         make.height.mas_equalTo(kSafeAreaTopHeight);
     }];
     
-    [self.view addSubview:self.topView];
-    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.navView.mas_bottom);
-        make.height.mas_equalTo(CGFloatIn750(434));
-    }];
-    
-    [self.view addSubview:self.iTableView];
-    [self.iTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.equalTo(self.view);
-        make.top.equalTo(self.topView.mas_bottom).offset(0);
-    }];
+    if (self.isHorizontal) {
+        [self.view addSubview:self.topView];
+        [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view);
+            make.top.equalTo(self.navView.mas_bottom);
+            make.bottom.equalTo(self.view.mas_bottom);
+            make.width.mas_equalTo(kWindowW/2.0f);
+        }];
+        
+        [self.view addSubview:self.iTableView];
+        [self.iTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.bottom.equalTo(self.view);
+            make.top.equalTo(self.navView.mas_bottom).offset(0);
+            make.left.equalTo(self.topView.mas_right);
+        }];
+    }else{
+        [self.view addSubview:self.topView];
+        [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.view);
+            make.top.equalTo(self.navView.mas_bottom);
+            make.height.mas_equalTo(CGFloatIn750(434));
+        }];
+        
+        [self.view addSubview:self.iTableView];
+        [self.iTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.right.equalTo(self.view);
+            make.top.equalTo(self.topView.mas_bottom).offset(0);
+        }];
+    }
 }
 
 #pragma mark lazy loading...
@@ -150,5 +167,36 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+}
+
+-(void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
+    if (!_topView || !_iTableView) {
+        return;
+    }
+    if (self.isHorizontal) {
+        [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view);
+            make.top.equalTo(self.navView.mas_bottom);
+            make.bottom.equalTo(self.view.mas_bottom);
+            make.width.mas_equalTo(kWindowW/2.0f);
+        }];
+        
+        [self.iTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.bottom.equalTo(self.view);
+            make.top.equalTo(self.navView.mas_bottom).offset(0);
+            make.left.equalTo(self.topView.mas_right);
+        }];
+    }else{
+        [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.view);
+            make.top.equalTo(self.navView.mas_bottom);
+            make.height.mas_equalTo(CGFloatIn750(434));
+        }];
+        
+        [self.iTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.right.equalTo(self.view);
+            make.top.equalTo(self.topView.mas_bottom).offset(0);
+        }];
+    }
 }
 @end

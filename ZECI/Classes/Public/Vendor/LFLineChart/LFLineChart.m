@@ -24,10 +24,7 @@
  */
 @property (nonatomic, strong) UILabel *titleLab;
 
-/**
- *  显示折线图的可滑动视图
- */
-@property (nonatomic, strong) UIScrollView *scrollView;
+
 
 /**
  *  折线图
@@ -105,7 +102,6 @@
 
 #pragma mark 绘图
 - (void)mapping {
-    
     static CGFloat topToContainView = 0.f;
     
     if (self.title) {
@@ -145,6 +141,13 @@
     [self.scrollView setShowsHorizontalScrollIndicator:NO];
     [self.scrollView setShowsVerticalScrollIndicator:NO];
     [self addSubview:self.scrollView];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+        make.top.equalTo(self.mas_top).offset(topToContainView);
+        make.bottom.equalTo(self.mas_bottom);
+    }];
+    
     
     self.chartLineView = [[LFChartLineView alloc] initWithFrame:self.scrollView.bounds];
     
@@ -159,6 +162,9 @@
     self.chartLineView.secondX = self.secondX;
     
     [self.scrollView addSubview:self.chartLineView];
+//    [self.chartLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.scrollView);
+//    }];
     __block NSUInteger i = 0;
     [valueArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isEqualToString:@"-1"]) {
@@ -174,11 +180,31 @@
     [self.chartLineView mapping];
     
     self.scrollView.contentSize = self.chartLineView.bounds.size;
-    
 }
 
 #pragma mark 更新数据
 - (void)reloadDatas {
+    static CGFloat topToContainView = 0.f;
+    if (self.title) {
+        topToContainView = 25;
+    }
+  
+    self.scrollView.frame = CGRectMake(0, topToContainView, self.frame.size.width,self.frame.size.height - topToContainView);
+    
+    self.chartLineView.frame = self.scrollView.bounds;
+    
+    __block NSUInteger i = 0;
+    [valueArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isEqualToString:@"-1"]) {
+            i = idx;
+            *stop = YES;
+        }
+    }];
+    if (i >6) {
+        self.scrollView.contentOffset = CGPointMake(self.xScaleMarkLEN *(i - 6) ,0);
+    }
+    
     [self.chartLineView reloadDatas];
+    self.scrollView.contentSize = CGSizeMake(self.chartLineView.bounds.size.width, 1);
 }
 @end

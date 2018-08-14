@@ -7,6 +7,7 @@
 //
 
 #import "ZPublicManager.h"
+#import <UMShare/UMShare.h>
 
 @implementation ZPublicManager
 + (ZPublicManager *)shareInstance {
@@ -16,6 +17,13 @@
         publicManager = [[ZPublicManager alloc] init];
     });
     return publicManager;
+}
+
+#pragma mark 友盟分享
+-(void)umenShare {
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@"5b3c29e2b27b0a0ac200028d"];
+    /* 设置微信的appKey和appSecret */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdabd790a9b61c1d8" appSecret:@"f6874bcbdd9221bf7c53f8137279bb48" redirectURL:@"http://mobile.umeng.com/social"];
 }
 
 

@@ -107,11 +107,44 @@
     NSInteger titleLabelWidth = 180;
 
     self.backgroundView.frame = self.bounds;
+    [self.backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
+    }];
+    
     self.backgroundImageView.frame = self.bounds;
+    [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
+    }];
+    
     self.leftButton.frame = CGRectMake(margin, top, buttonWidth, buttonHeight);
+    [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).offset(margin);
+        make.top.equalTo(self.mas_top).offset(top);
+        make.width.mas_equalTo(buttonWidth);
+        make.height.mas_equalTo(buttonHeight);
+    }];
+    
     self.rightButton.frame = CGRectMake(kWRScreenWidth - buttonWidth - margin, top, buttonWidth, buttonHeight);
+    [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right).offset(-margin);
+        make.top.equalTo(self.mas_top).offset(top);
+        make.width.mas_equalTo(buttonWidth);
+        make.height.mas_equalTo(buttonHeight);
+    }];
+    
     self.titleLable.frame = CGRectMake((kWRScreenWidth - titleLabelWidth) / 2, top, titleLabelWidth, titleLabelHeight);
+    [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX);
+        make.top.equalTo(self.mas_top).offset(top);
+        make.width.mas_equalTo(titleLabelWidth);
+        make.height.mas_equalTo(titleLabelHeight);
+    }];
+    
     self.bottomLine.frame = CGRectMake(0, (CGFloat)(self.bounds.size.height-0.5), kWRScreenWidth, 0.5);
+    [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self);
+        make.height.mas_equalTo(0.5);
+    }];
 }
 
 #pragma mark - 导航栏左右按钮事件

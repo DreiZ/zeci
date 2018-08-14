@@ -32,7 +32,7 @@
     
     [self addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top).offset(14);
+        make.top.equalTo(self.mas_top).offset(0);
         make.right.equalTo(self.mas_right).offset(-12);
     }];
     

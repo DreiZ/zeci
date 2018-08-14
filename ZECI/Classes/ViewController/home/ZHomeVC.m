@@ -176,4 +176,15 @@
         [self.navigationController pushViewController:svc animated:YES];
     }
 }
+
+#pragma mark 屏幕旋转处理
+//获取设备方向 更新 UI
+-(void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
+    if (isHorizontal) {
+        
+    }else{
+       
+    }
+    
+}
 @end
