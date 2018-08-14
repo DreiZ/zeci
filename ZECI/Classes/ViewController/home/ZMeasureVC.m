@@ -110,6 +110,7 @@
     if (!_editView) {
         _editView = [[ZMeasureEditView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH)];
     }
+    _editView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
     return _editView;
 }
 

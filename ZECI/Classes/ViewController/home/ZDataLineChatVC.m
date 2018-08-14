@@ -79,6 +79,7 @@
             }
         };
     }
+    _shareView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
     return _shareView;
 }
 
