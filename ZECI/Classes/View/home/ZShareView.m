@@ -46,7 +46,7 @@
     [self addSubview:contView];
     [contView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.height.mas_equalTo(CGFloatIn750(100));
+        make.height.mas_equalTo(CGFloatIn750(160));
         make.width.mas_equalTo(CGFloatIn750(330));
     }];
     
@@ -67,7 +67,7 @@
     
     [contView addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(contView.mas_top).offset(10);
+        make.centerY.equalTo(contView.mas_centerY);
         make.right.equalTo(contView.mas_right).offset(-10);
         make.height.width.mas_equalTo(40);
     }];
@@ -75,13 +75,26 @@
     NSMutableArray *imageViewArr = @[].mutableCopy;
     NSMutableArray *btnArr = @[].mutableCopy;
     NSArray *imageArr = @[@"weixin", @"pengyouquan"];
+    NSArray *titleArr = @[@"微信好友", @"朋友圈"];
     for (int i = 0; i < imageArr.count; i++) {
         UIImageView *image = [self getImageViewWith:imageArr[i] supreView:contView];
         [imageViewArr addObject:image];
         [image mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(contView.mas_centerY);
+            make.centerY.equalTo(contView.mas_centerY).offset(-10);
             make.left.equalTo(contView.mas_left).offset(20 + i * CGFloatIn750(100));
             make.width.height.mas_equalTo(37);
+        }];
+        
+        
+        UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        tempLabel.textColor = kFont6Color;
+        tempLabel.text = titleArr[i];
+        tempLabel.textAlignment = NSTextAlignmentCenter;
+        [tempLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad]?14.0f:12.0f]];
+        [contView addSubview:tempLabel];
+        [tempLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(image.mas_centerX);
+            make.top.equalTo(image.mas_bottom).offset(8);
         }];
         UIButton *btn = [self getBtn:i supreView:contView];
         [btnArr addObject:btn];
