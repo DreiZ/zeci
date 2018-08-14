@@ -17,7 +17,7 @@
 /**
  *  Y轴刻度标签  宽度
  */
-#define YMARKLAB_WIDTH 35.f
+#define YMARKLAB_WIDTH 45.f
 
 /**
  *  Y轴刻度标签  高度
@@ -27,7 +27,7 @@
  *  X轴刻度标签  宽度
  */
 
-#define XMARKLAB_WIDTH 40.f
+#define XMARKLAB_WIDTH 45.f
 
 /**
  *  X轴刻度标签  高度
@@ -166,6 +166,9 @@
     
     for (int i = 0;i < self.xMarkTitles.count; i ++) {
 //        UILabel *markLab = [[UILabel alloc] initWithFrame:CGRectMake(self.startPoint.x - XMARKLAB_WIDTH / 2 + i * self.xScaleMarkLEN, self.yAxis_L + self.startPoint.y + YMARKLAB_HEIGHT / 2, XMARKLAB_WIDTH, XMARKLAB_HEIGHT)];
+        if (i == 0) {
+            continue;
+        }
         UILabel *markLab = [[UILabel alloc] initWithFrame:CGRectMake(self.startPoint.x - XMARKLAB_WIDTH / 2 + i * self.xScaleMarkLEN, 0, XMARKLAB_WIDTH, XMARKLAB_HEIGHT)];
         markLab.textAlignment = NSTextAlignmentCenter;
         markLab.font = [UIFont systemFontOfSize:11.0];

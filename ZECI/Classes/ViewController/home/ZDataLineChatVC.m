@@ -55,10 +55,10 @@
 //    NSArray *temp = @[@"23",@"33",@"27",@"37",@"48",@"23",@"58"];
 //    NSArray *temp1 = @[@"30",@"46",@"32",@"44",@"52",@"31",@"62"];
 //    NSArray *temp2 = @[@"48",@"55",@"45",@"52",@"61",@"43",@"78"];
-    NSArray *temp = @[@"",@"23",@"33",@"",@"23",@"",@""];
-    NSArray *temp1 = @[@"",@"30",@"46",@"",@"45",@"",@""];
-    NSArray *temp2 = @[@"",@"48",@"55",@"",@"55",@"",@""];
-    NSArray *tempy = @[@"3月3日",@"3月4日",@"3月5日",@"3月6日",@"3月7日",@"3月8日",@"3月9日"];
+    NSArray *temp = @[@"",@"23",@"33",@"",@"23",@"",@"",@"",@"",@"",@"",@"",@""];
+    NSArray *temp1 = @[@"",@"30",@"46",@"",@"45",@"",@"",@"",@"",@"",@"",@"",@""];
+    NSArray *temp2 = @[@"",@"48",@"55",@"",@"55",@"",@"",@"",@"",@"",@"",@"",@""];
+    NSArray *tempy = @[@"3月3日",@"3月4日",@"3月5日",@"3月6日",@"3月7日",@"3月8日",@"3月9日",@"3月10日",@"3月11日",@"3月12日",@"3月13日",@"3月14日",@"3月15日",@"3月16日",@"3月17日"];
     float max = 0;
     float min = 0;
     for(int i = 0; i < temp.count; i++){
@@ -68,7 +68,7 @@
         NSString *y1Value;
         NSString *y2Value;
         
-        NSString *formatter = @"MM月dd日";
+//        NSString *formatter = @"MM月dd日";
         
         xValue = tempy[i];
         yValue = temp[i];
@@ -110,7 +110,7 @@
     self.lineChart.firstX = 12;
     self.lineChart.secondX = 24;
     
-    self.lineChart.xScaleMarkLEN = self.lineChart.bounds.size.width/orderedArray.count;
+    self.lineChart.xScaleMarkLEN = 45;
     self.lineChart.yMarkTitles = @[[NSString stringWithFormat:@"%.0f",self.lineChart.minValue],
                                    [NSString stringWithFormat:@"%.0f",self.lineChart.minValue + (self.lineChart.maxValue - self.lineChart.minValue)/6],
                                    [NSString stringWithFormat:@"%.0f",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*2/6],
