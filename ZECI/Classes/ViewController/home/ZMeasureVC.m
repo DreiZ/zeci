@@ -152,6 +152,7 @@
         _editView.sureBlock = ^(NSString *earTag) {
             weakSelf.editView.singleData.earTag = earTag;
             [weakSelf.iTableView reloadData];
+            [[ZHomeViewModel shareInstance] updateTestHistory];
         };
     }
     _editView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
@@ -270,6 +271,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [[ZHomeViewModel shareInstance].testPigs removeObjectAtIndex:indexPath.row];
         [self.iTableView reloadData];
+        [[ZHomeViewModel shareInstance] updateTestHistory];
     }
 }
 
