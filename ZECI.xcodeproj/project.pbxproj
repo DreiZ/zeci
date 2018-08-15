@@ -50,6 +50,9 @@
 		5E5D891B20E1D2EF0096536C /* UIView+Radio.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D891920E1D2EF0096536C /* UIView+Radio.m */; };
 		5E71D50F2123C686009FA7E3 /* ZMeasureSaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D50E2123C686009FA7E3 /* ZMeasureSaveView.m */; };
 		5E71D5122123CC7A009FA7E3 /* ZMeasureSaveAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D5112123CC7A009FA7E3 /* ZMeasureSaveAlertView.m */; };
+		5E71D52221241031009FA7E3 /* UserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D51F21241031009FA7E3 /* UserDTO.m */; };
+		5E71D52321241031009FA7E3 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D52121241031009FA7E3 /* Utils.m */; };
+		5E71D52621241058009FA7E3 /* NSString+pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D52521241058009FA7E3 /* NSString+pinyin.m */; };
 		5EA1839D2121136A009C6675 /* ZCompanyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */; };
 		5EA183A0212119C3009C6675 /* ZDataListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1839F212119C3009C6675 /* ZDataListVC.m */; };
 		5EA183A321211AE7009C6675 /* ZDataListSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183A221211AE7009C6675 /* ZDataListSearchView.m */; };
@@ -174,6 +177,12 @@
 		5E71D50E2123C686009FA7E3 /* ZMeasureSaveView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureSaveView.m; sourceTree = "<group>"; };
 		5E71D5102123CC7A009FA7E3 /* ZMeasureSaveAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureSaveAlertView.h; sourceTree = "<group>"; };
 		5E71D5112123CC7A009FA7E3 /* ZMeasureSaveAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureSaveAlertView.m; sourceTree = "<group>"; };
+		5E71D51E21241031009FA7E3 /* UserDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDTO.h; sourceTree = "<group>"; };
+		5E71D51F21241031009FA7E3 /* UserDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDTO.m; sourceTree = "<group>"; };
+		5E71D52021241031009FA7E3 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		5E71D52121241031009FA7E3 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		5E71D52421241058009FA7E3 /* NSString+pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+pinyin.h"; sourceTree = "<group>"; };
+		5E71D52521241058009FA7E3 /* NSString+pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+pinyin.m"; sourceTree = "<group>"; };
 		5EA1839B2121136A009C6675 /* ZCompanyInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZCompanyInfoVC.h; sourceTree = "<group>"; };
 		5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCompanyInfoVC.m; sourceTree = "<group>"; };
 		5EA1839E212119C3009C6675 /* ZDataListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataListVC.h; sourceTree = "<group>"; };
@@ -454,6 +463,7 @@
 		5E4D81DF20C7B53D002A12E2 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				5E71D51D21241031009FA7E3 /* ZSearhKeyTools */,
 				5E3EFF1020C8CE7A005E3E3E /* ZAdvertiseHelper */,
 				5E3EFF0620C8C7A1005E3E3E /* IntroductryPages */,
 				5E4D81E020C7B59D002A12E2 /* ZPublicManager.h */,
@@ -500,6 +510,19 @@
 				5E5D891920E1D2EF0096536C /* UIView+Radio.m */,
 			);
 			path = "UIView+Radio";
+			sourceTree = "<group>";
+		};
+		5E71D51D21241031009FA7E3 /* ZSearhKeyTools */ = {
+			isa = PBXGroup;
+			children = (
+				5E71D52421241058009FA7E3 /* NSString+pinyin.h */,
+				5E71D52521241058009FA7E3 /* NSString+pinyin.m */,
+				5E71D51E21241031009FA7E3 /* UserDTO.h */,
+				5E71D51F21241031009FA7E3 /* UserDTO.m */,
+				5E71D52021241031009FA7E3 /* Utils.h */,
+				5E71D52121241031009FA7E3 /* Utils.m */,
+			);
+			path = ZSearhKeyTools;
 			sourceTree = "<group>";
 		};
 		5EA183BC2121736B009C6675 /* LFLineChart */ = {
@@ -798,12 +821,14 @@
 				5EFD36A720E0EBB400B68054 /* ZHomeVC.m in Sources */,
 				5E48F92C20C67FA100422A6F /* ZBaseCell.m in Sources */,
 				5EA183C82121736B009C6675 /* LFLineChart.m in Sources */,
+				5E71D52321241031009FA7E3 /* Utils.m in Sources */,
 				5E48F94120C694E000422A6F /* NSMutableArray+LYNil.m in Sources */,
 				5E48F94220C694E000422A6F /* NSMutableDictionary+LYNil.m in Sources */,
 				5E45CC672122AD5B00469A30 /* ZHomeModel.m in Sources */,
 				5E09303A211EB54B00AA98DC /* ZHomeNavView.m in Sources */,
 				5E4D81E520C7B5B6002A12E2 /* ZPublicDataManager.m in Sources */,
 				5E48F91920C67BD300422A6F /* WRNavigationBar.m in Sources */,
+				5E71D52621241058009FA7E3 /* NSString+pinyin.m in Sources */,
 				5EA183AF212126F0009C6675 /* ZMeasureTopView.m in Sources */,
 				5EA183B221212F61009C6675 /* ZMeasureListCell.m in Sources */,
 				5E45CC6A2122AEF200469A30 /* ZHomeViewModel.m in Sources */,
@@ -815,6 +840,7 @@
 				5E48F94020C694E000422A6F /* NSDictionary+LYNil.m in Sources */,
 				5E48F93520C6905A00422A6F /* ZBaseTabBarController.m in Sources */,
 				5E4D81F320C7CB59002A12E2 /* ZBaseViewModel.m in Sources */,
+				5E71D52221241031009FA7E3 /* UserDTO.m in Sources */,
 				5E4D81ED20C7C5C2002A12E2 /* NSObject+Hint.m in Sources */,
 				5E48F8E420C6542F00422A6F /* main.m in Sources */,
 				5EA183BB21216EEE009C6675 /* ZDataLineChatInfomationView.m in Sources */,

@@ -17,7 +17,7 @@
 
 
 //编辑的 数据库中所有数据
-@property (nonatomic,strong) NSMutableArray <ZSingePig *>*singPigDatas;
+@property (nonatomic,strong) NSMutableArray <ZSinglePig *>*singPigDatas;
 //编辑的 数据库中没有保存的测量数据
 @property (nonatomic,strong) NSMutableArray <ZSingleData *>*testPigs;
 

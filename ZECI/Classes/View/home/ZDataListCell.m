@@ -77,7 +77,7 @@
     if (!_detaiLabel) {
         _detaiLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _detaiLabel.textColor = kFont3Color;
-        _detaiLabel.text = @"2018022:12 12 32";
+        _detaiLabel.text = @"";
         _detaiLabel.numberOfLines = 1;
         _detaiLabel.textAlignment = NSTextAlignmentLeft;
         [_detaiLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:14]];
@@ -90,12 +90,18 @@
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _timeLabel.textColor = kFont9Color;
-        _timeLabel.text = @"2018-12-12";
+        _timeLabel.text = @"";
         _timeLabel.numberOfLines = 1;
         _timeLabel.textAlignment = NSTextAlignmentRight;
         [_timeLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 14:12]];
     }
     return _timeLabel;
+}
+
+- (void)setSingleData:(ZSingleData *)singleData {
+    _singleData = singleData;
+    _detaiLabel.text = [NSString stringWithFormat:@"%@： %@  %@  %@",singleData.earTag, singleData.firstNum, singleData.secondNum, singleData.thirdNum];
+    _timeLabel.text = [ZPublicManager timeWithStr:singleData.testTime format:@"YYYY-MM-dd"];
 }
 
 + (CGFloat)z_getCellHeight:(id)sender {

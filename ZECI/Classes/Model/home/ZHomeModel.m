@@ -7,13 +7,24 @@
 //
 
 #import "ZHomeModel.h"
+#import "NSString+pinyin.h"
 
 @implementation ZSingleData
 
 @end
 
-@implementation ZSingePig
-
+@implementation ZSinglePig
+- (void)setEarTag:(NSString *)earTag {
+    _earTag = earTag;
+    
+    // 转拼音
+    NSString * PinYin = [earTag transformToPinyin];
+    // 首字母
+    NSString * FirstLetter = [earTag transformToPinyinFirstLetter];
+    
+    _namePinYin = PinYin;
+    _nameFirstLetter = FirstLetter;
+}
 @end
 
 @implementation ZTestPigs

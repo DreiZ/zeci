@@ -10,25 +10,35 @@
 #import "ZDataListSearchView.h"
 
 #import "ZDataListCell.h"
+#import "ZHomeViewModel.h"
+
 #import "ZDataLineChatVC.h"
 
 @interface ZDataListVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic,strong) ZDataListSearchView *searchView;
 @property (nonatomic,strong) UITableView *iTableView;
 
+@property (nonatomic,strong) NSMutableArray *searchArr;
+@property (nonatomic,assign) BOOL isSearchState;
 @end
 
 @implementation ZDataListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setNavgation];
+    [self setDataSource];
     [self setMainView];
 }
 
 - (void)setNavgation {
     self.customNavBar.hidden = NO;
     self.customNavBar.title = @"数据库";
+}
+
+- (void)setDataSource {
+    self.searchArr = @[].mutableCopy;
 }
 
 - (void)setMainView {
@@ -49,13 +59,17 @@
 }
 
 
-
 #pragma mark lazy loading...
 - (ZDataListSearchView *)searchView {
     if (!_searchView) {
+        __weak typeof(self) weakSelf = self;
         _searchView = [[ZDataListSearchView alloc] init];
         _searchView.searchBlock = ^(NSString *value) {
-            
+            [weakSelf startSearch:value];
+        };
+        
+        _searchView.valueChange = ^(NSString *value) {
+            [weakSelf startSearch:value];
         };
     }
     return _searchView;
@@ -77,7 +91,8 @@
             }
         } else {
             self.automaticallyAdjustsScrollViewInsets = NO;
-        } _iTableView.delegate = self;
+        }
+        _iTableView.delegate = self;
         _iTableView.dataSource = self;
     }
     return _iTableView;
@@ -89,11 +104,23 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    if (_isSearchState) {
+        return _searchArr.count;
+    }
+    return [ZHomeViewModel shareInstance].singPigDatas.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZDataListCell *cell = [ZDataListCell z_cellWithTableView:tableView];
+    ZSinglePig* singlePig;
+    if (_isSearchState) {
+        singlePig = _searchArr[indexPath.row];
+    }else{
+        singlePig = [ZHomeViewModel shareInstance].singPigDatas[indexPath.row];
+    }
+    if (singlePig && singlePig.singleList) {
+        cell.singleData = [singlePig.singleList lastObject];
+    }
     return cell;
 }
 
@@ -112,6 +139,70 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ZDataLineChatVC *chatvc = [[ZDataLineChatVC alloc] init];
+    if (_isSearchState) {
+        chatvc.singlePigData = _searchArr[indexPath.row];
+    }else{
+        chatvc.singlePigData = [ZHomeViewModel shareInstance].singPigDatas[indexPath.row];
+    }
     [self.navigationController pushViewController:chatvc animated:YES];
+}
+
+#pragma mark search handle
+// 开始所搜
+- (void)startSearch:(NSString *)string{
+    if (self.searchArr.count > 0) {
+        
+        [self.searchArr removeAllObjects];
+    }
+    
+    // 开始搜索
+    NSString * key = string.lowercaseString;
+    NSMutableArray * tempArr = [NSMutableArray array];
+    
+    if (![key isEqualToString:@"" ] && ![key isEqual:[NSNull null]]) {
+        
+        [[ZHomeViewModel shareInstance].singPigDatas enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            ZSinglePig * dto = [ZHomeViewModel shareInstance].singPigDatas[idx];
+            
+            //担心框架有事后为误转, 再次都设置转为小写
+            NSString * name = dto.earTag.lowercaseString;
+            NSString * namePinyin = dto.namePinYin.lowercaseString;
+            NSString * nameFirstLetter = dto.nameFirstLetter.lowercaseString;
+            
+            NSRange rang1 = [name rangeOfString:key];
+            if (rang1.length > 0) { // 比牛  -比
+                [tempArr addObject:dto];
+            }else {
+                if ([nameFirstLetter containsString:key]) {
+                    
+                    [tempArr addObject:dto];
+                }else { //二首
+                    if ([nameFirstLetter containsString:[key substringToIndex:1]]) {
+                        
+                        if ([namePinyin containsString:key]) {
+                            [tempArr addObject:dto];
+                        }
+                    }
+                }
+            }
+        }];
+        
+        [tempArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if (![self.searchArr containsObject:tempArr[idx]]) {
+                
+                [self.searchArr addObject:tempArr[idx]];
+            }
+        }];
+        
+        self.isSearchState = YES;
+        
+    }else{
+        
+        self.isSearchState = NO;
+    }
+    
+    [self.iTableView reloadData];
 }
 @end

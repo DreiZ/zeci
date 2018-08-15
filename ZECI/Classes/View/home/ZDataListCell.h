@@ -7,7 +7,9 @@
 //
 
 #import "ZBaseCell.h"
+#import "ZHomeModel.h"
 
 @interface ZDataListCell : ZBaseCell
- 
+@property (nonatomic,strong) ZSingleData *singleData;
+
 @end

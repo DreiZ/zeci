@@ -50,7 +50,7 @@
         [_searchTextField setBorderStyle:UITextBorderStyleNone];
         [_searchTextField setBackgroundColor:[UIColor clearColor]];
         [_searchTextField setReturnKeyType:UIReturnKeySearch];
-        [_searchTextField setPlaceholder:@"请输入相关条目"];
+        [_searchTextField setPlaceholder:@"请输入耳标"];
         _searchTextField.delegate = self;
         [_searchTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         
@@ -101,5 +101,4 @@
     
     return YES;
 }
-
 @end

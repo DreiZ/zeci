@@ -38,6 +38,7 @@
 
 #pragma mark 测量数据
 - (ZHistoryAllList *)getHistory {
+
     self.historyList = [[ZPublicDataManager shareInstance] getDBModelData:[ZHistoryAllList class]];
     if (!self.historyList) {
         self.historyList = [ZHistoryAllList new];
@@ -111,7 +112,7 @@
     NSMutableArray *listAry = [self removeTheSameDataForTestData];
     for (ZSingleData *singleData in listAry) {
         BOOL isHad = NO;
-        for (ZSingePig *aSingleData in self.singPigDatas) {
+        for (ZSinglePig *aSingleData in self.singPigDatas) {
             if ([aSingleData.earTag isEqualToString:singleData.earTag]) {
                 NSMutableArray *singPigList;
                 
@@ -132,7 +133,7 @@
         
         
         if (!isHad) {
-            ZSingePig *aSingleData = [[ZSingePig alloc] init];
+            ZSinglePig *aSingleData = [[ZSinglePig alloc] init];
             NSMutableArray *singPigList = [[NSMutableArray alloc] initWithArray:aSingleData.singleList];
             
             [singPigList addObject:singleData];

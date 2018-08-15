@@ -7,7 +7,9 @@
 //
 
 #import "ZBaseCustomViewController.h"
+#import "ZHomeModel.h"
 
 @interface ZDataLineChatVC : ZBaseCustomViewController
+@property (nonatomic,strong) ZSinglePig *singlePigData;
 
 @end

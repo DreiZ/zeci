@@ -17,9 +17,11 @@
 @property(nonatomic, strong) NSString *thirdNum;
 @end
 
-@interface ZSingePig : ZBaseModel
+@interface ZSinglePig : ZBaseModel
 //单头猪数据
 @property(nonatomic, strong) NSString *earTag;
+@property(nonatomic, strong) NSString *namePinYin;
+@property(nonatomic, strong) NSString *nameFirstLetter;
 @property(nonatomic, strong) NSArray <ZSingleData *> *singleList;
 @end
 
@@ -29,7 +31,7 @@
 @end
 
 @interface ZHistoryAllList : ZBaseModel
-@property(nonatomic, strong) NSArray <ZSingePig *> *allHisoryLists;
+@property(nonatomic, strong) NSArray <ZSinglePig *> *allHisoryLists;
 @end
 
 @interface ZHomeModel : ZBaseModel

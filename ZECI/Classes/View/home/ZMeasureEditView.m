@@ -190,7 +190,6 @@
         [_editTextField setFont:[UIFont systemFontOfSize:14]];
         [_editTextField setBorderStyle:UITextBorderStyleNone];
         [_editTextField setBackgroundColor:[UIColor clearColor]];
-        [_editTextField setReturnKeyType:UIReturnKeySearch];
         [_editTextField setPlaceholder:@"请输入耳标"];
         _editTextField.delegate = self;
         [_editTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
