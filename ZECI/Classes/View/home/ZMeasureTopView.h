@@ -7,11 +7,15 @@
 //
 
 #import "ZBaseView.h"
+#import "ZHomeModel.h"
 
 @interface ZMeasureTopView : ZBaseView
 @property (nonatomic,strong) UILabel *firstLabel;
 @property (nonatomic,strong) UILabel *secondLabel;
 @property (nonatomic,strong) UILabel *thridLabel;
+
+@property (nonatomic,strong) ZSingleData *singleData;
+
 
 - (void)resetUIWith:(BOOL)isPad;
 @end

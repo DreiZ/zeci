@@ -12,6 +12,8 @@
 @property (nonatomic,strong) UILabel *firstLabel;
 @property (nonatomic,strong) UILabel *secondLabel;
 @property (nonatomic,strong) UILabel *thridLabel;
+@property (nonatomic,strong) UIView *contView;
+
 @end
 
 @implementation ZMeasureListCell
@@ -30,6 +32,7 @@
     rightBackView.layer.borderColor = kLineColor.CGColor;
     rightBackView.layer.borderWidth = 0.5;
     [self addSubview:rightBackView];
+    self.contView = rightBackView;
     [rightBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self);
         make.bottom.equalTo(self.mas_bottom).offset(0.5);
@@ -71,7 +74,7 @@
     [editBtn setImage:[UIImage imageNamed:@"xiugai"] forState:UIControlStateNormal];
     [editBtn bk_addEventHandler:^(id sender) {
         if (weakSelf.editBlock) {
-            weakSelf.editBlock(1);
+            weakSelf.editBlock(weakSelf.singleData);
         }
     } forControlEvents:UIControlEventTouchUpInside];
     [rightBackView addSubview:editBtn];
@@ -87,7 +90,7 @@
     if (!_firstLabel) {
         _firstLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _firstLabel.textColor = kFont6Color;
-        _firstLabel.text = @"3234233";
+        _firstLabel.text = @"";
         _firstLabel.numberOfLines = 1;
         _firstLabel.textAlignment = NSTextAlignmentLeft;
         [_firstLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 14:12]];
@@ -99,7 +102,7 @@
     if (!_thridLabel) {
         _thridLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _thridLabel.textColor = kFont6Color;
-        _thridLabel.text = @"122223";
+        _thridLabel.text = @"";
         _thridLabel.numberOfLines = 1;
         _thridLabel.textAlignment = NSTextAlignmentLeft;
         [_thridLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 14:12]];
@@ -112,12 +115,32 @@
     if (!_secondLabel) {
         _secondLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _secondLabel.textColor = kFont6Color;
-        _secondLabel.text = @"444442";
+        _secondLabel.text = @"";
         _secondLabel.numberOfLines = 1;
         _secondLabel.textAlignment = NSTextAlignmentLeft;
         [_secondLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 14:12]];
     }
     return _secondLabel;
+}
+
+- (void)setSingleData:(ZSingleData *)singleData {
+    _singleData = singleData;
+    _firstLabel.text = [ZPublicManager timeWithStr:singleData.testTime format:@"YYYY-MM-dd"];
+    _thridLabel.text = [NSString stringWithFormat:@"%@ %@ %@",singleData.firstNum,singleData.secondNum,singleData.thirdNum];
+    _secondLabel.text = singleData.earTag;
+}
+
+- (void)setIsSelectData:(BOOL)isSelectData {
+    _isSelectData = isSelectData;
+    if (isSelectData) {
+        self.contView.layer.masksToBounds = YES;
+        self.contView.layer.borderColor = kMainColor.CGColor;
+        self.contView.layer.borderWidth = 1;
+    }else{
+        self.contView.layer.masksToBounds = YES;
+        self.contView.layer.borderColor = kLineColor.CGColor;
+        self.contView.layer.borderWidth = 0.5;
+    }
 }
 
 +(CGFloat)z_getCellHeight:(id)sender {

@@ -9,7 +9,7 @@
 #import "ZBaseCell.h"
 #import "ZHomeModel.h"
 @interface ZMeasureListCell : ZBaseCell
-@property (nonatomic,strong) ZSingeData *singeData;
-
-@property (nonatomic,strong) void (^editBlock)(NSInteger);
+@property (nonatomic,strong) ZSingleData *singleData;
+@property (nonatomic,assign) BOOL isSelectData;
+@property (nonatomic,strong) void (^editBlock)(ZSingleData *);
 @end

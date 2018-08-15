@@ -109,10 +109,14 @@
         make.bottom.equalTo(contView.mas_bottom).offset(-20);
     }];
     [sureBtn bk_addEventHandler:^(id sender) {
-        if (weakSelf.sureBlock) {
-            weakSelf.sureBlock(weakSelf.editTextField.text);
+        if (self.editTextField && self.editTextField.text.length > 0) {
+            if (weakSelf.sureBlock) {
+                weakSelf.sureBlock(weakSelf.editTextField.text);
+            }
+            [weakSelf removeFromSuperview];
+        }else{
+            [self showSuccessWithMsg:@"请输入耳标"];
         }
-        [weakSelf removeFromSuperview];
     } forControlEvents:UIControlEventTouchUpInside];
     
     [contView addSubview:self.editTextField];
@@ -132,14 +136,14 @@
         make.height.mas_equalTo(1);
     }];
     
-    self.editTextField.text = @"2342342345";
+    self.editTextField.text = @"";
 }
 
 - (UILabel *)firstLabel {
     if (!_firstLabel) {
         _firstLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _firstLabel.textColor = kFont3Color;
-        _firstLabel.text = @"3234233";
+        _firstLabel.text = @"";
         _firstLabel.numberOfLines = 1;
         _firstLabel.textAlignment = NSTextAlignmentLeft;
         [_firstLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(26)]];
@@ -151,7 +155,7 @@
     if (!_thridLabel) {
         _thridLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _thridLabel.textColor = kFont3Color;
-        _thridLabel.text = @"122223";
+        _thridLabel.text = @"";
         _thridLabel.numberOfLines = 1;
         _thridLabel.textAlignment = NSTextAlignmentLeft;
         [_thridLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(26)]];
@@ -164,7 +168,7 @@
     if (!_secondLabel) {
         _secondLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _secondLabel.textColor = kFont3Color;
-        _secondLabel.text = @"444442";
+        _secondLabel.text = @"";
         _secondLabel.numberOfLines = 1;
         _secondLabel.textAlignment = NSTextAlignmentLeft;
         [_secondLabel setFont:[UIFont systemFontOfSize:CGFloatIn750(26)]];
@@ -180,13 +184,14 @@
 //        _editTextField.layer.cornerRadius = 10;
 //        _editTextField.layer.borderColor = kMainColor.CGColor;
 //        _editTextField.layer.borderWidth = 1;
+        _editTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _editTextField.textAlignment = NSTextAlignmentCenter;
         _editTextField.textColor = kFont6Color;
         [_editTextField setFont:[UIFont systemFontOfSize:14]];
         [_editTextField setBorderStyle:UITextBorderStyleNone];
         [_editTextField setBackgroundColor:[UIColor clearColor]];
         [_editTextField setReturnKeyType:UIReturnKeySearch];
-        [_editTextField setPlaceholder:@"请输入相关条目"];
+        [_editTextField setPlaceholder:@"请输入耳标"];
         _editTextField.delegate = self;
         [_editTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     }
@@ -212,5 +217,13 @@
 {
     
     return YES;
+}
+
+- (void)setSingleData:(ZSingleData *)singleData {
+    _singleData = singleData;
+    _firstLabel.text = [ZPublicManager timeWithStr:singleData.testTime format:@"YYYY-MM-dd"];
+    _thridLabel.text = [NSString stringWithFormat:@"%@ %@ %@",singleData.firstNum,singleData.secondNum,singleData.thirdNum];
+    _secondLabel.text = singleData.earTag;
+    _editTextField.text = singleData.earTag;
 }
 @end

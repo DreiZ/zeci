@@ -8,7 +8,7 @@
 
 #import "ZHomeModel.h"
 
-@implementation ZSingeData
+@implementation ZSingleData
 
 @end
 

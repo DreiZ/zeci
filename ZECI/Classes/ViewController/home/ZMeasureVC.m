@@ -23,7 +23,7 @@
 @property (nonatomic,strong) ZMeasureEditView *editView;
 
 @property (nonatomic,strong) UITableView *iTableView;
-@property (nonatomic,strong) ZSingeData *selectData;
+@property (nonatomic,strong) ZSingleData *selectData;
 
 @end
 
@@ -122,7 +122,12 @@
 
 - (ZMeasureEditView *)editView {
     if (!_editView) {
+        __weak typeof(self) weakSelf = self;
         _editView = [[ZMeasureEditView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH)];
+        _editView.sureBlock = ^(NSString *earTag) {
+            weakSelf.editView.singleData.earTag = earTag;
+            [weakSelf.iTableView reloadData];
+        };
     }
     _editView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
     return _editView;
@@ -163,8 +168,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak typeof(self) weakSelf = self;
     ZMeasureListCell *cell = [ZMeasureListCell z_cellWithTableView:tableView];
-    cell.singeData = [ZHomeViewModel shareInstance].testPigs[indexPath.row];
-    cell.editBlock = ^(NSInteger index) {
+    cell.singleData = [ZHomeViewModel shareInstance].testPigs[indexPath.row];
+    cell.isSelectData = ([ZHomeViewModel shareInstance].testPigs[indexPath.row] == self.selectData);
+    cell.editBlock = ^(ZSingleData *singleData) {
+        weakSelf.editView.singleData = singleData;
         [weakSelf.view addSubview:weakSelf.editView];
     };
     return cell;
@@ -184,11 +191,35 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger tempTime = [ZPublicManager getNowTimestamp];
-    NSLog(@"zzz date  %ld",tempTime);
-    NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYY-MM-dd"]);
+    self.selectData = [ZHomeViewModel shareInstance].testPigs[indexPath.row];
+    self.topView.singleData = self.selectData;
+    [self.iTableView reloadData];
 }
 
+#pragma mark 侧滑删除
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+// 定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+// 进入编辑模式，按下出现的编辑按钮后,进行删除操作
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [[ZHomeViewModel shareInstance].testPigs removeObjectAtIndex:indexPath.row];
+        [self.iTableView reloadData];
+    }
+}
+
+// 修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+
+#pragma mark 翻转屏幕修改布局
 -(void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
     if (!_topView || !_iTableView) {
         return;
@@ -223,20 +254,23 @@
     }
 }
 
-- (ZSingeData *)addData {
+#pragma mark test data
+- (ZSingleData *)addData {
     NSInteger tempTime = [ZPublicManager getNowTimestamp];
     NSLog(@"zzz date  %ld",tempTime);
     NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]);
     
-    ZSingeData *tempPigData = [[ZSingeData alloc] init];
+    ZSingleData *tempPigData = [[ZSingleData alloc] init];
     tempPigData.earTag =  [ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"];
     tempPigData.testTime = [NSString stringWithFormat:@"%ld",tempTime];
     tempPigData.firstNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
     tempPigData.secondNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
     tempPigData.thirdNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
     self.selectData = tempPigData;
-    [[ZHomeViewModel shareInstance].testPigs addObject:tempPigData];
+    [[ZHomeViewModel shareInstance].testPigs insertObject:tempPigData atIndex:0];
     [self.iTableView reloadData];
+    self.topView.singleData = self.selectData;
     return tempPigData;
 }
+
 @end

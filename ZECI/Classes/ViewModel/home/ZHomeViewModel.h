@@ -11,7 +11,7 @@
 
 @interface ZHomeViewModel : ZBaseModel
 @property (nonatomic,strong) ZHistoryAllList *historyList;
-@property (nonatomic,strong) NSMutableArray <ZSingeData *>*testPigs;
+@property (nonatomic,strong) NSMutableArray <ZSingleData *>*testPigs;
 
 + (ZHomeViewModel *)shareInstance;
 

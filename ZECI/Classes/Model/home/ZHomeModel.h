@@ -8,7 +8,7 @@
 
 #import "ZBaseModel.h"
 
-@interface ZSingeData : ZBaseModel
+@interface ZSingleData : ZBaseModel
 //单次数据
 @property(nonatomic, strong) NSString *earTag;
 @property(nonatomic, strong) NSString *testTime;
@@ -20,7 +20,7 @@
 @interface ZSingePig : ZBaseModel
 //单头猪数据
 @property(nonatomic, strong) NSString *earTag;
-@property(nonatomic, strong) NSArray <ZSingeData *> *singList;
+@property(nonatomic, strong) NSArray <ZSingleData *> *singList;
 @end
 
 @interface ZHistoryAllList : ZBaseModel

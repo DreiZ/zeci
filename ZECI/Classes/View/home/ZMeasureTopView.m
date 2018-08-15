@@ -81,7 +81,7 @@
     if (!_firstLabel) {
         _firstLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _firstLabel.textColor = [UIColor whiteColor];
-        _firstLabel.text = @"33";
+        _firstLabel.text = @"0";
         _firstLabel.numberOfLines = 1;
         _firstLabel.textAlignment = NSTextAlignmentCenter;
         [_firstLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
@@ -93,7 +93,7 @@
     if (!_thridLabel) {
         _thridLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _thridLabel.textColor = [UIColor whiteColor];
-        _thridLabel.text = @"12";
+        _thridLabel.text = @"0";
         _thridLabel.numberOfLines = 1;
         _thridLabel.textAlignment = NSTextAlignmentCenter;
         [_thridLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
@@ -106,7 +106,7 @@
     if (!_secondLabel) {
         _secondLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _secondLabel.textColor = [UIColor whiteColor];
-        _secondLabel.text = @"42";
+        _secondLabel.text = @"0";
         _secondLabel.numberOfLines = 1;
         _secondLabel.textAlignment = NSTextAlignmentCenter;
         [_secondLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
@@ -177,5 +177,12 @@
             make.centerY.equalTo(self.rightBackView.mas_bottom).multipliedBy(0.8);
         }];
     }
+}
+
+- (void)setSingleData:(ZSingleData *)singleData {
+    _singleData = singleData;
+    _firstLabel.text = singleData.firstNum;
+    _thridLabel.text = singleData.thirdNum;
+    _secondLabel.text = singleData.secondNum;
 }
 @end
