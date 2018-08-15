@@ -15,6 +15,9 @@
 //微信好友和朋友圈
 #import "WXApi.h"
 
+#define firstLevel 12
+#define secondLevel 24
+
 @interface ZDataLineChatVC ()
 @property (nonatomic,strong) ZDataLineChatInfomationView *infomationView;
 @property (nonatomic,strong) LFLineChart *lineChart;
@@ -87,10 +90,69 @@
 - (void)setLineChat {
     self.lineChart = [[LFLineChart alloc] initWithFrame:CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-12, kWindowH - 160 - kSafeAreaTopHeight)];
     self.lineChart.clipsToBounds = YES;
+//    NSMutableArray *orderedArray = [[NSMutableArray alloc] init];
+////    NSArray *temp = @[@"23",@"33",@"27",@"37",@"48",@"23",@"58"];
+////    NSArray *temp1 = @[@"30",@"46",@"32",@"44",@"52",@"31",@"62"];
+////    NSArray *temp2 = @[@"48",@"55",@"45",@"52",@"61",@"43",@"78"];
+//    NSArray *temp = @[@"",@"23",@"33",@"",@"23",@"",@"",@"",@"",@"",@"",@"",@""];
+//    NSArray *temp1 = @[@"",@"30",@"46",@"",@"45",@"",@"",@"",@"",@"",@"",@"",@""];
+//    NSArray *temp2 = @[@"",@"48",@"55",@"",@"55",@"",@"",@"",@"",@"",@"",@"",@""];
+//    NSArray *tempy = @[@"3月3日",@"3月4日",@"3月5日",@"3月6日",@"3月7日",@"3月8日",@"3月9日",@"3月10日",@"3月11日",@"3月12日",@"3月13日",@"3月14日",@"3月15日",@"3月16日",@"3月17日"];
+    
     NSMutableArray *orderedArray = [[NSMutableArray alloc] init];
-//    NSArray *temp = @[@"23",@"33",@"27",@"37",@"48",@"23",@"58"];
-//    NSArray *temp1 = @[@"30",@"46",@"32",@"44",@"52",@"31",@"62"];
-//    NSArray *temp2 = @[@"48",@"55",@"45",@"52",@"61",@"43",@"78"];
+    
+    //第一条数据
+    NSMutableArray *firstDataArr = @[].mutableCopy;
+    //第二条数据
+    NSMutableArray *secondDataArr = @[].mutableCopy;
+    //第三条数据
+    NSMutableArray *thridDataArr = @[].mutableCopy;
+    //日期坐标
+    NSMutableArray *xValueArr = @[].mutableCopy;
+    if (_singlePigData.singleList && _singlePigData.singleList.count > 0) {
+        ZSingleData *firstData = _singlePigData.singleList[0];
+        
+        //第一条数据未前一天，空数据
+        [firstDataArr addObject:@""];
+        [secondDataArr addObject:@""];
+        [thridDataArr addObject:@""];
+        
+        [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[firstData.testTime integerValue] - 60 * 60 * 24] format:@"MM月dd日"]];
+        
+        for (ZSingleData *singleData in _singlePigData.singleList) {
+            [firstDataArr addObject:singleData.firstNum];
+            [secondDataArr addObject:singleData.secondNum];
+            [thridDataArr addObject:singleData.thirdNum];
+            
+            [xValueArr addObject:[ZPublicManager timeWithStr:firstData.testTime format:@"MM月dd日"]];
+        }
+    }
+    
+    
+    if (self.isHorizontal) {
+        if (xValueArr.count * ([ZPublicManager getIsIpad] ? 65:45) < kWindowW-180-12) {
+            for (int i = 0; i < ((kWindowW-180-12 - (xValueArr.count * ([ZPublicManager getIsIpad] ? 65:45)))/([ZPublicManager getIsIpad] ? 65:45)); i++) {
+                [firstDataArr addObject:@""];
+                [secondDataArr addObject:@""];
+                [thridDataArr addObject:@""];
+                ZSingleData *lastData = [_singlePigData.singleList lastObject];
+                [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastData.testTime integerValue] + i * 60 * 60 * 24] format:@"MM月dd日"]];
+            }
+        }
+    }else{
+        if (xValueArr.count * ([ZPublicManager getIsIpad] ? 65:45) < kWindowW-12) {
+            for (int i = 0; i < ((kWindowW-12 - (xValueArr.count * ([ZPublicManager getIsIpad] ? 65:45)))/([ZPublicManager getIsIpad] ? 65:45)); i++) {
+                [firstDataArr addObject:@""];
+                [secondDataArr addObject:@""];
+                [thridDataArr addObject:@""];
+                ZSingleData *lastData = [_singlePigData.singleList lastObject];
+                [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastData.testTime integerValue] + i * 60 * 60 * 24] format:@"MM月dd日"]];
+            }
+        }
+    }
+
+    
+    
     NSArray *temp = @[@"",@"23",@"33",@"",@"23",@"",@"",@"",@"",@"",@"",@"",@""];
     NSArray *temp1 = @[@"",@"30",@"46",@"",@"45",@"",@"",@"",@"",@"",@"",@"",@""];
     NSArray *temp2 = @[@"",@"48",@"55",@"",@"55",@"",@"",@"",@"",@"",@"",@"",@""];
@@ -135,18 +197,20 @@
     
     self.lineChart.maxValue = max + (max - min)*0.08;
     self.lineChart.minValue = min - (max - min)*0.08;
-    if (max == 0) {
-        self.lineChart.maxValue = 5;
+    if (max < secondLevel*1.5) {
+        self.lineChart.maxValue = secondLevel*1.5;
     }
     if (min <= 0) {
         self.lineChart.minValue = 0;
     }
     self.lineChart.minValue = 0;
     
-    self.lineChart.firstX = 12;
-    self.lineChart.secondX = 24;
+    self.lineChart.firstX = firstLevel;
+    self.lineChart.secondX = secondLevel;
     
     self.lineChart.xScaleMarkLEN = [ZPublicManager getIsIpad] ? 65:45;
+    
+    
     self.lineChart.yMarkTitles = @[[NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue],
                                    [NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue + (self.lineChart.maxValue - self.lineChart.minValue)/6],
                                    [NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue +(self.lineChart.maxValue - self.lineChart.minValue)*2/6],
