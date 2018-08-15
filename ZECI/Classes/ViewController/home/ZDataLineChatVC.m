@@ -91,13 +91,13 @@
     self.lineChart = [[LFLineChart alloc] initWithFrame:CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-12, kWindowH - 160 - kSafeAreaTopHeight)];
     self.lineChart.clipsToBounds = YES;
 //    NSMutableArray *orderedArray = [[NSMutableArray alloc] init];
-////    NSArray *temp = @[@"23",@"33",@"27",@"37",@"48",@"23",@"58"];
-////    NSArray *temp1 = @[@"30",@"46",@"32",@"44",@"52",@"31",@"62"];
-////    NSArray *temp2 = @[@"48",@"55",@"45",@"52",@"61",@"43",@"78"];
-//    NSArray *temp = @[@"",@"23",@"33",@"",@"23",@"",@"",@"",@"",@"",@"",@"",@""];
-//    NSArray *temp1 = @[@"",@"30",@"46",@"",@"45",@"",@"",@"",@"",@"",@"",@"",@""];
-//    NSArray *temp2 = @[@"",@"48",@"55",@"",@"55",@"",@"",@"",@"",@"",@"",@"",@""];
-//    NSArray *tempy = @[@"3月3日",@"3月4日",@"3月5日",@"3月6日",@"3月7日",@"3月8日",@"3月9日",@"3月10日",@"3月11日",@"3月12日",@"3月13日",@"3月14日",@"3月15日",@"3月16日",@"3月17日"];
+////    NSArray *firstDataArr = @[@"23",@"33",@"27",@"37",@"48",@"23",@"58"];
+////    NSArray *secondDataArr = @[@"30",@"46",@"32",@"44",@"52",@"31",@"62"];
+////    NSArray *thridDataArr = @[@"48",@"55",@"45",@"52",@"61",@"43",@"78"];
+//    NSArray *firstDataArr = @[@"",@"23",@"33",@"",@"23",@"",@"",@"",@"",@"",@"",@"",@""];
+//    NSArray *secondDataArr = @[@"",@"30",@"46",@"",@"45",@"",@"",@"",@"",@"",@"",@"",@""];
+//    NSArray *thridDataArr = @[@"",@"48",@"55",@"",@"55",@"",@"",@"",@"",@"",@"",@"",@""];
+//    NSArray *xValueArr = @[@"3月3日",@"3月4日",@"3月5日",@"3月6日",@"3月7日",@"3月8日",@"3月9日",@"3月10日",@"3月11日",@"3月12日",@"3月13日",@"3月14日",@"3月15日",@"3月16日",@"3月17日"];
     
     NSMutableArray *orderedArray = [[NSMutableArray alloc] init];
     
@@ -128,57 +128,42 @@
         }
     }
     
+    CGFloat chatLineWidth = self.isHorizontal ? (kWindowW-180-12):(kWindowH-180-12);
     
-    if (self.isHorizontal) {
-        if (xValueArr.count * ([ZPublicManager getIsIpad] ? 65:45) < kWindowW-180-12) {
-            for (int i = 0; i < ((kWindowW-180-12 - (xValueArr.count * ([ZPublicManager getIsIpad] ? 65:45)))/([ZPublicManager getIsIpad] ? 65:45)); i++) {
-                [firstDataArr addObject:@""];
-                [secondDataArr addObject:@""];
-                [thridDataArr addObject:@""];
-                ZSingleData *lastData = [_singlePigData.singleList lastObject];
-                [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastData.testTime integerValue] + i * 60 * 60 * 24] format:@"MM月dd日"]];
-            }
-        }
-    }else{
-        if (xValueArr.count * ([ZPublicManager getIsIpad] ? 65:45) < kWindowW-12) {
-            for (int i = 0; i < ((kWindowW-12 - (xValueArr.count * ([ZPublicManager getIsIpad] ? 65:45)))/([ZPublicManager getIsIpad] ? 65:45)); i++) {
-                [firstDataArr addObject:@""];
-                [secondDataArr addObject:@""];
-                [thridDataArr addObject:@""];
-                ZSingleData *lastData = [_singlePigData.singleList lastObject];
-                [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastData.testTime integerValue] + i * 60 * 60 * 24] format:@"MM月dd日"]];
-            }
+    if (xValueArr.count * ([ZPublicManager getIsIpad] ? 70:55) < chatLineWidth) {
+        NSInteger addCount = (NSInteger)((chatLineWidth - (xValueArr.count * ([ZPublicManager getIsIpad] ? 70:55)))/([ZPublicManager getIsIpad] ? 70:55));
+        for (NSInteger i = 0; i < addCount; i++) {
+            [firstDataArr addObject:@""];
+            [secondDataArr addObject:@""];
+            [thridDataArr addObject:@""];
+            ZSingleData *lastData = [_singlePigData.singleList lastObject];
+            
+            [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastData.testTime integerValue] + (i+1) * 60 * 60 * 24] format:@"MM月dd日"]];
         }
     }
 
-    
-    
-    NSArray *temp = @[@"",@"23",@"33",@"",@"23",@"",@"",@"",@"",@"",@"",@"",@""];
-    NSArray *temp1 = @[@"",@"30",@"46",@"",@"45",@"",@"",@"",@"",@"",@"",@"",@""];
-    NSArray *temp2 = @[@"",@"48",@"55",@"",@"55",@"",@"",@"",@"",@"",@"",@"",@""];
-    NSArray *tempy = @[@"3月3日",@"3月4日",@"3月5日",@"3月6日",@"3月7日",@"3月8日",@"3月9日",@"3月10日",@"3月11日",@"3月12日",@"3月13日",@"3月14日",@"3月15日",@"3月16日",@"3月17日"];
     float max = 0;
     float min = 0;
-    for(int i = 0; i < temp.count; i++){
+    
+    for(int i = 0; i < firstDataArr.count; i++){
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         NSString *xValue;
         NSString *yValue;
         NSString *y1Value;
         NSString *y2Value;
-        
-//        NSString *formatter = @"MM月dd日";
-        
-        xValue = tempy[i];
-        yValue = temp[i];
-        y1Value = temp1[i];
-        y2Value = temp2[i];
+        xValue = xValueArr[i];
+        yValue = firstDataArr[i];
+        y1Value = secondDataArr[i];
+        y2Value = thridDataArr[i];
         
         if ([yValue floatValue]>max) {
             max = [yValue floatValue];
         }
+        
         if ([y1Value floatValue]>max) {
             max = [y1Value floatValue];
         }
+        
         if ([y2Value floatValue]>max) {
             max = [y2Value floatValue];
         }
@@ -189,9 +174,7 @@
         }else if (i == 0){
             min = [yValue floatValue];
         }
-        dict = [@{
-                  @"item" : xValue, @"count":yValue,@"count1":y1Value,@"count2":y2Value
-                  } mutableCopy];
+        dict = [@{@"item" : xValue, @"count":yValue,@"count1":y1Value,@"count2":y2Value} mutableCopy];
         [orderedArray addObject:dict];
     }
     
@@ -208,7 +191,7 @@
     self.lineChart.firstX = firstLevel;
     self.lineChart.secondX = secondLevel;
     
-    self.lineChart.xScaleMarkLEN = [ZPublicManager getIsIpad] ? 65:45;
+    self.lineChart.xScaleMarkLEN = [ZPublicManager getIsIpad] ? 70:55;
     
     
     self.lineChart.yMarkTitles = @[[NSString stringWithFormat:@"%.0fmm",self.lineChart.minValue],

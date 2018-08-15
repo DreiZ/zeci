@@ -27,7 +27,7 @@
  *  X轴刻度标签  宽度
  */
 
-#define XMARKLAB_WIDTH ([ZPublicManager getIsIpad] ? 60:45.f)
+#define XMARKLAB_WIDTH ([ZPublicManager getIsIpad] ? 70:55.f)
 
 /**
  *  X轴刻度标签  高度
