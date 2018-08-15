@@ -18,4 +18,8 @@
 - (ZHistoryAllList *)getHistory;
 - (void)updateHistory;
 - (void)cleanAllHistory;
+
+
+- (void)removeTheSameDataForTestData;
+- (BOOL)checkTestDataIsHadSameData;
 @end

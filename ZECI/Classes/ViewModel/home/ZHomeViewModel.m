@@ -36,4 +36,28 @@
     [[ZPublicDataManager shareInstance] clearAllData];
     self.historyList = [ZHistoryAllList new];
 }
+
+#pragma mark 测试数据处理
+- (BOOL)checkTestDataIsHadSameData {
+    BOOL hadSame = NO;
+    NSMutableArray *listAry = [[NSMutableArray alloc]init];
+    for (ZSingleData *singleData in self.testPigs) {
+        if (![listAry containsObject:singleData]) {
+            [listAry addObject:singleData];
+        }else{
+            hadSame = YES;
+        }
+    }
+    return hadSame;
+}
+
+- (void)removeTheSameDataForTestData {
+    NSMutableArray *listAry = [[NSMutableArray alloc]init];
+    for (ZSingleData *singleData in self.testPigs) {
+        if (![listAry containsObject:singleData]) {
+            [listAry addObject:singleData];
+        }
+    }
+    NSLog(@"%@",listAry);
+}
 @end

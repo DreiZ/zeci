@@ -81,7 +81,7 @@
     if (!_firstLabel) {
         _firstLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _firstLabel.textColor = [UIColor whiteColor];
-        _firstLabel.text = @"0";
+        _firstLabel.text = @"11";
         _firstLabel.numberOfLines = 1;
         _firstLabel.textAlignment = NSTextAlignmentCenter;
         [_firstLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
@@ -89,11 +89,24 @@
     return _firstLabel;
 }
 
+- (UILabel *)secondLabel {
+    if (!_secondLabel) {
+        _secondLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _secondLabel.textColor = [UIColor whiteColor];
+        _secondLabel.text = @"22";
+        _secondLabel.numberOfLines = 1;
+        _secondLabel.textAlignment = NSTextAlignmentCenter;
+        [_secondLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
+    }
+    return _secondLabel;
+}
+
+
 - (UILabel *)thridLabel {
     if (!_thridLabel) {
         _thridLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _thridLabel.textColor = [UIColor whiteColor];
-        _thridLabel.text = @"0";
+        _thridLabel.text = @"33";
         _thridLabel.numberOfLines = 1;
         _thridLabel.textAlignment = NSTextAlignmentCenter;
         [_thridLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
@@ -101,18 +114,6 @@
     return _thridLabel;
 }
 
-
-- (UILabel *)secondLabel {
-    if (!_secondLabel) {
-        _secondLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _secondLabel.textColor = [UIColor whiteColor];
-        _secondLabel.text = @"0";
-        _secondLabel.numberOfLines = 1;
-        _secondLabel.textAlignment = NSTextAlignmentCenter;
-        [_secondLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? CGFloatIn750(40): CGFloatIn750(50)]];
-    }
-    return _secondLabel;
-}
 
 - (void)resetUIWith:(BOOL)isPad {
     if (isPad) {

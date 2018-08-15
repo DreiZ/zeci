@@ -48,6 +48,8 @@
 		5E543DF5211830A900EB3830 /* UITableViewCell+ZCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF1211830A900EB3830 /* UITableViewCell+ZCategory.m */; };
 		5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF72118331000EB3830 /* ZSpaceCell.m */; };
 		5E5D891B20E1D2EF0096536C /* UIView+Radio.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D891920E1D2EF0096536C /* UIView+Radio.m */; };
+		5E71D50F2123C686009FA7E3 /* ZMeasureSaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D50E2123C686009FA7E3 /* ZMeasureSaveView.m */; };
+		5E71D5122123CC7A009FA7E3 /* ZMeasureSaveAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D5112123CC7A009FA7E3 /* ZMeasureSaveAlertView.m */; };
 		5EA1839D2121136A009C6675 /* ZCompanyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */; };
 		5EA183A0212119C3009C6675 /* ZDataListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1839F212119C3009C6675 /* ZDataListVC.m */; };
 		5EA183A321211AE7009C6675 /* ZDataListSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183A221211AE7009C6675 /* ZDataListSearchView.m */; };
@@ -168,6 +170,10 @@
 		5E543DF82118331000EB3830 /* ZSpaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSpaceCell.h; sourceTree = "<group>"; };
 		5E5D891920E1D2EF0096536C /* UIView+Radio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Radio.m"; sourceTree = "<group>"; };
 		5E5D891A20E1D2EF0096536C /* UIView+Radio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Radio.h"; sourceTree = "<group>"; };
+		5E71D50D2123C686009FA7E3 /* ZMeasureSaveView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureSaveView.h; sourceTree = "<group>"; };
+		5E71D50E2123C686009FA7E3 /* ZMeasureSaveView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureSaveView.m; sourceTree = "<group>"; };
+		5E71D5102123CC7A009FA7E3 /* ZMeasureSaveAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureSaveAlertView.h; sourceTree = "<group>"; };
+		5E71D5112123CC7A009FA7E3 /* ZMeasureSaveAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureSaveAlertView.m; sourceTree = "<group>"; };
 		5EA1839B2121136A009C6675 /* ZCompanyInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZCompanyInfoVC.h; sourceTree = "<group>"; };
 		5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCompanyInfoVC.m; sourceTree = "<group>"; };
 		5EA1839E212119C3009C6675 /* ZDataListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataListVC.h; sourceTree = "<group>"; };
@@ -562,6 +568,10 @@
 				5EA183BA21216EEE009C6675 /* ZDataLineChatInfomationView.m */,
 				5E45CC622122663C00469A30 /* ZShareView.h */,
 				5E45CC632122663C00469A30 /* ZShareView.m */,
+				5E71D50D2123C686009FA7E3 /* ZMeasureSaveView.h */,
+				5E71D50E2123C686009FA7E3 /* ZMeasureSaveView.m */,
+				5E71D5102123CC7A009FA7E3 /* ZMeasureSaveAlertView.h */,
+				5E71D5112123CC7A009FA7E3 /* ZMeasureSaveAlertView.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -776,11 +786,13 @@
 				5E4D81E920C7C592002A12E2 /* iCarousel.m in Sources */,
 				5E48F93F20C694E000422A6F /* NSArray+LYNil.m in Sources */,
 				5EA183C62121736B009C6675 /* LFChartLineView.m in Sources */,
+				5E71D50F2123C686009FA7E3 /* ZMeasureSaveView.m in Sources */,
 				5EA183A0212119C3009C6675 /* ZDataListVC.m in Sources */,
 				5E48F92620C67E8A00422A6F /* ZBaseViewController.m in Sources */,
 				5E48F92F20C6800000422A6F /* ZBaseNavigationController.m in Sources */,
 				5EA183A321211AE7009C6675 /* ZDataListSearchView.m in Sources */,
 				5E09303D211ECD6A00AA98DC /* ZHomeBluetoothListCell.m in Sources */,
+				5E71D5122123CC7A009FA7E3 /* ZMeasureSaveAlertView.m in Sources */,
 				5E4D81F020C7CA27002A12E2 /* ZBaseModel.m in Sources */,
 				5E48F93220C68D1400422A6F /* ZBaseCustomViewController.m in Sources */,
 				5EFD36A720E0EBB400B68054 /* ZHomeVC.m in Sources */,
@@ -987,14 +999,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BP42WMT6L5;
+				DEVELOPMENT_TEAM = 7483HXR3HC;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZECI/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ZECI/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zzz.ZECI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzz.ZECIZ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1007,14 +1020,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BP42WMT6L5;
+				DEVELOPMENT_TEAM = 7483HXR3HC;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZECI/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ZECI/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zzz.ZECI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzz.ZECIZ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

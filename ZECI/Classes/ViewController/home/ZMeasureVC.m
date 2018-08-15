@@ -7,24 +7,30 @@
 //
 
 #import "ZMeasureVC.h"
-#import "ZMeasureNavView.h"
 #import "ZCompanyInfoVC.h"
 #import "ZDataListVC.h"
-#import "ZMeasureTopView.h"
 
+#import "ZMeasureTopView.h"
+#import "ZMeasureEditView.h"
+#import "ZMeasureNavView.h"
+#import "ZMeasureSaveView.h"
+#import "ZMeasureSaveAlertView.h"
 #import "ZMeasureListCell.h"
 
-#import "ZMeasureEditView.h"
 #import "ZHomeViewModel.h"
 
 @interface ZMeasureVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) ZMeasureNavView *navView;
 @property (nonatomic,strong) ZMeasureTopView *topView;
 @property (nonatomic,strong) ZMeasureEditView *editView;
+@property (nonatomic,strong) ZMeasureSaveView *saveView;
+@property (nonatomic,strong) ZMeasureSaveAlertView *saveAlertView;
+
 
 @property (nonatomic,strong) UITableView *iTableView;
 @property (nonatomic,strong) ZSingleData *selectData;
 
+@property (nonatomic,assign) BOOL isBackSave;
 @end
 
 @implementation ZMeasureVC
@@ -37,7 +43,7 @@
     UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     tempBtn.backgroundColor = [UIColor blackColor];
     [tempBtn bk_addEventHandler:^(id sender) {
-        [self addData];
+        [self addTestData];
     } forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:tempBtn];
     [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,6 +81,14 @@
             make.top.equalTo(self.navView.mas_bottom).offset(0);
             make.left.equalTo(self.topView.mas_right);
         }];
+        
+        [self.view addSubview:self.saveView];
+        [self.saveView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 80:60);
+            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -20 : -15);
+            make.left.equalTo(self.view.mas_left).offset([ZPublicManager getIsIpad] ? 15:12);
+        }];
+        
         [self.topView resetUIWith:[ZPublicManager getIsIpad]];
     }else{
         [self.view addSubview:self.topView];
@@ -89,11 +103,18 @@
             make.left.bottom.right.equalTo(self.view);
             make.top.equalTo(self.topView.mas_bottom).offset(0);
         }];
+        
+        [self.view addSubview:self.saveView];
+        [self.saveView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 80:60);
+            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -20 : -15);
+            make.left.equalTo(self.view.mas_left).offset([ZPublicManager getIsIpad] ? 15:12);
+        }];
     }
 }
 
 #pragma mark lazy loading...
--(ZMeasureNavView *)navView {
+- (ZMeasureNavView *)navView {
     if (!_navView) {
         __weak typeof(self) weakSelf = self;
         _navView = [[ZMeasureNavView alloc] init];
@@ -105,7 +126,11 @@
                 ZDataListVC *listVC = [[ZDataListVC alloc] init];
                 [weakSelf.navigationController pushViewController:listVC animated:YES];
             }else{
-                [weakSelf.navigationController popViewControllerAnimated:YES];
+                if ([ZHomeViewModel shareInstance].testPigs && [ZHomeViewModel shareInstance].testPigs.count > 0) {
+                    [weakSelf backSaveTestPigsData];
+                }else{
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                }
             }
         };
     }
@@ -133,6 +158,39 @@
     return _editView;
 }
 
+- (ZMeasureSaveView *)saveView {
+    if (!_saveView) {
+        __weak typeof(self) weakSelf = self;
+        _saveView = [[ZMeasureSaveView alloc] init];
+        _saveView.saveBlock = ^{
+            if ([ZHomeViewModel shareInstance].testPigs && [ZHomeViewModel shareInstance].testPigs.count > 0) {
+                [weakSelf saveTestPigsData];
+            }else{
+                [weakSelf showErrorWithMsg:@"没有测量的数据需要保存"];
+            }
+        };
+    }
+    return _saveView;
+}
+
+- (ZMeasureSaveAlertView *)saveAlertView {
+    if (!_saveAlertView) {
+        __weak typeof(self) weakSelf = self;
+        _saveAlertView = [[ZMeasureSaveAlertView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH)];
+        _saveAlertView.sureBlock = ^(NSInteger index) {
+            if (index == 0) {
+                if (weakSelf.isBackSave) {
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                }
+            }else{
+                
+            }
+        };
+    }
+    _saveAlertView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
+    return _saveAlertView;
+}
+
 - (UITableView *)iTableView {
     if (!_iTableView) {
         _iTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -152,6 +210,7 @@
         }
         _iTableView.delegate = self;
         _iTableView.dataSource = self;
+        _iTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 64)];
     }
     return _iTableView;
 }
@@ -255,13 +314,13 @@
 }
 
 #pragma mark test data
-- (ZSingleData *)addData {
+- (ZSingleData *)addTestData {
     NSInteger tempTime = [ZPublicManager getNowTimestamp];
     NSLog(@"zzz date  %ld",tempTime);
     NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]);
     
     ZSingleData *tempPigData = [[ZSingleData alloc] init];
-    tempPigData.earTag =  [ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"];
+    tempPigData.earTag =  [ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMddHHmmss"];
     tempPigData.testTime = [NSString stringWithFormat:@"%ld",tempTime];
     tempPigData.firstNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
     tempPigData.secondNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
@@ -271,6 +330,31 @@
     [self.iTableView reloadData];
     self.topView.singleData = self.selectData;
     return tempPigData;
+}
+
+- (void)saveTestPigsData {
+    self.isBackSave = NO;
+    if ([[ZHomeViewModel shareInstance] checkTestDataIsHadSameData]) {
+        self.saveAlertView.alertLabel.text = @"数据列表中有相同耳标的测量数据，同一耳标只会取一条数据保存，确定保存吗？";
+        self.saveAlertView.titleLabel.text = @"提示";
+        [self.view addSubview:self.saveAlertView];
+    }else{
+        self.saveAlertView.alertLabel.text = @"确定保存测量数据列表数据到数据库吗？";
+        self.saveAlertView.titleLabel.text = @"提示";
+        [self.view addSubview:self.saveAlertView];
+    }
+}
+
+- (void)backSaveTestPigsData {
+    self.isBackSave = YES;
+    self.saveAlertView.titleLabel.text = @"测试数据还未保存";
+    if ([[ZHomeViewModel shareInstance] checkTestDataIsHadSameData]) {
+        self.saveAlertView.alertLabel.text = @"数据列表中有相同耳标的测量数据，同一耳标只会取一条数据保存，确定保存吗？";
+        [self.view addSubview:self.saveAlertView];
+    }else{
+        self.saveAlertView.alertLabel.text = @"确定保存测量数据列表数据到数据库吗？";
+        [self.view addSubview:self.saveAlertView];
+    }
 }
 
 @end
