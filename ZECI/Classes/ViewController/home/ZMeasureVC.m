@@ -19,6 +19,8 @@
 
 #import "ZHomeViewModel.h"
 
+static NSInteger zindex = 0;
+
 @interface ZMeasureVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) ZMeasureNavView *navView;
 @property (nonatomic,strong) ZMeasureTopView *topView;
@@ -40,24 +42,7 @@
     [self setupNavigationView];
     [self setMainView];
     
-    NSArray *tempArr = @[@"q",@"d",@"f",@"g",@"j",@"k",@"l",@"p",@"o"];
-    NSArray *temp1Arr = @[@"g",@"t",@"j",@"b"];
-    
-    for (NSString *str in temp1Arr) {
-        BOOL isHad = NO;
-        for (NSString *sstr in tempArr) {
-            if ([sstr isEqualToString:str]) {
-                
-                isHad = YES;
-                break;
-            }
-        }
-        if (!isHad) {
-            NSLog(@"zzz %@",str);
-        }
-        
-    }
-    
+    zindex++;
     UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     tempBtn.backgroundColor = [UIColor blackColor];
     [tempBtn bk_addEventHandler:^(id sender) {
@@ -76,6 +61,7 @@
     self.customNavBar.hidden = YES;
     self.view.backgroundColor = kBackColor;
 }
+
 
 - (void)setMainView {
     [self.view addSubview:self.navView];
@@ -208,15 +194,18 @@
             }
         };
     }
+    
     _saveAlertView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
     return _saveAlertView;
 }
 
 - (UITableView *)iTableView {
     if (!_iTableView) {
+        
         _iTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _iTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _iTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+        
         if ([_iTableView respondsToSelector:@selector(contentInsetAdjustmentBehavior)]) {
             _iTableView.estimatedRowHeight = 0;
             _iTableView.estimatedSectionHeaderHeight = 0;
@@ -337,7 +326,7 @@
 
 #pragma mark test data
 - (ZSingleData *)addTestData {
-    NSInteger tempTime = [ZPublicManager getNowTimestamp];
+    NSInteger tempTime = [ZPublicManager getNowTimestamp] + zindex * 24*60*60;
     NSLog(@"zzz date  %ld",tempTime);
     NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]);
     
@@ -353,9 +342,12 @@
     self.topView.singleData = self.selectData;
     
     [[ZHomeViewModel shareInstance] updateTestHistory];
+    
     return tempPigData;
 }
 
+
+#pragma mark 保存数据---------------------------
 - (void)saveTestPigsData {
     self.isBackSave = NO;
     if ([[ZHomeViewModel shareInstance] checkTestDataIsHadSameData]) {

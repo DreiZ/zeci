@@ -119,12 +119,23 @@
         
         [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[firstData.testTime integerValue] - 60 * 60 * 24] format:@"MM月dd日"]];
         
+        ZSingleData *lastSingleData = nil;
         for (ZSingleData *singleData in _singlePigData.singleList) {
+            if (lastSingleData && ([[ZPublicManager timeWithStr:lastSingleData.testTime format:@"MMdd"] integerValue] + 1 != [[ZPublicManager timeWithStr:singleData.testTime format:@"MMdd"] integerValue])) {
+                for (int i = 0; i < ([[ZPublicManager timeWithStr:singleData.testTime format:@"MMdd"] integerValue]) - ([[ZPublicManager timeWithStr:lastSingleData.testTime format:@"MMdd"] integerValue])-1; i++) {
+                    [firstDataArr addObject:@""];
+                    [secondDataArr addObject:@""];
+                    [thridDataArr addObject:@""];
+                    
+                    [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastSingleData.testTime integerValue] + (i+1) * 60 * 60 * 24] format:@"MM月dd日"]];
+                }
+            }
             [firstDataArr addObject:singleData.firstNum];
             [secondDataArr addObject:singleData.secondNum];
             [thridDataArr addObject:singleData.thirdNum];
             
-            [xValueArr addObject:[ZPublicManager timeWithStr:firstData.testTime format:@"MM月dd日"]];
+            [xValueArr addObject:[ZPublicManager timeWithStr:singleData.testTime format:@"MM月dd日"]];
+            lastSingleData = singleData;
         }
     }
     
