@@ -15,10 +15,20 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         publicDataManager = [[ZHomeViewModel alloc] init];
+        //所有测试数据 数据库
+        [publicDataManager getHistory];
+        if (publicDataManager.historyList && publicDataManager.historyList.allHisoryLists) {
+            publicDataManager.singPigDatas = [[NSMutableArray alloc] initWithArray:publicDataManager.historyList.allHisoryLists];
+        }else{
+            publicDataManager.singPigDatas = @[].mutableCopy;
+        }
+        
+        
+        //测量未保存数据
         [publicDataManager getTestHistory];
         
-        if (publicDataManager.testList && publicDataManager.testList.singList) {
-            publicDataManager.testPigs = [[NSMutableArray alloc] initWithArray:publicDataManager.testList.singList];
+        if (publicDataManager.testList && publicDataManager.testList.singleList) {
+            publicDataManager.testPigs = [[NSMutableArray alloc] initWithArray:publicDataManager.testList.singleList];
         }else{
             publicDataManager.testPigs = @[].mutableCopy;
         }
@@ -36,6 +46,7 @@
 }
 
 - (void)updateHistory {
+    [ZHomeViewModel shareInstance].historyList.allHisoryLists = [ZHomeViewModel shareInstance].singPigDatas;
     [[ZPublicDataManager shareInstance] addOrUpdateModel:self.historyList];
 }
 
@@ -54,7 +65,7 @@
 }
 
 - (void)updateTestHistory {
-    [ZHomeViewModel shareInstance].testList.singList = [ZHomeViewModel shareInstance].testPigs;
+    [ZHomeViewModel shareInstance].testList.singleList = [ZHomeViewModel shareInstance].testPigs;
     [[ZPublicDataManager shareInstance] addOrUpdateModel:self.testList];
 }
 
@@ -77,13 +88,80 @@
     return hadSame;
 }
 
-- (void)removeTheSameDataForTestData {
+
+- (NSMutableArray *)removeTheSameDataForTestData {
     NSMutableArray *listAry = [[NSMutableArray alloc]init];
     for (ZSingleData *singleData in self.testPigs) {
-        if (![listAry containsObject:singleData]) {
+        BOOL isHad = NO;
+        for (ZSingleData *aSingleData in listAry) {
+            if ([aSingleData.earTag isEqualToString:singleData.earTag]) {
+                isHad = YES;
+            }
+        }
+        if (!isHad) {
             [listAry addObject:singleData];
         }
     }
     NSLog(@"%@",listAry);
+    return listAry;
+}
+
+
+- (void)updateTestDataToAllHistoryData {
+    NSMutableArray *listAry = [self removeTheSameDataForTestData];
+    for (ZSingleData *singleData in listAry) {
+        BOOL isHad = NO;
+        for (ZSingePig *aSingleData in self.singPigDatas) {
+            if ([aSingleData.earTag isEqualToString:singleData.earTag]) {
+                NSMutableArray *singPigList;
+                
+                
+                if (aSingleData.singleList) {
+                    singPigList = [[NSMutableArray alloc] initWithArray:aSingleData.singleList];
+                }else {
+                    singPigList = @[].mutableCopy;
+                }
+                
+                [self insertData:singleData singleList:singPigList];
+                aSingleData.singleList = singPigList;
+                isHad = YES;
+                
+                break;
+            }
+        }
+        
+        
+        if (!isHad) {
+            ZSingePig *aSingleData = [[ZSingePig alloc] init];
+            NSMutableArray *singPigList = [[NSMutableArray alloc] initWithArray:aSingleData.singleList];
+            
+            [singPigList addObject:singleData];
+            aSingleData.singleList = singPigList;
+            aSingleData.earTag = singleData.earTag;
+            [self.singPigDatas addObject:aSingleData];
+        }
+    }
+    
+    
+    [self updateHistory];
+    [self.testPigs removeAllObjects];
+    [self updateTestHistory];
+}
+
+//相同日期数据替换
+- (void)insertData:(ZSingleData *)singleData singleList:(NSMutableArray *)singleList {
+    BOOL isHad = NO;
+    NSInteger index = 0;
+    for (ZSingleData *lSingData in singleList) {
+        if ([[ZPublicManager timeWithStr:lSingData.testTime format:@"YYYYMMdd"]  isEqualToString:[ZPublicManager timeWithStr:singleData.testTime format:@"YYYYMMdd"] ]) {
+            isHad = YES;
+            [singleList replaceObjectAtIndex:index withObject:singleData];
+            break;
+        }
+        index++;
+    }
+    if (!isHad) {
+        [singleList addObject:singleData];
+    }
 }
 @end

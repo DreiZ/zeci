@@ -40,6 +40,24 @@
     [self setupNavigationView];
     [self setMainView];
     
+    NSArray *tempArr = @[@"q",@"d",@"f",@"g",@"j",@"k",@"l",@"p",@"o"];
+    NSArray *temp1Arr = @[@"g",@"t",@"j",@"b"];
+    
+    for (NSString *str in temp1Arr) {
+        BOOL isHad = NO;
+        for (NSString *sstr in tempArr) {
+            if ([sstr isEqualToString:str]) {
+                
+                isHad = YES;
+                break;
+            }
+        }
+        if (!isHad) {
+            NSLog(@"zzz %@",str);
+        }
+        
+    }
+    
     UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     tempBtn.backgroundColor = [UIColor blackColor];
     [tempBtn bk_addEventHandler:^(id sender) {
@@ -184,7 +202,9 @@
                     [weakSelf.navigationController popViewControllerAnimated:YES];
                 }
             }else{
-                
+                [[ZHomeViewModel shareInstance] updateTestDataToAllHistoryData];
+                [weakSelf.iTableView reloadData];
+                [weakSelf showSuccessWithMsg:@"已保存到数据库"];
             }
         };
     }
@@ -322,7 +342,7 @@
     NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]);
     
     ZSingleData *tempPigData = [[ZSingleData alloc] init];
-    tempPigData.earTag =  [ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMddHHmmss"];
+    tempPigData.earTag =  [ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]; //YYYYMMddHHmmss
     tempPigData.testTime = [NSString stringWithFormat:@"%ld",tempTime];
     tempPigData.firstNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
     tempPigData.secondNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
@@ -360,5 +380,4 @@
         [self.view addSubview:self.saveAlertView];
     }
 }
-
 @end

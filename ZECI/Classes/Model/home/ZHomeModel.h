@@ -20,12 +20,12 @@
 @interface ZSingePig : ZBaseModel
 //单头猪数据
 @property(nonatomic, strong) NSString *earTag;
-@property(nonatomic, strong) NSArray <ZSingleData *> *singList;
+@property(nonatomic, strong) NSArray <ZSingleData *> *singleList;
 @end
 
 @interface ZTestPigs : ZBaseModel
 //测量暂存数据
-@property(nonatomic, strong) NSArray <ZSingleData *> *singList;
+@property(nonatomic, strong) NSArray <ZSingleData *> *singleList;
 @end
 
 @interface ZHistoryAllList : ZBaseModel
