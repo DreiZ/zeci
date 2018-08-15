@@ -9,17 +9,24 @@
 #import "ZHomeViewModel.h"
 
 @implementation ZHomeViewModel
+
 + (ZHomeViewModel *)shareInstance {
     static ZHomeViewModel *publicDataManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         publicDataManager = [[ZHomeViewModel alloc] init];
-        publicDataManager.testPigs = @[].mutableCopy;
+        [publicDataManager getTestHistory];
+        
+        if (publicDataManager.testList && publicDataManager.testList.singList) {
+            publicDataManager.testPigs = [[NSMutableArray alloc] initWithArray:publicDataManager.testList.singList];
+        }else{
+            publicDataManager.testPigs = @[].mutableCopy;
+        }
     });
     return publicDataManager;
 }
 
-
+#pragma mark 测量数据
 - (ZHistoryAllList *)getHistory {
     self.historyList = [[ZPublicDataManager shareInstance] getDBModelData:[ZHistoryAllList class]];
     if (!self.historyList) {
@@ -33,8 +40,27 @@
 }
 
 - (void)cleanAllHistory {
-    [[ZPublicDataManager shareInstance] clearAllData];
+    [[ZPublicDataManager shareInstance] clearModel:[ZHistoryAllList class]];
     self.historyList = [ZHistoryAllList new];
+}
+
+#pragma mark 测量数据
+- (ZTestPigs *)getTestHistory {
+    self.testList = [[ZPublicDataManager shareInstance] getDBModelData:[ZTestPigs class]];
+    if (!self.testList) {
+        self.testList = [ZTestPigs new];
+    }
+    return self.testList;
+}
+
+- (void)updateTestHistory {
+    [ZHomeViewModel shareInstance].testList.singList = [ZHomeViewModel shareInstance].testPigs;
+    [[ZPublicDataManager shareInstance] addOrUpdateModel:self.testList];
+}
+
+- (void)cleanTestHistory {
+    [[ZPublicDataManager shareInstance] clearModel:[ZTestPigs class]];
+    self.testList = [ZTestPigs new];
 }
 
 #pragma mark 测试数据处理

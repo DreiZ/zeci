@@ -11,6 +11,7 @@
 
 @interface ZHomeViewModel : ZBaseModel
 @property (nonatomic,strong) ZHistoryAllList *historyList;
+@property (nonatomic,strong) ZTestPigs *testList;
 @property (nonatomic,strong) NSMutableArray <ZSingleData *>*testPigs;
 
 + (ZHomeViewModel *)shareInstance;
@@ -19,6 +20,9 @@
 - (void)updateHistory;
 - (void)cleanAllHistory;
 
+- (ZTestPigs *)getTestHistory;
+- (void)updateTestHistory;
+- (void)cleanTestHistory;
 
 - (void)removeTheSameDataForTestData;
 - (BOOL)checkTestDataIsHadSameData;

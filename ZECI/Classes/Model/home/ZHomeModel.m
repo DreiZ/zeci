@@ -16,6 +16,10 @@
 
 @end
 
+@implementation ZTestPigs
+
+@end
+
 @implementation ZHistoryAllList
 
 @end

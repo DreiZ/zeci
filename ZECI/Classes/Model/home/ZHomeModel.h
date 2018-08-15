@@ -23,6 +23,11 @@
 @property(nonatomic, strong) NSArray <ZSingleData *> *singList;
 @end
 
+@interface ZTestPigs : ZBaseModel
+//测量暂存数据
+@property(nonatomic, strong) NSArray <ZSingleData *> *singList;
+@end
+
 @interface ZHistoryAllList : ZBaseModel
 @property(nonatomic, strong) NSArray <ZSingePig *> *allHisoryLists;
 @end

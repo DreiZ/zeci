@@ -329,6 +329,8 @@
     [[ZHomeViewModel shareInstance].testPigs insertObject:tempPigData atIndex:0];
     [self.iTableView reloadData];
     self.topView.singleData = self.selectData;
+    
+    [[ZHomeViewModel shareInstance] updateTestHistory];
     return tempPigData;
 }
 
