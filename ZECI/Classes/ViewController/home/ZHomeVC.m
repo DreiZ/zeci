@@ -20,7 +20,7 @@
 @property (nonatomic,strong) ZHomeNavView *navView;
 
 @property (nonatomic,strong) CBPeripheral *connectPeripheral;
-
+@property (nonatomic,strong) UILabel *bluetoothStateLabel;
 @end
 
 @implementation ZHomeVC
@@ -84,9 +84,17 @@
         if ([ZPublicBluetoothManager shareInstance].peripheralState == CBManagerStatePoweredOn && ![ZPublicBluetoothManager shareInstance].cbPeripheral) {
             [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
         }
-    };
     
-
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([ZPublicBluetoothManager shareInstance].peripheralState == CBManagerStatePoweredOn) {
+                weakSelf.bluetoothStateLabel.text = @"";
+                weakSelf.navView.bluetoothState = YES;
+            }else{
+                weakSelf.bluetoothStateLabel.text = @"手机蓝牙未打开";
+                weakSelf.navView.bluetoothState = NO;
+            }
+        });
+    };
 }
 
 #pragma mark lazy loading...
@@ -208,6 +216,23 @@
             make.left.equalTo(sectionView.mas_left).offset(10);
         }];
         
+        _bluetoothStateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _bluetoothStateLabel.textColor = kMainColor;
+        _bluetoothStateLabel.text = @"手机蓝牙未打开";
+        _bluetoothStateLabel.numberOfLines = 0;
+        _bluetoothStateLabel.textAlignment = NSTextAlignmentLeft;
+        [_bluetoothStateLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:13]];
+        [sectionView addSubview:_bluetoothStateLabel];
+        [_bluetoothStateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo(sectionView);
+            make.right.equalTo(sectionView.mas_right).offset(-10);
+        }];
+        if ([ZPublicBluetoothManager shareInstance].peripheralState == CBManagerStatePoweredOn) {
+            self.bluetoothStateLabel.text = @"";
+        }else{
+            self.bluetoothStateLabel.text = @"手机蓝牙未打开";
+        }
+
         return sectionView;
        
     }

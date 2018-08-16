@@ -102,4 +102,12 @@
     }
     return _companyBtn;
 }
+
+- (void)setBluetoothState:(BOOL)bluetoothState {
+    if (bluetoothState) {
+        [_BluetoothBtn setImage:[UIImage imageNamed:@"lanya"] forState:UIControlStateNormal];
+    }else{
+        [_BluetoothBtn setImage:[UIImage imageNamed:@"lanyayi"] forState:UIControlStateNormal]; 
+    }
+}
 @end
