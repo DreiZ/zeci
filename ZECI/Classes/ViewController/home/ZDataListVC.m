@@ -147,6 +147,31 @@
     [self.navigationController pushViewController:chatvc animated:YES];
 }
 
+
+#pragma mark 侧滑删除
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+// 定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+// 进入编辑模式，按下出现的编辑按钮后,进行删除操作
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [[ZHomeViewModel shareInstance].singPigDatas removeObjectAtIndex:indexPath.row];
+        [self.iTableView reloadData];
+        [[ZHomeViewModel shareInstance] updateHistory];
+    }
+}
+
+// 修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+
 #pragma mark search handle
 // 开始所搜
 - (void)startSearch:(NSString *)string{

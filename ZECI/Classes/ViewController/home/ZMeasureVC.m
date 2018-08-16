@@ -327,8 +327,8 @@ static NSInteger zindex = 0;
 #pragma mark test data
 - (ZSingleData *)addTestData {
     NSInteger tempTime = [ZPublicManager getNowTimestamp] + zindex * 24*60*60;
-    NSLog(@"zzz date  %ld",tempTime);
-    NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]);
+//    NSLog(@"zzz date  %ld",tempTime);
+//    NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]);
     
     ZSingleData *tempPigData = [[ZSingleData alloc] init];
     tempPigData.earTag =  [ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]; //YYYYMMddHHmmss
