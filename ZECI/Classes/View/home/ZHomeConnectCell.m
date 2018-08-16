@@ -9,7 +9,7 @@
 #import "ZHomeConnectCell.h"
 
 @interface ZHomeConnectCell ()
-@property (nonatomic,strong) UILabel *bluetoothLabel;
+@property (nonatomic,strong) UILabel *BluetoothLabel;
 @property (nonatomic,strong) UILabel *connectHintLabel;
 
 @end
@@ -70,8 +70,8 @@
     }];
     
     
-    [self.contentView addSubview:self.bluetoothLabel];
-    [self.bluetoothLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:self.BluetoothLabel];
+    [self.BluetoothLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(arrowImageView.mas_left).offset(-10);
     }];
@@ -85,16 +85,16 @@
     }];
 }
 
-- (UILabel *)bluetoothLabel {
-    if (!_bluetoothLabel) {
-        _bluetoothLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _bluetoothLabel.textColor = kFont3Color;
-        _bluetoothLabel.text = @"sdfrfgsdg";
-        _bluetoothLabel.numberOfLines = 1;
-        _bluetoothLabel.textAlignment = NSTextAlignmentLeft;
-        [_bluetoothLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:15]];
+- (UILabel *)BluetoothLabel {
+    if (!_BluetoothLabel) {
+        _BluetoothLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _BluetoothLabel.textColor = kFont3Color;
+        _BluetoothLabel.text = @"sdfrfgsdg";
+        _BluetoothLabel.numberOfLines = 1;
+        _BluetoothLabel.textAlignment = NSTextAlignmentLeft;
+        [_BluetoothLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:15]];
     }
-    return _bluetoothLabel;
+    return _BluetoothLabel;
 }
 
 - (UILabel *)connectHintLabel {
@@ -111,6 +111,7 @@
 
 - (void)setConnectName:(NSString *)connectName {
     _connectName = connectName;
+    _BluetoothLabel.text = connectName;
     if (connectName && connectName.length > 0) {
         _connectHintLabel.hidden = NO;
     }else{

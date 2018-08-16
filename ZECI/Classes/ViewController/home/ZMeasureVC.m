@@ -33,6 +33,7 @@ static NSInteger zindex = 0;
 
 @property (nonatomic,strong) UITableView *iTableView;
 @property (nonatomic,strong) ZSingleData *selectData;
+@property (nonatomic,strong) ZSingleData *testData;
 
 @property (nonatomic,assign) BOOL isBackSave;
 @end
@@ -43,19 +44,7 @@ static NSInteger zindex = 0;
     [super viewDidLoad];
     [self setupNavigationView];
     [self setMainView];
-    
-    zindex++;
-    UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-    tempBtn.backgroundColor = [UIColor blackColor];
-    [tempBtn bk_addEventHandler:^(id sender) {
-        [self addTestData];
-    } forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:tempBtn];
-    [tempBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(100);
-        make.left.equalTo(self.view.mas_left).offset(50);
-        make.top.equalTo(self.view.mas_top).offset(kSafeAreaTopHeight + 50);
-    }];
+    [self setTestBluetooth];
 }
 
 
@@ -119,7 +108,71 @@ static NSInteger zindex = 0;
     }
 }
 
+- (void)setTestBluetooth {
+    __weak typeof(self) weakSelf = self;
+    [ZPublicBluetoothManager shareInstance].testDataBlock = ^(NSString *testData) {
+        NSInteger tempTime = [ZPublicManager getNowTimestamp];
+        
+        weakSelf.testData.testTime = [NSString stringWithFormat:@"%ld",tempTime];
+        if (testData && testData.length > 0 && [testData hasSuffix:@"E"]) {
+            if ([testData hasPrefix:@"R"]){
+                //耳标数据
+                weakSelf.testData.earTag = testData;
+                
+            }else if ([testData hasPrefix:@"H"] ) {
+                //定格测量数据
+                [self setTestBlueDataWithData:testData withIndex:1];
+                
+                [weakSelf addTestData:weakSelf.testData];
+                weakSelf.testData = nil;
+                
+            }else if ([testData hasPrefix:@"D"]){
+                //电量
+            }else if ([testData hasPrefix:@"B"]){
+                //实时数据
+                [self setTestBlueDataWithData:testData withIndex:1];
+                
+            }else {
+                
+                char commitChar = [testData characterAtIndex:0];
+                //实时数据
+                if ((commitChar>47)&&(commitChar<58)) {
+                    [self setTestBlueDataWithData:testData withIndex:0];
+                }
+            }
+        }
+    };
+}
+
+- (void)setTestBlueDataWithData:(NSString *)testData withIndex:(NSInteger)offsetCount{
+    
+    if (testData.length > 2+offsetCount) {
+        self.testData.firstNum = [testData substringWithRange:NSMakeRange(0+offsetCount,2)];
+    }
+    
+    if (testData.length > 4+offsetCount) {
+        self.testData.secondNum = [testData substringWithRange:NSMakeRange(2+offsetCount,2)];
+    }
+    
+    if (testData.length > 6+offsetCount) {
+        self.testData.thirdNum = [testData substringWithRange:NSMakeRange(4+offsetCount,2)];
+    }
+    
+    if (self.topView) {
+        self.topView.firstLabel.text = self.testData.firstNum;
+        self.topView.secondLabel.text = self.testData.secondNum;
+        self.topView.thridLabel.text = self.testData.thirdNum;
+    }
+}
+
 #pragma mark lazy loading...
+-(ZSingleData *)testData {
+    if (!_testData) {
+        _testData = [[ZSingleData alloc] init];
+    }
+    return _testData;
+}
+
 - (ZMeasureNavView *)navView {
     if (!_navView) {
         __weak typeof(self) weakSelf = self;
@@ -358,18 +411,20 @@ static NSInteger zindex = 0;
 }
 
 #pragma mark test data
-- (ZSingleData *)addTestData {
-    NSInteger tempTime = [ZPublicManager getNowTimestamp] + zindex * 24*60*60;
-//    NSLog(@"zzz date  %ld",tempTime);
-//    NSLog(@"zzz datetime  %@",[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]);
+- (ZSingleData *)addTestData:(ZSingleData *)tempPigData {
     
-    ZSingleData *tempPigData = [[ZSingleData alloc] init];
-    tempPigData.earTag =  [ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",tempTime] format:@"YYYYMMdd"]; //YYYYMMddHHmmss
-    tempPigData.testTime = [NSString stringWithFormat:@"%ld",tempTime];
-    tempPigData.firstNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
-    tempPigData.secondNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
-    tempPigData.thirdNum = [NSString stringWithFormat:@"%u",arc4random() % 99];
+    if ([tempPigData.firstNum integerValue] == 0 && [tempPigData.secondNum integerValue] == 0 && [tempPigData.thirdNum integerValue] == 0) {
+        return nil;
+    }
+    
     self.selectData = tempPigData;
+    if (!tempPigData.earTag || tempPigData.earTag.length == 0) {
+        NSString *zeroStr = @"000000000000000";
+        NSInteger tempCount = [ZHomeViewModel shareInstance].singPigDatas.count;
+        tempPigData.earTag = [@"R" stringByAppendingString:[zeroStr substringWithRange:NSMakeRange(0, zeroStr.length - tempCount)]];
+        tempPigData.earTag = [tempPigData.earTag stringByAppendingString:[NSString stringWithFormat:@"%ld",tempCount]];
+        tempPigData.earTag = [tempPigData.earTag stringByAppendingString:@"E"];
+    }
     [[ZHomeViewModel shareInstance].testPigs insertObject:tempPigData atIndex:0];
     [self.iTableView reloadData];
     self.topView.singleData = self.selectData;

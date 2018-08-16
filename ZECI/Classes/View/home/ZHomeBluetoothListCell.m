@@ -9,7 +9,7 @@
 #import "ZHomeBluetoothListCell.h"
 
 @interface ZHomeBluetoothListCell ()
-@property (nonatomic,strong) UILabel *bluetoothLabel;
+@property (nonatomic,strong) UILabel *BluetoothLabel;
 
 @end
 
@@ -56,8 +56,8 @@
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(self.mas_right).offset([ZPublicManager getIsIpad] ? -20:10);
     }];
-    [self.contentView addSubview:self.bluetoothLabel];
-    [self.bluetoothLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:self.BluetoothLabel];
+    [self.BluetoothLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.left.equalTo(hintImageView.mas_right).offset([ZPublicManager getIsIpad] ? 20:10);
     }];
@@ -71,16 +71,20 @@
     }];
 }
 
-- (UILabel *)bluetoothLabel {
-    if (!_bluetoothLabel) {
-        _bluetoothLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _bluetoothLabel.textColor = kFont3Color;
-        _bluetoothLabel.text = @"dasfgasdgas";
-        _bluetoothLabel.numberOfLines = 1;
-        _bluetoothLabel.textAlignment = NSTextAlignmentLeft;
-        [_bluetoothLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:15]];
+- (UILabel *)BluetoothLabel {
+    if (!_BluetoothLabel) {
+        _BluetoothLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _BluetoothLabel.textColor = kFont3Color;
+        _BluetoothLabel.text = @"";
+        _BluetoothLabel.numberOfLines = 1;
+        _BluetoothLabel.textAlignment = NSTextAlignmentLeft;
+        [_BluetoothLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:15]];
     }
-    return _bluetoothLabel;
+    return _BluetoothLabel;
+}
+
+- (void)setBluetoothName:(NSString *)name {
+    _BluetoothLabel.text = name;
 }
 
 + (CGFloat)z_getCellHeight:(id)sender {

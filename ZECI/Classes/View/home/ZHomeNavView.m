@@ -9,7 +9,7 @@
 #import "ZHomeNavView.h"
 
 @interface ZHomeNavView ()
-@property (nonatomic,strong) UIButton *blueToothBtn;
+@property (nonatomic,strong) UIButton *BluetoothBtn;
 @property (nonatomic,strong) UIButton *companyBtn;
 @property (nonatomic,strong) UIButton *listBtn;
 @end
@@ -37,8 +37,8 @@
         make.height.mas_equalTo(44);
     }];
     
-    [contView addSubview:self.blueToothBtn];
-    [self.blueToothBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [contView addSubview:self.BluetoothBtn];
+    [self.BluetoothBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(contView.mas_centerY);
         make.left.equalTo(contView.mas_left).offset(0);
         make.height.width.mas_equalTo(44);
@@ -60,18 +60,18 @@
 }
 
 
-- (UIButton *)blueToothBtn {
-    if (!_blueToothBtn) {
+- (UIButton *)BluetoothBtn {
+    if (!_BluetoothBtn) {
         __weak typeof(self) weakSelf = self;
-        _blueToothBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-        [_blueToothBtn setImage:[UIImage imageNamed:@"lanya"] forState:UIControlStateNormal];
-        [_blueToothBtn bk_addEventHandler:^(id sender) {
+        _BluetoothBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+        [_BluetoothBtn setImage:[UIImage imageNamed:@"lanya"] forState:UIControlStateNormal];
+        [_BluetoothBtn bk_addEventHandler:^(id sender) {
             if (weakSelf.topSelectBlock) {
                 weakSelf.topSelectBlock(0);
             }
         } forControlEvents:UIControlEventTouchUpInside];
     }
-    return _blueToothBtn;
+    return _BluetoothBtn;
 }
 
 

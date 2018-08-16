@@ -38,7 +38,7 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSBluetoothPeripheralUsageDescription</key>
+	<key>NSBluetoothPeripheralUsageDescription - 2</key>
 	<string>是否允许币策使用蓝牙？允许此权限以便更好的使用服务功能</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>是否允许背膘测定仪使用日历？允许此权限以便更好的使用服务功能</string>

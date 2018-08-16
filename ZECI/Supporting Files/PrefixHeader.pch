@@ -50,7 +50,8 @@
 //#import "ZPublicUserManager.h"
 #import "ZPublicManager.h"
 #import "ZPublicDataManager.h"
-
+#import "ZPublicBluetoothManager.h"
+#import "AppDelegate.h"
 
 
 typedef NS_ENUM(NSUInteger, ZFormatterType) {

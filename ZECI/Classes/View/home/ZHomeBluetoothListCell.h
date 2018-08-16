@@ -9,4 +9,5 @@
 #import "ZBaseCell.h"
 
 @interface ZHomeBluetoothListCell : ZBaseCell
+- (void)setBluetoothName:(NSString *)name;
 @end

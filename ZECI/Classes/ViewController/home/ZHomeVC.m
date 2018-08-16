@@ -19,6 +19,8 @@
 @property (nonatomic,strong) UITableView *iTableView;
 @property (nonatomic,strong) ZHomeNavView *navView;
 
+@property (nonatomic,strong) CBPeripheral *connectPeripheral;
+
 @end
 
 @implementation ZHomeVC
@@ -36,7 +38,8 @@
     [super viewDidLoad];
     
     [self setupNavigationView];
-    [self setUI];
+    [self setMainUI];
+    [self setBluetooth];
 }
 
 - (void)setupNavigationView {
@@ -45,7 +48,7 @@
     self.view.backgroundColor = kBackColor;
 }
 
-- (void)setUI {
+- (void)setMainUI {
     [self.view addSubview:self.navView];
     [self.navView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.view);
@@ -57,6 +60,19 @@
         make.left.bottom.right.equalTo(self.view);
         make.top.equalTo(self.navView.mas_bottom).offset(10);
     }];
+}
+
+- (void)setBluetooth {
+    __weak typeof(self) weakSelf = self;
+    
+    [ZPublicBluetoothManager shareInstance].findChangeBlock = ^{
+        [weakSelf.iTableView reloadData];
+    };
+    
+    [ZPublicBluetoothManager shareInstance].connectBlock = ^(CBPeripheral *cbPeripheral) {
+        weakSelf.connectPeripheral = cbPeripheral;
+        [weakSelf.iTableView reloadData];
+    };
 }
 
 #pragma mark lazy loading...
@@ -71,6 +87,8 @@
             }else if (index == 2){
                 ZDataListVC *listVC = [[ZDataListVC alloc] init];
                 [weakSelf.navigationController pushViewController:listVC animated:YES];
+            }else{
+                [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
             }
         };
     }
@@ -109,18 +127,26 @@
     if (section == 0) {
         return 1;
     }else{
-        return 5;
+        if ([ZPublicBluetoothManager shareInstance].peripherals) {
+            return [ZPublicBluetoothManager shareInstance].peripherals.count;
+        }
+        return 0;
     }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         ZHomeConnectCell *cell = [ZHomeConnectCell z_cellWithTableView:tableView];
-        
+        if (self.connectPeripheral) {
+            cell.connectName = self.connectPeripheral.name;
+        }else{
+            cell.connectName = @"";
+        }
         return cell;
     }else{
+        CBPeripheral *cbPeripheral = [ZPublicBluetoothManager shareInstance].peripherals[indexPath.row];
         ZHomeBluetoothListCell *cell = [ZHomeBluetoothListCell z_cellWithTableView:tableView];
-        
+        [cell setBluetoothName:cbPeripheral.name];
         return cell;
     }
 }
@@ -174,6 +200,9 @@
     if (indexPath.section == 0) {
         ZMeasureVC *svc = [[ZMeasureVC alloc] init];
         [self.navigationController pushViewController:svc animated:YES];
+    }else{
+        [ZPublicBluetoothManager shareInstance].cbPeripheral = [ZPublicBluetoothManager shareInstance].peripherals[indexPath.row];
+        [[ZPublicBluetoothManager shareInstance] connectToPeripheral];
     }
 }
 
