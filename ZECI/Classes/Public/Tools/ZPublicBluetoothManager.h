@@ -20,9 +20,18 @@
 // 蓝牙状态
 @property (nonatomic, assign) CBManagerState peripheralState;
 
+//蓝牙状态
+@property (nonatomic,strong) void (^bluetoothChangeBlock)(void);
+//发现设备
 @property (nonatomic,strong) void (^findChangeBlock)(void);
+//连接蓝牙
 @property (nonatomic,strong) void (^connectBlock)(CBPeripheral *cbPeripheral);
+
+//匹配服务及特征
+@property (nonatomic,strong) void (^testMatchingBlock)(void);
+//返回测试数据
 @property (nonatomic,strong) void (^testDataBlock)(NSString *testData);
+
 
 + (ZPublicBluetoothManager *)shareInstance;
 

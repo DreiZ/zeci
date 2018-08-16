@@ -143,6 +143,9 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
         default:
             break;
     }
+    if (self.bluetoothChangeBlock) {
+        self.bluetoothChangeBlock();
+    }
 }
 
 /**
@@ -276,6 +279,9 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
         if ([characteristic.UUID.UUIDString isEqualToString:kNotifyCharacteristicUUID])
         {
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            if (self.testMatchingBlock) {
+                self.testMatchingBlock();
+            }
         }
     }
 }

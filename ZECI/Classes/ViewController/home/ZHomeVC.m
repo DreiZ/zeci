@@ -73,6 +73,20 @@
         weakSelf.connectPeripheral = cbPeripheral;
         [weakSelf.iTableView reloadData];
     };
+    
+    [ZPublicBluetoothManager shareInstance].testMatchingBlock = ^{
+        [[AppDelegate App] showSuccessWithMsg:@"连接匹配成功"];
+        ZMeasureVC *svc = [[ZMeasureVC alloc] init];
+        [weakSelf.navigationController pushViewController:svc animated:YES];
+    };
+    
+    [ZPublicBluetoothManager shareInstance].bluetoothChangeBlock = ^{
+        if ([ZPublicBluetoothManager shareInstance].peripheralState == CBManagerStatePoweredOn && ![ZPublicBluetoothManager shareInstance].cbPeripheral) {
+            [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+        }
+    };
+    
+
 }
 
 #pragma mark lazy loading...
@@ -88,7 +102,11 @@
                 ZDataListVC *listVC = [[ZDataListVC alloc] init];
                 [weakSelf.navigationController pushViewController:listVC animated:YES];
             }else{
-                [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+                if ([ZPublicBluetoothManager shareInstance].peripheralState != CBManagerStatePoweredOn) {
+                    [weakSelf showSuccessWithMsg:@"请先打开手机蓝牙"];
+                }else{
+                    [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+                }
             }
         };
     }
