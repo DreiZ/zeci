@@ -1,5 +1,5 @@
 //
-//  ZHomeConectCell.h
+//  ZHomeConnectCell.h
 //  ZECI
 //
 //  Created by zzz on 2018/8/11.
@@ -8,6 +8,7 @@
 
 #import "ZBaseCell.h"
 
-@interface ZHomeConectCell : ZBaseCell
+@interface ZHomeConnectCell : ZBaseCell
+@property (nonatomic,copy) NSString *connectName;
 
 @end

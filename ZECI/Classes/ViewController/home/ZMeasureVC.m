@@ -242,6 +242,7 @@ static NSInteger zindex = 0;
     cell.editBlock = ^(ZSingleData *singleData) {
         weakSelf.editView.singleData = singleData;
         [weakSelf.view addSubview:weakSelf.editView];
+        [weakSelf.editView.editTextField becomeFirstResponder];
     };
     return cell;
 }

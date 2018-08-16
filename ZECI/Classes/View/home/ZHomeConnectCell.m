@@ -1,25 +1,27 @@
 //
-//  ZHomeConectCell.m
+//  ZHomeConnectCell.m
 //  ZECI
 //
 //  Created by zzz on 2018/8/11.
 //  Copyright © 2018年 zzz. All rights reserved.
 //
 
-#import "ZHomeConectCell.h"
+#import "ZHomeConnectCell.h"
 
-@interface ZHomeConectCell ()
+@interface ZHomeConnectCell ()
 @property (nonatomic,strong) UILabel *bluetoothLabel;
+@property (nonatomic,strong) UILabel *connectHintLabel;
+
 @end
 
-@implementation ZHomeConectCell
+@implementation ZHomeConnectCell
 
 + (instancetype)cellWithTableView:(UITableView *)tableView {
-    static NSString *identifier = @"ZHomeConectCell";
+    static NSString *identifier = @"ZHomeConnectCell";
     
-    ZHomeConectCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    ZHomeConnectCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[ZHomeConectCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[ZHomeConnectCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     return cell;
 }
@@ -46,7 +48,7 @@
     [hintLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:16]];
     [self.contentView addSubview:hintLabel];
     [hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(84);
+//        make.width.mas_equalTo(84);
         make.left.equalTo(self.mas_left).offset(10);
         make.centerY.equalTo(self.mas_centerY);
     }];
@@ -59,6 +61,12 @@
     [arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(self.mas_right).offset(-10);
+    }];
+    
+    [self.contentView addSubview:self.connectHintLabel];
+    [self.connectHintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.left.equalTo(hintLabel.mas_right).offset(4);
     }];
     
     
@@ -87,6 +95,27 @@
         [_bluetoothLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:15]];
     }
     return _bluetoothLabel;
+}
+
+- (UILabel *)connectHintLabel {
+    if (!_connectHintLabel) {
+        _connectHintLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _connectHintLabel.textColor = kFont9Color;
+        _connectHintLabel.text = @"(点此去测量)";
+        _connectHintLabel.numberOfLines = 1;
+        _connectHintLabel.textAlignment = NSTextAlignmentLeft;
+        [_connectHintLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 14:12]];
+    }
+    return _connectHintLabel;
+}
+
+- (void)setConnectName:(NSString *)connectName {
+    _connectName = connectName;
+    if (connectName && connectName.length > 0) {
+        _connectHintLabel.hidden = NO;
+    }else{
+        _connectHintLabel.hidden = YES;
+    }
 }
 
 + (CGFloat)z_getCellHeight:(id)sender {

@@ -10,7 +10,7 @@
 		30A63C8E79AB45659F2858AB /* libPods-ZECI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3927F0F06D5F9CE2CFE33939 /* libPods-ZECI.a */; };
 		5E09303A211EB54B00AA98DC /* ZHomeNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E093039211EB54B00AA98DC /* ZHomeNavView.m */; };
 		5E09303D211ECD6A00AA98DC /* ZHomeBluetoothListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E09303C211ECD6A00AA98DC /* ZHomeBluetoothListCell.m */; };
-		5E093040211EE55100AA98DC /* ZHomeConectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E09303F211EE55100AA98DC /* ZHomeConectCell.m */; };
+		5E093040211EE55100AA98DC /* ZHomeConnectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E09303F211EE55100AA98DC /* ZHomeConnectCell.m */; };
 		5E3EFF0920C8C839005E3E3E /* ZIntroductryPagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3EFF0820C8C839005E3E3E /* ZIntroductryPagesManager.m */; };
 		5E3EFF0C20C8C971005E3E3E /* ZIntroductryPagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3EFF0B20C8C971005E3E3E /* ZIntroductryPagesView.m */; };
 		5E3EFF1320C8CE8B005E3E3E /* ZAdvertiseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3EFF1220C8CE8B005E3E3E /* ZAdvertiseHelper.m */; };
@@ -96,8 +96,8 @@
 		5E093039211EB54B00AA98DC /* ZHomeNavView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeNavView.m; sourceTree = "<group>"; };
 		5E09303B211ECD6A00AA98DC /* ZHomeBluetoothListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHomeBluetoothListCell.h; sourceTree = "<group>"; };
 		5E09303C211ECD6A00AA98DC /* ZHomeBluetoothListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeBluetoothListCell.m; sourceTree = "<group>"; };
-		5E09303E211EE55100AA98DC /* ZHomeConectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHomeConectCell.h; sourceTree = "<group>"; };
-		5E09303F211EE55100AA98DC /* ZHomeConectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeConectCell.m; sourceTree = "<group>"; };
+		5E09303E211EE55100AA98DC /* ZHomeConnectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHomeConnectCell.h; sourceTree = "<group>"; };
+		5E09303F211EE55100AA98DC /* ZHomeConnectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHomeConnectCell.m; sourceTree = "<group>"; };
 		5E3EFF0720C8C839005E3E3E /* ZIntroductryPagesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZIntroductryPagesManager.h; sourceTree = "<group>"; };
 		5E3EFF0820C8C839005E3E3E /* ZIntroductryPagesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZIntroductryPagesManager.m; sourceTree = "<group>"; };
 		5E3EFF0A20C8C971005E3E3E /* ZIntroductryPagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZIntroductryPagesView.h; sourceTree = "<group>"; };
@@ -578,8 +578,8 @@
 				5E093039211EB54B00AA98DC /* ZHomeNavView.m */,
 				5E09303B211ECD6A00AA98DC /* ZHomeBluetoothListCell.h */,
 				5E09303C211ECD6A00AA98DC /* ZHomeBluetoothListCell.m */,
-				5E09303E211EE55100AA98DC /* ZHomeConectCell.h */,
-				5E09303F211EE55100AA98DC /* ZHomeConectCell.m */,
+				5E09303E211EE55100AA98DC /* ZHomeConnectCell.h */,
+				5E09303F211EE55100AA98DC /* ZHomeConnectCell.m */,
 				5EA183A121211AE7009C6675 /* ZDataListSearchView.h */,
 				5EA183A221211AE7009C6675 /* ZDataListSearchView.m */,
 				5EA183A42121213F009C6675 /* ZDataListCell.h */,
@@ -856,7 +856,7 @@
 				5E48F91820C67BD300422A6F /* WRCustomNavigationBar.m in Sources */,
 				5E45CC642122663C00469A30 /* ZShareView.m in Sources */,
 				5EA183C52121736B009C6675 /* LFAxisView.m in Sources */,
-				5E093040211EE55100AA98DC /* ZHomeConectCell.m in Sources */,
+				5E093040211EE55100AA98DC /* ZHomeConnectCell.m in Sources */,
 				5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */,
 				5EA183A62121213F009C6675 /* ZDataListCell.m in Sources */,
 				5EA183B821216C67009C6675 /* ZDataLineChatVC.m in Sources */,

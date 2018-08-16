@@ -9,7 +9,6 @@
 #import "ZMeasureEditView.h"
 
 @interface ZMeasureEditView ()<UITextFieldDelegate>
-@property (nonatomic,strong) UITextField *editTextField;
 @property (nonatomic,strong) UILabel *firstLabel;
 @property (nonatomic,strong) UILabel *secondLabel;
 @property (nonatomic,strong) UILabel *thridLabel;

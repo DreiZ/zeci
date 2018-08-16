@@ -11,6 +11,6 @@
 
 @interface ZMeasureEditView : ZBaseView
 @property (nonatomic,strong) ZSingleData *singleData;
-
+@property (nonatomic,strong) UITextField *editTextField;
 @property (nonatomic,strong) void (^sureBlock)(NSString *);
 @end

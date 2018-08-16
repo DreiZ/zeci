@@ -8,7 +8,7 @@
 
 #import "ZHomeVC.h"
 #import "ZHomeNavView.h"
-#import "ZHomeConectCell.h"
+#import "ZHomeConnectCell.h"
 #import "ZHomeBluetoothListCell.h"
 
 #import "ZCompanyInfoVC.h"
@@ -115,7 +115,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        ZHomeConectCell *cell = [ZHomeConectCell z_cellWithTableView:tableView];
+        ZHomeConnectCell *cell = [ZHomeConnectCell z_cellWithTableView:tableView];
         
         return cell;
     }else{
@@ -128,7 +128,7 @@
 #pragma mark tableView ------delegate-----
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return [ZHomeConectCell z_getCellHeight:nil];
+        return [ZHomeConnectCell z_getCellHeight:nil];
     }else{
         return [ZHomeBluetoothListCell z_getCellHeight:nil];
     }
