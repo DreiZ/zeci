@@ -39,7 +39,20 @@
     
     [self setupNavigationView];
     [self setMainUI];
-    [self setBluetooth];
+    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isAppFirstLoad"];
+    if (isLoaded){
+        [self setBluetooth];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isAppFirstLoad"];
+    if (isLoaded){
+        [self setBluetooth];
+        [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"isAppFirstLoad"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 - (void)setupNavigationView {
