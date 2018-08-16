@@ -11,6 +11,8 @@
 #import "LFLineChart.h"
 #import "ZShareView.h"
 
+#import "ZLineChatBrowseVC.h"
+
 #import <UMShare/UMShare.h>
 //微信好友和朋友圈
 #import "WXApi.h"
@@ -90,17 +92,16 @@
 - (void)setLineChat {
     self.lineChart = [[LFLineChart alloc] initWithFrame:CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-12, kWindowH - 160 - kSafeAreaTopHeight)];
     self.lineChart.clipsToBounds = YES;
-//    NSMutableArray *orderedArray = [[NSMutableArray alloc] init];
-////    NSArray *firstDataArr = @[@"23",@"33",@"27",@"37",@"48",@"23",@"58"];
-////    NSArray *secondDataArr = @[@"30",@"46",@"32",@"44",@"52",@"31",@"62"];
-////    NSArray *thridDataArr = @[@"48",@"55",@"45",@"52",@"61",@"43",@"78"];
-//    NSArray *firstDataArr = @[@"",@"23",@"33",@"",@"23",@"",@"",@"",@"",@"",@"",@"",@""];
-//    NSArray *secondDataArr = @[@"",@"30",@"46",@"",@"45",@"",@"",@"",@"",@"",@"",@"",@""];
-//    NSArray *thridDataArr = @[@"",@"48",@"55",@"",@"55",@"",@"",@"",@"",@"",@"",@"",@""];
-//    NSArray *xValueArr = @[@"3月3日",@"3月4日",@"3月5日",@"3月6日",@"3月7日",@"3月8日",@"3月9日",@"3月10日",@"3月11日",@"3月12日",@"3月13日",@"3月14日",@"3月15日",@"3月16日",@"3月17日"];
-    
+    __weak typeof(self) weakSelf = self;
+    self.lineChart.tapBlock = ^{
+        UIImage* image = [weakSelf screenShot];
+        ZLineChatBrowseVC* controller = [[ZLineChatBrowseVC alloc] initWithImage:image lastPageFrame:weakSelf.lineChart.frame];
+        controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [weakSelf presentViewController:controller animated:true completion:nil];
+    };
+
     NSMutableArray *orderedArray = [[NSMutableArray alloc] init];
-    
     //第一条数据
     NSMutableArray *firstDataArr = @[].mutableCopy;
     //第二条数据
@@ -243,7 +244,7 @@
 
 - (UIImage *)screenShot {
     UIImage* image = nil;
-    UIGraphicsBeginImageContextWithOptions(self.lineChart.scrollView.contentSize, YES, 0.0);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.lineChart.scrollView.contentSize.width, self.lineChart.scrollView.height), YES, 0.0);
     
     //保存collectionView当前的偏移量
     CGPoint savedContentOffset = self.lineChart.scrollView.contentOffset;
@@ -251,7 +252,7 @@
     
     //将collectionView的偏移量设置为(0,0)
     self.lineChart.scrollView.contentOffset = CGPointZero;
-    self.lineChart.scrollView.frame = CGRectMake(0, 0, self.lineChart.scrollView.contentSize.width, self.lineChart.scrollView.contentSize.height);
+    self.lineChart.scrollView.frame = CGRectMake(0, 0, self.lineChart.scrollView.contentSize.width, self.lineChart.scrollView.height);
     
     //在当前上下文中渲染出collectionView
     [self.lineChart.scrollView.layer renderInContext: UIGraphicsGetCurrentContext()];

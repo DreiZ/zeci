@@ -53,6 +53,7 @@
 		5E71D52221241031009FA7E3 /* UserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D51F21241031009FA7E3 /* UserDTO.m */; };
 		5E71D52321241031009FA7E3 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D52121241031009FA7E3 /* Utils.m */; };
 		5E71D52621241058009FA7E3 /* NSString+pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D52521241058009FA7E3 /* NSString+pinyin.m */; };
+		5E71D529212427D0009FA7E3 /* ZLineChatBrowseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D528212427D0009FA7E3 /* ZLineChatBrowseVC.m */; };
 		5EA1839D2121136A009C6675 /* ZCompanyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */; };
 		5EA183A0212119C3009C6675 /* ZDataListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1839F212119C3009C6675 /* ZDataListVC.m */; };
 		5EA183A321211AE7009C6675 /* ZDataListSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA183A221211AE7009C6675 /* ZDataListSearchView.m */; };
@@ -183,6 +184,8 @@
 		5E71D52121241031009FA7E3 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		5E71D52421241058009FA7E3 /* NSString+pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+pinyin.h"; sourceTree = "<group>"; };
 		5E71D52521241058009FA7E3 /* NSString+pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+pinyin.m"; sourceTree = "<group>"; };
+		5E71D527212427D0009FA7E3 /* ZLineChatBrowseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLineChatBrowseVC.h; sourceTree = "<group>"; };
+		5E71D528212427D0009FA7E3 /* ZLineChatBrowseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLineChatBrowseVC.m; sourceTree = "<group>"; };
 		5EA1839B2121136A009C6675 /* ZCompanyInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZCompanyInfoVC.h; sourceTree = "<group>"; };
 		5EA1839C2121136A009C6675 /* ZCompanyInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCompanyInfoVC.m; sourceTree = "<group>"; };
 		5EA1839E212119C3009C6675 /* ZDataListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataListVC.h; sourceTree = "<group>"; };
@@ -553,6 +556,8 @@
 				5EA183A82121252E009C6675 /* ZMeasureVC.m */,
 				5EA183B621216C67009C6675 /* ZDataLineChatVC.h */,
 				5EA183B721216C67009C6675 /* ZDataLineChatVC.m */,
+				5E71D527212427D0009FA7E3 /* ZLineChatBrowseVC.h */,
+				5E71D528212427D0009FA7E3 /* ZLineChatBrowseVC.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -832,6 +837,7 @@
 				5EA183AF212126F0009C6675 /* ZMeasureTopView.m in Sources */,
 				5EA183B221212F61009C6675 /* ZMeasureListCell.m in Sources */,
 				5E45CC6A2122AEF200469A30 /* ZHomeViewModel.m in Sources */,
+				5E71D529212427D0009FA7E3 /* ZLineChatBrowseVC.m in Sources */,
 				5E5D891B20E1D2EF0096536C /* UIView+Radio.m in Sources */,
 				5E3EFF1620C8CEB9005E3E3E /* ZAdvertiseView.m in Sources */,
 				5E48F92920C67E9F00422A6F /* ZBaseView.m in Sources */,

@@ -140,6 +140,7 @@
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, topToContainView, self.frame.size.width,self.frame.size.height - topToContainView)];
     [self.scrollView setShowsHorizontalScrollIndicator:NO];
     [self.scrollView setShowsVerticalScrollIndicator:NO];
+    self.scrollView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.scrollView];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left);
@@ -181,6 +182,26 @@
     
     self.scrollView.contentSize = self.chartLineView.bounds.size;
     self.scrollView.contentSize = CGSizeMake(self.chartLineView.bounds.size.width, 1);
+    
+    UITapGestureRecognizer *sigleTapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapGesture:)];
+    sigleTapRecognizer.numberOfTapsRequired = 1;
+    [self.scrollView addGestureRecognizer:sigleTapRecognizer];
+}
+
+-(void)handleTapGesture:( UITapGestureRecognizer *)tapRecognizer {
+    NSInteger tapCount = tapRecognizer.numberOfTapsRequired;
+    // 先取消任何操作
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    switch (tapCount){
+        case 1:
+            if (_tapBlock) {
+                _tapBlock();
+            }
+            break;
+            //        case 2:
+            //           [self handleDoubleTap:tapRecognizer];
+            break;
+    }
 }
 
 #pragma mark 更新数据
@@ -207,5 +228,12 @@
     
     [self.chartLineView reloadDatas];
     self.scrollView.contentSize = CGSizeMake(self.chartLineView.bounds.size.width, 1);
+}
+
+- (void)dealloc {
+    NSMutableArray *newges = [NSMutableArray arrayWithArray:self.scrollView.gestureRecognizers];
+    for (int i =0; i < [newges count]; i++) {
+        [self.scrollView removeGestureRecognizer:[newges objectAtIndex:i]];
+    }
 }
 @end

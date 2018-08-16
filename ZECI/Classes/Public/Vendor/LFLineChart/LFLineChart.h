@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface LFLineChart : UIView
+@property (nonatomic,strong) void (^tapBlock)(void);
+
 /**
  *  显示折线图的可滑动视图
  */
