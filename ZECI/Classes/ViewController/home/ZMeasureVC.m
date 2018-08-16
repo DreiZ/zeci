@@ -16,6 +16,8 @@
 #import "ZMeasureSaveView.h"
 #import "ZMeasureSaveAlertView.h"
 #import "ZMeasureListCell.h"
+#import "AppDelegate.h"
+#import "ZGuideView.h"
 
 #import "ZHomeViewModel.h"
 
@@ -27,7 +29,7 @@ static NSInteger zindex = 0;
 @property (nonatomic,strong) ZMeasureEditView *editView;
 @property (nonatomic,strong) ZMeasureSaveView *saveView;
 @property (nonatomic,strong) ZMeasureSaveAlertView *saveAlertView;
-
+@property (nonatomic,strong) ZGuideView *guideV;
 
 @property (nonatomic,strong) UITableView *iTableView;
 @property (nonatomic,strong) ZSingleData *selectData;
@@ -82,7 +84,7 @@ static NSInteger zindex = 0;
         [self.view addSubview:self.iTableView];
         [self.iTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.bottom.equalTo(self.view);
-            make.top.equalTo(self.navView.mas_bottom).offset(0);
+            make.top.equalTo(self.navView.mas_bottom).offset(10);
             make.left.equalTo(self.topView.mas_right);
         }];
         
@@ -94,7 +96,7 @@ static NSInteger zindex = 0;
         }];
         
         [self.topView resetUIWith:[ZPublicManager getIsIpad]];
-    }else{
+    }else {
         [self.view addSubview:self.topView];
         [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.view);
@@ -197,6 +199,22 @@ static NSInteger zindex = 0;
     
     _saveAlertView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
     return _saveAlertView;
+}
+
+- (void)setGuideView {
+    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isMeasureLoad"];
+    if (!isLoaded ) {
+        UIWindow *presentView = [[AppDelegate App] window];
+        if (self.isHorizontal) {
+            ZGuideView *guideV = [[ZGuideView alloc] initWithTestGuideView:presentView.bounds holeRect:CGRectMake(([ZPublicManager getIsIpad] ? 24:12) + kWindowW/2.0f, kSafeAreaTopHeight+10, kWindowW/2.0f-([ZPublicManager getIsIpad] ? 24:12)*2, [ZMeasureListCell z_getCellHeight:nil])];
+            _guideV = guideV;
+            [presentView addSubview:guideV];
+        }else{
+            ZGuideView *guideV = [[ZGuideView alloc] initWithTestGuideView:presentView.bounds holeRect:CGRectMake([ZPublicManager getIsIpad] ? 24:12 , kSafeAreaTopHeight + CGFloatIn750(434), kWindowW-([ZPublicManager getIsIpad] ? 24:12)*2, [ZMeasureListCell z_getCellHeight:nil])];
+            _guideV = guideV;
+            [presentView addSubview:guideV];
+        }
+    }
 }
 
 - (UITableView *)iTableView {
@@ -305,11 +323,18 @@ static NSInteger zindex = 0;
         
         [self.iTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.bottom.equalTo(self.view);
-            make.top.equalTo(self.navView.mas_bottom).offset(0);
+            make.top.equalTo(self.navView.mas_bottom).offset(10);
             make.left.equalTo(self.topView.mas_right);
         }];
         
         [self.topView resetUIWith:[ZPublicManager getIsIpad]];
+        
+        if (_guideV) {
+            UIWindow *presentView = [[AppDelegate App] window];
+            _guideV.frame = presentView.bounds;
+            [_guideV setHoleFrame:CGRectMake(([ZPublicManager getIsIpad] ? 24:12) + kWindowW/2.0f, kSafeAreaTopHeight+2, kWindowW/2.0f-([ZPublicManager getIsIpad] ? 24:12)*2, [ZMeasureListCell z_getCellHeight:nil])];
+            [_guideV resetFrame];
+        }
     }else{
         [self.topView resetUIWith:NO];
         [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -322,6 +347,13 @@ static NSInteger zindex = 0;
             make.left.bottom.right.equalTo(self.view);
             make.top.equalTo(self.topView.mas_bottom).offset(0);
         }];
+        
+        if (_guideV) {
+            UIWindow *presentView = [[AppDelegate App] window];
+            _guideV.frame = presentView.bounds;
+            [_guideV setHoleFrame:CGRectMake([ZPublicManager getIsIpad] ? 24:12 , kSafeAreaTopHeight + CGFloatIn750(434), kWindowW-([ZPublicManager getIsIpad] ? 24:12)*2, [ZMeasureListCell z_getCellHeight:nil])];
+            [_guideV resetFrame];
+        }
     }
 }
 
@@ -343,6 +375,8 @@ static NSInteger zindex = 0;
     self.topView.singleData = self.selectData;
     
     [[ZHomeViewModel shareInstance] updateTestHistory];
+    
+    [self setGuideView];
     
     return tempPigData;
 }

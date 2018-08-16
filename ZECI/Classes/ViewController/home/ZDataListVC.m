@@ -13,6 +13,8 @@
 #import "ZHomeViewModel.h"
 
 #import "ZDataLineChatVC.h"
+#import "AppDelegate.h"
+#import "ZGuideView.h"
 
 @interface ZDataListVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic,strong) ZDataListSearchView *searchView;
@@ -20,6 +22,8 @@
 
 @property (nonatomic,strong) NSMutableArray *searchArr;
 @property (nonatomic,assign) BOOL isSearchState;
+
+@property (nonatomic,strong) ZGuideView *guideV;
 @end
 
 @implementation ZDataListVC
@@ -30,6 +34,7 @@
     [self setNavgation];
     [self setDataSource];
     [self setMainView];
+    [self setGuideView];
 }
 
 - (void)setNavgation {
@@ -73,6 +78,16 @@
         };
     }
     return _searchView;
+}
+
+- (void)setGuideView {
+    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isDataListLoaded"];
+    if (!isLoaded && [ZHomeViewModel shareInstance].singPigDatas && [ZHomeViewModel shareInstance].singPigDatas.count > 0) {
+        UIWindow *presentView = [[AppDelegate App] window];
+        ZGuideView *guideV = [[ZGuideView alloc] initWithListGuideView:presentView.bounds holeRect:CGRectMake(0, ([ZPublicManager getIsIpad] ? 70:55)+kSafeAreaTopHeight+([ZPublicManager getIsIpad] ? 15:10), kWindowW, [ZDataListCell z_getCellHeight:nil])];
+        _guideV = guideV;
+        [presentView addSubview:guideV];
+    }
 }
 
 -(UITableView *)iTableView {
@@ -229,5 +244,14 @@
     }
     
     [self.iTableView reloadData];
+}
+
+- (void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
+    if (_guideV) {
+        UIWindow *presentView = [[AppDelegate App] window];
+        _guideV.frame = presentView.bounds;
+        [_guideV setHoleFrame:CGRectMake(0, ([ZPublicManager getIsIpad] ? 70:55)+kSafeAreaTopHeight+([ZPublicManager getIsIpad] ? 15:10), kWindowW, [ZDataListCell z_getCellHeight:nil])];
+        [_guideV resetFrame];
+    }
 }
 @end

@@ -75,6 +75,11 @@
     return _homeVC;
 }
 
++(AppDelegate *)App {
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
+}
+
+
 #pragma mark---------------------setup Notification
 - (void)setupNotification{
      [self.window setRootViewController:self.tabBarController];
