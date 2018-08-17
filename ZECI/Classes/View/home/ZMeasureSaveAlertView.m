@@ -135,7 +135,7 @@
         _alertLabel.text = @"";
         _alertLabel.numberOfLines = 0;
         _alertLabel.textAlignment = NSTextAlignmentLeft;
-        [_alertLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad]? 16:13]];
+        [_alertLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad]? 16:14]];
     }
     return _alertLabel;
 }

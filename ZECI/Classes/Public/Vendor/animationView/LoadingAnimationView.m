@@ -75,7 +75,9 @@
     [path2 stroke];
     
 }
+
 static LoadingAnimationView* tmpview ;
+
 +(void)showInView:(UIView *)view
 {
     if (tmpview) {
@@ -91,7 +93,8 @@ static LoadingAnimationView* tmpview ;
     CGRect rect  = aview.frame;
 //    rect.origin.y -= 100;
     aview.frame = rect;
-    [view addSubview:aview];
+//    [view addSubview:aview];
+    [view insertSubview:aview atIndex:0];
     [aview startAnimation];
     tmpview = aview;
 }

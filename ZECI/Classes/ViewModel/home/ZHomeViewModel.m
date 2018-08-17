@@ -80,10 +80,14 @@
     BOOL hadSame = NO;
     NSMutableArray *listAry = [[NSMutableArray alloc]init];
     for (ZSingleData *singleData in self.testPigs) {
-        if (![listAry containsObject:singleData]) {
+        for (ZSingleData *saveSingleData in listAry) {
+            if ([saveSingleData.earTag isEqualToString:singleData.earTag]) {
+                hadSame = YES;
+                return YES;
+            }
+        }
+        if (!hadSame) {
             [listAry addObject:singleData];
-        }else{
-            hadSame = YES;
         }
     }
     return hadSame;

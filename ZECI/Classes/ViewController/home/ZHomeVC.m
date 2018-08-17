@@ -25,6 +25,7 @@
 @property (nonatomic,strong) UILabel *bluetoothStateLabel;
 @property (nonatomic,strong) UIView *bluetoothSearchView;
 
+@property (nonatomic,assign) BOOL isScanIng;
 @end
 
 @implementation ZHomeVC
@@ -102,6 +103,7 @@
     
     [ZPublicBluetoothManager shareInstance].bluetoothChangeBlock = ^{
         if ([ZPublicBluetoothManager shareInstance].peripheralState == CBManagerStatePoweredOn && ![ZPublicBluetoothManager shareInstance].cbPeripheral) {
+            [weakSelf startAnimationView];
             [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
         }
     
@@ -118,6 +120,7 @@
     };
     
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"bluetoothChange" object:nil] subscribeNext:^(NSNotification * _Nullable noti) {
+        [weakSelf startAnimationView];
         [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
         if (weakSelf.iTableView) {
             [weakSelf.iTableView reloadData];
@@ -138,8 +141,14 @@
     __weak typeof(self) weakSelf = self;
     UIButton *searchBluetoothBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [searchBluetoothBtn bk_addEventHandler:^(id sender) {
-        [weakSelf startAnimationView];
-        [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+        if ([ZPublicBluetoothManager shareInstance].centralManager.isScanning) {
+            [weakSelf stopAnimationView];
+            [[ZPublicBluetoothManager shareInstance].centralManager stopScan];
+        }else{
+            [weakSelf startAnimationView];
+            [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+        }
+        
     } forControlEvents:UIControlEventTouchUpInside];
     [searchBluetoothBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, ([ZPublicManager getIsIpad] ? -30:-24), 0)];
     [searchBluetoothBtn setTitleColor:kFont6Color forState:UIControlStateNormal];
@@ -159,6 +168,7 @@
     [LoadingAnimationView showInView:self.bluetoothSearchView];
     
 }
+
 - (void)stopAnimationView {
     [LoadingAnimationView dismiss];
     
@@ -180,6 +190,7 @@
                 if ([ZPublicBluetoothManager shareInstance].peripheralState != CBManagerStatePoweredOn) {
                     [weakSelf showSuccessWithMsg:[ZPublicManager getIsIpad] ? @"请先打开iPad蓝牙":@"请先打开手机蓝牙"];
                 }else{
+                    [weakSelf startAnimationView];
                     [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
                 }
             }

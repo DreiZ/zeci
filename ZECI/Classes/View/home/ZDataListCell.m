@@ -45,7 +45,7 @@
     [self.contentView addSubview:hintImageView];
     [hintImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
-        make.left.equalTo(self.mas_left).offset([ZPublicManager getIsIpad] ? 20:15);
+        make.left.equalTo(self.mas_left).offset([ZPublicManager getIsIpad] ? 15:10);
         make.width.height.mas_equalTo(32);
     }];
     
@@ -60,7 +60,7 @@
     [self.contentView addSubview:self.detaiLabel];
     [self.detaiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(hintImageView.mas_right).offset([ZPublicManager getIsIpad] ? 30:20);
-        make.right.equalTo(self.timeLabel.mas_left).offset([ZPublicManager getIsIpad] ? -30:-20);
+        make.right.equalTo(self.timeLabel.mas_left).offset([ZPublicManager getIsIpad] ? -20:-10);
         make.centerY.equalTo(self.mas_centerY);
     }];
     

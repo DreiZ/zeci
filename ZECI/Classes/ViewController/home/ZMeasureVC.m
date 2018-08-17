@@ -21,7 +21,7 @@
 
 #import "ZHomeViewModel.h"
 
-static NSInteger zindex = 0;
+//static NSInteger zindex = 0;
 
 @interface ZMeasureVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) ZMeasureNavView *navView;
@@ -34,6 +34,7 @@ static NSInteger zindex = 0;
 @property (nonatomic,strong) UITableView *iTableView;
 @property (nonatomic,strong) ZSingleData *selectData;
 @property (nonatomic,strong) ZSingleData *testData;
+@property (nonatomic,strong) UILabel *tempLabel;
 
 @property (nonatomic,assign) BOOL isBackSave;
 @end
@@ -86,6 +87,7 @@ static NSInteger zindex = 0;
         
         [self.topView resetUIWith:[ZPublicManager getIsIpad]];
     }else {
+        
         [self.view addSubview:self.topView];
         [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.view);
@@ -113,7 +115,8 @@ static NSInteger zindex = 0;
     [ZPublicBluetoothManager shareInstance].testDataBlock = ^(NSString *testData) {
         NSInteger tempTime = [ZPublicManager getNowTimestamp];
         
-        weakSelf.testData.testTime = [NSString stringWithFormat:@"%ld",tempTime];
+        weakSelf.testData.testTime = [NSString stringWithFormat:@"%ld",tempTime];//+ zindex * 24*60*60
+        
         if (testData && testData.length > 0 && [testData hasSuffix:@"E"]) {
             if ([testData hasPrefix:@"R"]){
                 //耳标数据
@@ -133,7 +136,7 @@ static NSInteger zindex = 0;
                 [self setTestBlueDataWithData:testData withIndex:1];
                 
             }else {
-                
+                //以数字开头
                 char commitChar = [testData characterAtIndex:0];
                 //实时数据
                 if ((commitChar>47)&&(commitChar<58)) {
@@ -192,6 +195,44 @@ static NSInteger zindex = 0;
                 }
             }
         };
+        
+//        _tempLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//        _tempLabel.textColor = [UIColor whiteColor];
+//        _tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
+//        _tempLabel.numberOfLines = 0;
+//        _tempLabel.textAlignment = NSTextAlignmentCenter;
+//        [_tempLabel setFont:[UIFont systemFontOfSize:16.0f]];
+//        [_navView addSubview:_tempLabel];
+//        [_tempLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerX.equalTo(self.navView.mas_centerX);
+//            make.bottom.equalTo(self.navView.mas_bottom).offset(-20);
+//        }];
+//
+//        UIButton *te1Btn = [[UIButton alloc] initWithFrame:CGRectZero];
+//        te1Btn.backgroundColor = [UIColor whiteColor];
+//        [te1Btn bk_addEventHandler:^(id sender) {
+//            zindex--;
+//            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
+//        } forControlEvents:UIControlEventTouchUpInside];
+//        [_navView addSubview:te1Btn];
+//        [te1Btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.width.height.mas_equalTo(40);
+//            make.centerY.equalTo(self.tempLabel.mas_centerY);
+//            make.right.equalTo(self.tempLabel.mas_left).offset(-20);
+//        }];
+//
+//        UIButton *te2Btn = [[UIButton alloc] initWithFrame:CGRectZero];
+//        te2Btn.backgroundColor = [UIColor blackColor];
+//        [te2Btn bk_addEventHandler:^(id sender) {
+//            zindex++;
+//            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
+//        } forControlEvents:UIControlEventTouchUpInside];
+//        [_navView addSubview:te2Btn];
+//        [te2Btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.width.height.mas_equalTo(40);
+//            make.centerY.equalTo(self.tempLabel.mas_centerY);
+//            make.left.equalTo(self.tempLabel.mas_right).offset(20);
+//        }];
     }
     return _navView;
 }
@@ -255,17 +296,23 @@ static NSInteger zindex = 0;
 }
 
 - (void)setGuideView {
+    
     BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isMeasureLoad"];
+    
     if (!isLoaded ) {
         UIWindow *presentView = [[AppDelegate App] window];
         if (self.isHorizontal) {
+            
             ZGuideView *guideV = [[ZGuideView alloc] initWithTestGuideView:presentView.bounds holeRect:CGRectMake(([ZPublicManager getIsIpad] ? 24:12) + kWindowW/2.0f, kSafeAreaTopHeight+10, kWindowW/2.0f-([ZPublicManager getIsIpad] ? 24:12)*2, [ZMeasureListCell z_getCellHeight:nil])];
             _guideV = guideV;
             [presentView addSubview:guideV];
+            
         }else{
+            
             ZGuideView *guideV = [[ZGuideView alloc] initWithTestGuideView:presentView.bounds holeRect:CGRectMake([ZPublicManager getIsIpad] ? 24:12 , kSafeAreaTopHeight + CGFloatIn750(434), kWindowW-([ZPublicManager getIsIpad] ? 24:12)*2, [ZMeasureListCell z_getCellHeight:nil])];
             _guideV = guideV;
             [presentView addSubview:guideV];
+            
         }
     }
 }
@@ -419,9 +466,9 @@ static NSInteger zindex = 0;
     
     self.selectData = tempPigData;
     if (!tempPigData.earTag || tempPigData.earTag.length == 0) {
-        NSString *zeroStr = @"000000000000000";
+        NSString *zeroStr = @"00000000";
         NSInteger tempCount = [ZHomeViewModel shareInstance].singPigDatas.count;
-        tempPigData.earTag = [@"R" stringByAppendingString:[zeroStr substringWithRange:NSMakeRange(0, zeroStr.length - tempCount)]];
+        tempPigData.earTag = [@"R" stringByAppendingString:[zeroStr substringWithRange:NSMakeRange(0, zeroStr.length - [[NSString stringWithFormat:@"%ld",tempCount] length])]];
         tempPigData.earTag = [tempPigData.earTag stringByAppendingString:[NSString stringWithFormat:@"%ld",tempCount]];
         tempPigData.earTag = [tempPigData.earTag stringByAppendingString:@"E"];
     }
@@ -441,13 +488,16 @@ static NSInteger zindex = 0;
 - (void)saveTestPigsData {
     self.isBackSave = NO;
     if ([[ZHomeViewModel shareInstance] checkTestDataIsHadSameData]) {
-        self.saveAlertView.alertLabel.text = @"数据列表中有相同耳标的测量数据，同一耳标只会取一条数据保存，确定保存吗？";
+        self.saveAlertView.alertLabel.text = @"数据列表中有相同耳标的测量数据，同一耳标只会取最新一条测量数据保存，确定保存吗？";
         self.saveAlertView.titleLabel.text = @"提示";
         [self.view addSubview:self.saveAlertView];
     }else{
-        self.saveAlertView.alertLabel.text = @"确定保存测量数据列表数据到数据库吗？";
-        self.saveAlertView.titleLabel.text = @"提示";
-        [self.view addSubview:self.saveAlertView];
+//        self.saveAlertView.alertLabel.text = @"确定保存测量数据列表数据到数据库吗？";
+//        self.saveAlertView.titleLabel.text = @"提示";
+//        [self.view addSubview:self.saveAlertView];
+        [[ZHomeViewModel shareInstance] updateTestDataToAllHistoryData];
+        [self.iTableView reloadData];
+        [self showSuccessWithMsg:@"已保存到数据库"];
     }
 }
 

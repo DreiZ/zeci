@@ -121,22 +121,42 @@
         [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[firstData.testTime integerValue] - 60 * 60 * 24] format:@"MM月dd日"]];
         
         ZSingleData *lastSingleData = nil;
+        
         for (ZSingleData *singleData in _singlePigData.singleList) {
-            if (lastSingleData && ([[ZPublicManager timeWithStr:lastSingleData.testTime format:@"MMdd"] integerValue] + 1 != [[ZPublicManager timeWithStr:singleData.testTime format:@"MMdd"] integerValue])) {
-                for (int i = 0; i < ([[ZPublicManager timeWithStr:singleData.testTime format:@"MMdd"] integerValue]) - ([[ZPublicManager timeWithStr:lastSingleData.testTime format:@"MMdd"] integerValue])-1; i++) {
+
+            NSString *lastTime = nil;
+            if (lastSingleData) {
+                
+                lastTime = lastSingleData.testTime;
+                
+                NSInteger tempSpaceCount = 0;
+                
+                while (![[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastTime integerValue] + 24 * 50 * 60] format:@"MMdd"] isEqualToString:[ZPublicManager timeWithStr:singleData.testTime format:@"MMdd"]]) {
+                    
+                    //防止中间空数据占太长时间
+                    if (tempSpaceCount > 30) {
+                        break;
+                    }
+                    
                     [firstDataArr addObject:@""];
                     [secondDataArr addObject:@""];
                     [thridDataArr addObject:@""];
                     
-                    [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastSingleData.testTime integerValue] + (i+1) * 60 * 60 * 24] format:@"MM月dd日"]];
+                    [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastTime integerValue] + 60 * 60 * 24] format:@"MM月dd日"]];
+                    lastTime = [NSString stringWithFormat:@"%ld",[lastTime integerValue] + 60 * 60 * 24];
+                    tempSpaceCount++;
                 }
             }
+            
+
             [firstDataArr addObject:singleData.firstNum];
             [secondDataArr addObject:singleData.secondNum];
             [thridDataArr addObject:singleData.thirdNum];
             
             [xValueArr addObject:[ZPublicManager timeWithStr:singleData.testTime format:@"MM月dd日"]];
+            lastTime = singleData.testTime;
             lastSingleData = singleData;
+            
         }
     }
     
