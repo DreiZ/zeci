@@ -7,6 +7,7 @@
 //
 
 #import "ZPublicBluetoothManager.h"
+#import "ZBluetoothLostView.h"
 
 // 蓝牙4.0设备名
 static NSString * const kBlePeripheralName = @"LanQianTech";
@@ -18,7 +19,8 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 
 
 @interface ZPublicBluetoothManager ()<CBCentralManagerDelegate,CBPeripheralDelegate>
-
+@property (nonatomic,strong) ZBluetoothLostView *lostView;
+@property (nonatomic,assign) BOOL isConnectLost;
 @end
 
 @implementation ZPublicBluetoothManager
@@ -57,6 +59,19 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     return _centralManager;
 }
 
+
+- (ZBluetoothLostView *)lostView {
+    if (!_lostView) {
+        
+        _lostView = [[ZBluetoothLostView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH)];
+    }
+    
+    _lostView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
+    return _lostView;
+}
+
+
+#pragma mark 蓝牙设备相关操作
 // 扫描设备
 - (void)scanForPeripherals
 {
@@ -72,6 +87,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 {
     if (self.cbPeripheral != nil)
     {
+        self.isConnectLost = YES;
         NSLog(@"连接设备");
         [self showMessage:@"连接设备"];
         [self.centralManager connectPeripheral:self.cbPeripheral options:nil];
@@ -94,6 +110,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
         // 取消连接
         NSLog(@"取消连接");
         [self showMessage:@"取消连接"];
+        self.isConnectLost = YES;
         [self.centralManager cancelPeripheralConnection:self.cbPeripheral];
     }
 }
@@ -165,10 +182,10 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     
     if (![self.peripherals containsObject:peripheral] && peripheral.name)
     {
-       
+       [self.peripherals addObject:peripheral];
         if ([peripheral.name isEqualToString:kBlePeripheralName])
         {
-            [self.peripherals addObject:peripheral];
+            
             [self showMessage:[NSString stringWithFormat:@"设备名:%@",peripheral.name]];
             self.cbPeripheral = peripheral;
             
@@ -212,8 +229,12 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     [self showMessage:@"断开连接"];
+ 
+//    [[AppDelegate App].window showSuccessWithMsg:@"断开连接"];
+    if (!self.isConnectLost) {
+        [[AppDelegate App].window addSubview:self.lostView];
+    }
     
-    [[AppDelegate App].window showSuccessWithMsg:@"断开连接"];
     if (self.connectBlock) {
         self.connectBlock(nil);
     }
@@ -221,7 +242,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     {
         [self.centralManager connectPeripheral:peripheral options:nil];
     }
-    
+    self.isConnectLost = NO;
 }
 
 /**

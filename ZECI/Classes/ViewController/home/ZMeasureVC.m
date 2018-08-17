@@ -21,7 +21,7 @@
 
 #import "ZHomeViewModel.h"
 
-//static NSInteger zindex = 0;
+static NSInteger zindex = 0;
 
 @interface ZMeasureVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) ZMeasureNavView *navView;
@@ -115,7 +115,7 @@
     [ZPublicBluetoothManager shareInstance].testDataBlock = ^(NSString *testData) {
         NSInteger tempTime = [ZPublicManager getNowTimestamp];
         
-        weakSelf.testData.testTime = [NSString stringWithFormat:@"%ld",tempTime];//+ zindex * 24*60*60
+        weakSelf.testData.testTime = [NSString stringWithFormat:@"%ld",tempTime + zindex * 24*60*60];//
         
         if (testData && testData.length > 0 && [testData hasSuffix:@"E"]) {
             if ([testData hasPrefix:@"R"]){

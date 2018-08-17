@@ -1,18 +1,18 @@
 //
-//  ZMeasureSaveAlertView.m
+//  ZBluetoothLostView.m
 //  ZECI
 //
-//  Created by zzz on 2018/8/15.
+//  Created by zzz on 2018/8/17.
 //  Copyright © 2018年 zzz. All rights reserved.
 //
 
-#import "ZMeasureSaveAlertView.h"
+#import "ZBluetoothLostView.h"
 
-@interface ZMeasureSaveAlertView ()
+@interface ZBluetoothLostView ()
 
 @end
 
-@implementation ZMeasureSaveAlertView
+@implementation ZBluetoothLostView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -53,7 +53,7 @@
     
     UILabel *hintLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     hintLabel.textColor = kMainColor;
-    hintLabel.text = @"提示";
+    hintLabel.text = @"设备已断开连接";
     hintLabel.numberOfLines = 0;
     hintLabel.textAlignment = NSTextAlignmentCenter;
     [hintLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
@@ -71,53 +71,24 @@
         make.top.equalTo(hintLabel.mas_bottom).offset(20);
     }];
     
-
+    
     UIButton *sureBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-    [sureBtn setTitle:@"保存" forState:UIControlStateNormal];
+    [sureBtn setTitle:@"知道了" forState:UIControlStateNormal];
     [sureBtn setTitleColor:kMainColor forState:UIControlStateNormal];
     [sureBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
     [contView addSubview:sureBtn];
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(contView.mas_centerX);
+        make.left.equalTo(contView.mas_left);
         make.height.mas_equalTo(40);
         make.right.equalTo(contView.mas_right).offset(0);
         make.bottom.equalTo(contView.mas_bottom).offset(0);
     }];
     [sureBtn bk_addEventHandler:^(id sender) {
-        if (weakSelf.sureBlock) {
-            weakSelf.sureBlock(1);
-        }
         [weakSelf removeFromSuperview];
     } forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton * cancleBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-    [cancleBtn setTitle:@"暂不保存" forState:UIControlStateNormal];
-    [cancleBtn setTitleColor:kFont6Color forState:UIControlStateNormal];
-    [cancleBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
-    [contView addSubview:cancleBtn];
-    [cancleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(contView.mas_centerX);
-        make.height.mas_equalTo(40);
-        make.left.equalTo(contView.mas_left).offset(0);
-        make.bottom.equalTo(contView.mas_bottom).offset(0);
-    }];
-    [cancleBtn bk_addEventHandler:^(UIButton *sender) {
-        if (weakSelf.sureBlock) {
-            weakSelf.sureBlock(0);
-        }
-        [weakSelf removeFromSuperview];
-    } forControlEvents:UIControlEventTouchUpInside];
-    
-    UIView *spaceLineView = [[UIView alloc] initWithFrame:CGRectZero];
-    spaceLineView.backgroundColor = kLineColor;
-    [contView addSubview:spaceLineView];
-    [spaceLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sureBtn.mas_top);
-        make.centerX.equalTo(contView.mas_centerX);
-        make.bottom.equalTo(contView.mas_bottom);
-        make.width.mas_equalTo(0.5);
-    }];
    
+    
     UIView *bottomLineView = [[UIView alloc] initWithFrame:CGRectZero];
     bottomLineView.backgroundColor = kMainColor;
     [contView addSubview:bottomLineView];
@@ -134,7 +105,7 @@
     if (!_alertLabel) {
         _alertLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _alertLabel.textColor = kFont3Color;
-        _alertLabel.text = @"";
+        _alertLabel.text = @"请检查设备是否正常开启，如还需测量，请重新连接扫描蓝牙设备,并连接设备";
         _alertLabel.numberOfLines = 0;
         _alertLabel.textAlignment = NSTextAlignmentLeft;
         [_alertLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad]? 16:14]];
@@ -152,4 +123,5 @@
     [label sizeToFit];
 }
 @end
+
 
