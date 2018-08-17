@@ -503,7 +503,7 @@
 
 - (void)backSaveTestPigsData {
     self.isBackSave = YES;
-    self.saveAlertView.titleLabel.text = @"测试数据还未保存";
+    self.saveAlertView.titleLabel.text = @"测量数据还未保存";
     if ([[ZHomeViewModel shareInstance] checkTestDataIsHadSameData]) {
         self.saveAlertView.alertLabel.text = @"数据列表中有相同耳标的测量数据，同一耳标只会取一条数据保存，确定保存吗？";
         [self.view addSubview:self.saveAlertView];

@@ -29,7 +29,7 @@
 
 //匹配服务及特征
 @property (nonatomic,strong) void (^testMatchingBlock)(void);
-//返回测试数据
+//返回测量数据
 @property (nonatomic,strong) void (^testDataBlock)(NSString *testData);
 
 

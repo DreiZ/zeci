@@ -56,7 +56,7 @@
     hintLabel.text = @"提示";
     hintLabel.numberOfLines = 0;
     hintLabel.textAlignment = NSTextAlignmentCenter;
-    [hintLabel setFont:[UIFont systemFontOfSize:18.0f]];
+    [hintLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
     [contView addSubview:hintLabel];
     [hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(contView.mas_centerX);

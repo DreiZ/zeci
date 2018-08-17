@@ -15,7 +15,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         publicDataManager = [[ZHomeViewModel alloc] init];
-        //所有测试数据 数据库
+        //所有测量数据 数据库
         [publicDataManager getHistory];
         if (publicDataManager.historyList && publicDataManager.historyList.allHisoryLists) {
             publicDataManager.singPigDatas = [[NSMutableArray alloc] initWithArray:publicDataManager.historyList.allHisoryLists];
@@ -75,7 +75,7 @@
     self.testList = [ZTestPigs new];
 }
 
-#pragma mark 测试数据处理
+#pragma mark 测量数据处理
 - (BOOL)checkTestDataIsHadSameData {
     BOOL hadSame = NO;
     NSMutableArray *listAry = [[NSMutableArray alloc]init];
