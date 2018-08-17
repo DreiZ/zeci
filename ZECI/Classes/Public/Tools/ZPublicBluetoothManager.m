@@ -61,7 +61,6 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 - (void)scanForPeripherals
 {
     [self.centralManager stopScan];
-    
     if (self.peripheralState ==  CBManagerStatePoweredOn)
     {
         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
@@ -143,9 +142,12 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
         default:
             break;
     }
-    if (self.bluetoothChangeBlock) {
-        self.bluetoothChangeBlock();
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"zzz 设备状态更新");
+        if (self.bluetoothChangeBlock) {
+            self.bluetoothChangeBlock();
+        }
+    });
 }
 
 /**
@@ -162,9 +164,10 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     
     if (![self.peripherals containsObject:peripheral] && peripheral.name)
     {
-        [self.peripherals addObject:peripheral];
+       
         if ([peripheral.name isEqualToString:kBlePeripheralName])
         {
+            [self.peripherals addObject:peripheral];
             [self showMessage:[NSString stringWithFormat:@"设备名:%@",peripheral.name]];
             self.cbPeripheral = peripheral;
             
@@ -186,11 +189,11 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
  */
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    NSLog(@"zzz peripheral.name:%@ 连接失败",peripheral.name);
     [[AppDelegate App].window showSuccessWithMsg:@"连接失败"];
     if (self.connectBlock) {
         self.connectBlock(nil);
     }
+    
     if ([peripheral.name isEqualToString:kBlePeripheralName])
     {
         [self.centralManager connectPeripheral:peripheral options:nil];
@@ -208,7 +211,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     [self showMessage:@"断开连接"];
-    NSLog(@"zzz peripheral.name:%@ 断开连接",peripheral.name);
+    
     [[AppDelegate App].window showSuccessWithMsg:@"断开连接"];
     if (self.connectBlock) {
         self.connectBlock(nil);
@@ -239,6 +242,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     if (self.connectBlock) {
         self.connectBlock(peripheral);
     }
+    [self.centralManager stopScan];
 }
 
 

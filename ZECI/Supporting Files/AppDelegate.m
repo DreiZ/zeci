@@ -34,6 +34,11 @@
     return YES;
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"bluetoothChange" object:nil];
+}
+
+
 #pragma mark 回掉
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
 {

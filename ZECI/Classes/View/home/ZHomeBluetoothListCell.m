@@ -69,6 +69,7 @@
         make.left.right.bottom.equalTo(self);
         make.height.mas_equalTo(0.5);
     }];
+  
 }
 
 - (UILabel *)BluetoothLabel {

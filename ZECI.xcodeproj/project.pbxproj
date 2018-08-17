@@ -44,6 +44,8 @@
 		5E4D81ED20C7C5C2002A12E2 /* NSObject+Hint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4D81EB20C7C5C1002A12E2 /* NSObject+Hint.m */; };
 		5E4D81F020C7CA27002A12E2 /* ZBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4D81EF20C7CA27002A12E2 /* ZBaseModel.m */; };
 		5E4D81F320C7CB59002A12E2 /* ZBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4D81F220C7CB59002A12E2 /* ZBaseViewModel.m */; };
+		5E4EB7DF21265A7F00ED201B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4EB7DE21265A7F00ED201B /* CoreBluetooth.framework */; };
+		5E4EB7EA21269A0000ED201B /* LoadingAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EB7E921269A0000ED201B /* LoadingAnimationView.m */; };
 		5E51D6D021250D0E009F6A0E /* ZGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D6CF21250D0E009F6A0E /* ZGuideView.m */; };
 		5E51D6D721251237009F6A0E /* JMHoledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D6D621251236009F6A0E /* JMHoledView.m */; };
 		5E51D6DA212527D6009F6A0E /* ZPublicBluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D6D9212527D6009F6A0E /* ZPublicBluetoothManager.m */; };
@@ -169,6 +171,9 @@
 		5E4D81EF20C7CA27002A12E2 /* ZBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBaseModel.m; sourceTree = "<group>"; };
 		5E4D81F120C7CB59002A12E2 /* ZBaseViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBaseViewModel.h; sourceTree = "<group>"; };
 		5E4D81F220C7CB59002A12E2 /* ZBaseViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBaseViewModel.m; sourceTree = "<group>"; };
+		5E4EB7DE21265A7F00ED201B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		5E4EB7E821269A0000ED201B /* LoadingAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingAnimationView.h; sourceTree = "<group>"; };
+		5E4EB7E921269A0000ED201B /* LoadingAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingAnimationView.m; sourceTree = "<group>"; };
 		5E51D6CE21250D0E009F6A0E /* ZGuideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZGuideView.h; sourceTree = "<group>"; };
 		5E51D6CF21250D0E009F6A0E /* ZGuideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZGuideView.m; sourceTree = "<group>"; };
 		5E51D6D521251236009F6A0E /* JMHoledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMHoledView.h; sourceTree = "<group>"; };
@@ -235,6 +240,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E4EB7DF21265A7F00ED201B /* CoreBluetooth.framework in Frameworks */,
 				30A63C8E79AB45659F2858AB /* libPods-ZECI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,6 +401,7 @@
 		5E48F90D20C673A200422A6F /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				5E4EB7E7212699F100ED201B /* animationView */,
 				5E51D6D121250D1C009F6A0E /* JMHoledView */,
 				5EA183BC2121736B009C6675 /* LFLineChart */,
 				5E4D81E620C7C592002A12E2 /* iCarousel */,
@@ -509,6 +516,15 @@
 				5E4D81EB20C7C5C1002A12E2 /* NSObject+Hint.m */,
 			);
 			path = "NSObject+Hint";
+			sourceTree = "<group>";
+		};
+		5E4EB7E7212699F100ED201B /* animationView */ = {
+			isa = PBXGroup;
+			children = (
+				5E4EB7E821269A0000ED201B /* LoadingAnimationView.h */,
+				5E4EB7E921269A0000ED201B /* LoadingAnimationView.m */,
+			);
+			path = animationView;
 			sourceTree = "<group>";
 		};
 		5E51D6D121250D1C009F6A0E /* JMHoledView */ = {
@@ -639,6 +655,7 @@
 		713A9F95CC91AC2C25CC914C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E4EB7DE21265A7F00ED201B /* CoreBluetooth.framework */,
 				3927F0F06D5F9CE2CFE33939 /* libPods-ZECI.a */,
 			);
 			name = Frameworks;
@@ -843,6 +860,7 @@
 				5E48F92F20C6800000422A6F /* ZBaseNavigationController.m in Sources */,
 				5EA183A321211AE7009C6675 /* ZDataListSearchView.m in Sources */,
 				5E51D6DA212527D6009F6A0E /* ZPublicBluetoothManager.m in Sources */,
+				5E4EB7EA21269A0000ED201B /* LoadingAnimationView.m in Sources */,
 				5E09303D211ECD6A00AA98DC /* ZHomeBluetoothListCell.m in Sources */,
 				5E71D5122123CC7A009FA7E3 /* ZMeasureSaveAlertView.m in Sources */,
 				5E4D81F020C7CA27002A12E2 /* ZBaseModel.m in Sources */,

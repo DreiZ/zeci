@@ -46,14 +46,16 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSBluetoothPeripheralUsageDescription - 2</key>
-	<string>是否允许币策使用蓝牙？允许此权限以便更好的使用服务功能</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>是否允许背膘测定仪使用蓝牙？允许此权限才能连接测膘仪测量数据</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>是否允许背膘测定仪使用日历？允许此权限以便更好的使用服务功能</string>
 	<key>NSCameraUsageDescription</key>
-	<string>需要获取相机权限来拍照上传照片，如禁止则无法使用拍照功能上传照片</string>
+	<string>背膘测定仪需要获取相机权限来拍照上传照片，如禁止则无法使用拍照功能上传照片</string>
 	<key>NSMotionUsageDescription</key>
-	<string>是否允许币策使用运动与健康？允许此权限以便更好的使用服务等功能</string>
+	<string>是否允许背膘测定仪使用运动与健康？允许此权限以便更好的使用服务等功能</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>是否允许背膘测定仪使用相册？允许此权限才能保存测膘仪测量数据走势图</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

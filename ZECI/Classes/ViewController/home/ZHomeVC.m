@@ -10,10 +10,12 @@
 #import "ZHomeNavView.h"
 #import "ZHomeConnectCell.h"
 #import "ZHomeBluetoothListCell.h"
+#import "LoadingAnimationView.h"
 
 #import "ZCompanyInfoVC.h"
 #import "ZDataListVC.h"
 #import "ZMeasureVC.h"
+#import "ZHomeModel.h"
 
 @interface ZHomeVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic,strong) UITableView *iTableView;
@@ -21,6 +23,8 @@
 
 @property (nonatomic,strong) CBPeripheral *connectPeripheral;
 @property (nonatomic,strong) UILabel *bluetoothStateLabel;
+@property (nonatomic,strong) UIView *bluetoothSearchView;
+
 @end
 
 @implementation ZHomeVC
@@ -39,19 +43,15 @@
     
     [self setupNavigationView];
     [self setMainUI];
-    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isAppFirstLoad"];
-    if (isLoaded){
-        [self setBluetooth];
-    }
+    
+    [self setBluetooth];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isAppFirstLoad"];
-    if (isLoaded){
-        [self setBluetooth];
-        [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"isAppFirstLoad"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    if (_iTableView) {
+        [_iTableView reloadData];
     }
 }
 
@@ -62,6 +62,8 @@
 }
 
 - (void)setMainUI {
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self.view addSubview:self.navView];
     [self.navView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.view);
@@ -70,9 +72,13 @@
     
     [self.view addSubview:self.iTableView];
     [self.iTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-50
+                                                         );
         make.top.equalTo(self.navView.mas_bottom).offset(10);
     }];
+    
+    self.bluetoothSearchView = [self bluetoothSearchView];
 }
 
 - (void)setBluetooth {
@@ -89,6 +95,7 @@
     
     [ZPublicBluetoothManager shareInstance].testMatchingBlock = ^{
         [[AppDelegate App] showSuccessWithMsg:@"连接匹配成功"];
+        [weakSelf stopAnimationView];
         ZMeasureVC *svc = [[ZMeasureVC alloc] init];
         [weakSelf.navigationController pushViewController:svc animated:YES];
     };
@@ -108,6 +115,53 @@
             }
         });
     };
+    
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"bluetoothChange" object:nil] subscribeNext:^(NSNotification * _Nullable noti) {
+        [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+        if (weakSelf.iTableView) {
+            [weakSelf.iTableView reloadData];
+        }
+    }];
+   
+}
+
+- (UIView *)bluetoothSearchView {
+    
+    UIView *bluetoothSearchView = [[UIView alloc] init];
+    [self.view addSubview:bluetoothSearchView];
+    [bluetoothSearchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(self.view);
+        make.height.mas_equalTo([ZPublicManager getIsIpad] ? 100:80);
+    }];
+    
+    __weak typeof(self) weakSelf = self;
+    UIButton *searchBluetoothBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    [searchBluetoothBtn bk_addEventHandler:^(id sender) {
+        [[ZPublicBluetoothManager shareInstance].peripherals removeAllObjects];
+        [weakSelf startAnimationView];
+        [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+    } forControlEvents:UIControlEventTouchUpInside];
+    [searchBluetoothBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, -24, 0)];
+    [searchBluetoothBtn setTitleColor:kFont6Color forState:UIControlStateNormal];
+    [searchBluetoothBtn setTitle:@"刷新" forState:UIControlStateNormal];
+    [searchBluetoothBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [bluetoothSearchView addSubview:searchBluetoothBtn];
+    [searchBluetoothBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(bluetoothSearchView);
+        make.top.bottom.equalTo(bluetoothSearchView);
+        make.width.equalTo(searchBluetoothBtn.mas_height);
+    }];
+    
+    return bluetoothSearchView;
+}
+
+- (void)startAnimationView {
+    [LoadingAnimationView showInView:self.bluetoothSearchView];
+    
+}
+- (void)stopAnimationView {
+    [LoadingAnimationView dismiss];
+    
 }
 
 #pragma mark lazy loading...
@@ -242,8 +296,10 @@
         }];
         if ([ZPublicBluetoothManager shareInstance].peripheralState == CBManagerStatePoweredOn) {
             self.bluetoothStateLabel.text = @"";
+            self.navView.bluetoothState = YES;
         }else{
             self.bluetoothStateLabel.text = @"手机蓝牙未打开";
+            self.navView.bluetoothState = NO;
         }
 
         return sectionView;
