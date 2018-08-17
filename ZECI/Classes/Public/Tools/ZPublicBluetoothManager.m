@@ -161,6 +161,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
     [self showMessage:[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]];
+    NSLog(@"%@",[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]);
     
     if (![self.peripherals containsObject:peripheral] && peripheral.name)
     {
@@ -231,8 +232,6 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
  */
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-    NSLog(@"zzz 连接设备:%@成功",peripheral.name);
-    
     //    self.peripheralText.text = [NSString stringWithFormat:@"连接设备:%@成功",peripheral.name];
     [self showMessage:[NSString stringWithFormat:@"连接设备:%@成功",peripheral.name]];
     // 设置设备的代理
@@ -257,7 +256,6 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     // 遍历所有的服务
     for (CBService *service in peripheral.services)
     {
-        NSLog(@"zzz 服务:%@",service.UUID.UUIDString);
         // 获取对应的服务
         if ([service.UUID.UUIDString isEqualToString:kNotifyServerUUID])
         {
@@ -279,7 +277,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     // 遍历所有的特征
     for (CBCharacteristic *characteristic in service.characteristics)
     {
-        NSLog(@"zzz 特征值:%@",characteristic.UUID.UUIDString);
+//        NSLog(@"zzz 特征值:%@",characteristic.UUID.UUIDString);
         if ([characteristic.UUID.UUIDString isEqualToString:kNotifyCharacteristicUUID])
         {
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
@@ -307,7 +305,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
         if (self.testDataBlock) {
             self.testDataBlock(testData);
         }
-        NSLog(@"zzz 特征中数据 ：%@  = %@",data,testData);
+//        NSLog(@"zzz 特征中数据 ：%@  = %@",data,testData);
     }
 }
 

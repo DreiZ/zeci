@@ -145,11 +145,11 @@
     [formatter setTimeZone:timeZone];
     
     NSDate *datenow = [NSDate date];//现在时间
-    NSLog(@"设备当前的时间:%@",[formatter stringFromDate:datenow]);
+//    NSLog(@"设备当前的时间:%@",[formatter stringFromDate:datenow]);
     
     //时间转时间戳的方法:
     NSInteger timeSp = [[NSNumber numberWithDouble:[datenow timeIntervalSince1970]] integerValue];
-    NSLog(@"设备当前的时间戳:%ld",(long)timeSp); //时间戳的值
+//    NSLog(@"设备当前的时间戳:%ld",(long)timeSp); //时间戳的值
     
     return timeSp;
 }
