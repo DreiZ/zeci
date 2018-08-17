@@ -196,43 +196,43 @@ static NSInteger zindex = 0;
             }
         };
         
-//        _tempLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        _tempLabel.textColor = [UIColor whiteColor];
-//        _tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
-//        _tempLabel.numberOfLines = 0;
-//        _tempLabel.textAlignment = NSTextAlignmentCenter;
-//        [_tempLabel setFont:[UIFont systemFontOfSize:16.0f]];
-//        [_navView addSubview:_tempLabel];
-//        [_tempLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.equalTo(self.navView.mas_centerX);
-//            make.bottom.equalTo(self.navView.mas_bottom).offset(-20);
-//        }];
-//
-//        UIButton *te1Btn = [[UIButton alloc] initWithFrame:CGRectZero];
-//        te1Btn.backgroundColor = [UIColor whiteColor];
-//        [te1Btn bk_addEventHandler:^(id sender) {
-//            zindex--;
-//            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
-//        } forControlEvents:UIControlEventTouchUpInside];
-//        [_navView addSubview:te1Btn];
-//        [te1Btn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.width.height.mas_equalTo(40);
-//            make.centerY.equalTo(self.tempLabel.mas_centerY);
-//            make.right.equalTo(self.tempLabel.mas_left).offset(-20);
-//        }];
-//
-//        UIButton *te2Btn = [[UIButton alloc] initWithFrame:CGRectZero];
-//        te2Btn.backgroundColor = [UIColor blackColor];
-//        [te2Btn bk_addEventHandler:^(id sender) {
-//            zindex++;
-//            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
-//        } forControlEvents:UIControlEventTouchUpInside];
-//        [_navView addSubview:te2Btn];
-//        [te2Btn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.width.height.mas_equalTo(40);
-//            make.centerY.equalTo(self.tempLabel.mas_centerY);
-//            make.left.equalTo(self.tempLabel.mas_right).offset(20);
-//        }];
+        _tempLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _tempLabel.textColor = [UIColor whiteColor];
+        _tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
+        _tempLabel.numberOfLines = 0;
+        _tempLabel.textAlignment = NSTextAlignmentCenter;
+        [_tempLabel setFont:[UIFont systemFontOfSize:16.0f]];
+        [_navView addSubview:_tempLabel];
+        [_tempLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.navView.mas_centerX);
+            make.bottom.equalTo(self.navView.mas_bottom).offset(-20);
+        }];
+
+        UIButton *te1Btn = [[UIButton alloc] initWithFrame:CGRectZero];
+        te1Btn.backgroundColor = [UIColor whiteColor];
+        [te1Btn bk_addEventHandler:^(id sender) {
+            zindex--;
+            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
+        } forControlEvents:UIControlEventTouchUpInside];
+        [_navView addSubview:te1Btn];
+        [te1Btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo(40);
+            make.centerY.equalTo(self.tempLabel.mas_centerY);
+            make.right.equalTo(self.tempLabel.mas_left).offset(-20);
+        }];
+
+        UIButton *te2Btn = [[UIButton alloc] initWithFrame:CGRectZero];
+        te2Btn.backgroundColor = [UIColor blackColor];
+        [te2Btn bk_addEventHandler:^(id sender) {
+            zindex++;
+            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
+        } forControlEvents:UIControlEventTouchUpInside];
+        [_navView addSubview:te2Btn];
+        [te2Btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo(40);
+            make.centerY.equalTo(self.tempLabel.mas_centerY);
+            make.left.equalTo(self.tempLabel.mas_right).offset(20);
+        }];
     }
     return _navView;
 }

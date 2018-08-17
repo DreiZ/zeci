@@ -182,10 +182,10 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     
     if (![self.peripherals containsObject:peripheral] && peripheral.name)
     {
-       [self.peripherals addObject:peripheral];
+       
         if ([peripheral.name isEqualToString:kBlePeripheralName])
         {
-            
+            [self.peripherals addObject:peripheral];
             [self showMessage:[NSString stringWithFormat:@"设备名:%@",peripheral.name]];
             self.cbPeripheral = peripheral;
             
