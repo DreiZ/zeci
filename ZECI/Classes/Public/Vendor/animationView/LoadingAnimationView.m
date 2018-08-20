@@ -97,6 +97,12 @@ static LoadingAnimationView* tmpview ;
     [view insertSubview:aview atIndex:0];
     [aview startAnimation];
     tmpview = aview;
+    
+    [aview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(view.mas_centerX);
+        make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 60:40);
+        make.top.mas_equalTo(view.mas_top).offset(0);
+    }];
 }
 +(void)dismiss
 {

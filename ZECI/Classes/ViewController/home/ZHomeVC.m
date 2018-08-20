@@ -150,7 +150,7 @@
         }
         
     } forControlEvents:UIControlEventTouchUpInside];
-    [searchBluetoothBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, ([ZPublicManager getIsIpad] ? -30:-24), 0)];
+    [searchBluetoothBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, ([ZPublicManager getIsIpad] ? -34:-26), 0)];
     [searchBluetoothBtn setTitleColor:kFont6Color forState:UIControlStateNormal];
     [searchBluetoothBtn setTitle:@"刷新" forState:UIControlStateNormal];
     [searchBluetoothBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];

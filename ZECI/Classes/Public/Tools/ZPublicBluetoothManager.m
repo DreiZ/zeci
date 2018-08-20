@@ -193,6 +193,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 //            [self.centralManager connectPeripheral:peripheral options:nil];
         }
     }
+    
     if (self.findChangeBlock) {
         self.findChangeBlock();
     }

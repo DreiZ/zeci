@@ -469,7 +469,7 @@ static NSInteger zindex = 0;
         NSString *zeroStr = @"00000000";
         NSInteger tempCount = [ZHomeViewModel shareInstance].singPigDatas.count;
         tempPigData.earTag = [@"R" stringByAppendingString:[zeroStr substringWithRange:NSMakeRange(0, zeroStr.length - [[NSString stringWithFormat:@"%ld",tempCount] length])]];
-        tempPigData.earTag = [tempPigData.earTag stringByAppendingString:[NSString stringWithFormat:@"%ld",tempCount]];
+        tempPigData.earTag = [tempPigData.earTag stringByAppendingString:[NSString stringWithFormat:@"%ld",tempCount+1]];
         tempPigData.earTag = [tempPigData.earTag stringByAppendingString:@"E"];
     }
     [[ZHomeViewModel shareInstance].testPigs insertObject:tempPigData atIndex:0];
