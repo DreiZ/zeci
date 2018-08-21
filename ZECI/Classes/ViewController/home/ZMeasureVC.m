@@ -80,9 +80,9 @@ static NSInteger zindex = 0;
         
         [self.view addSubview:self.saveView];
         [self.saveView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 80:60);
-            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -20 : -15);
-            make.left.equalTo(self.view.mas_left).offset([ZPublicManager getIsIpad] ? 15:12);
+            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 120:80);
+            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -6 : -4);
+            make.left.equalTo(self.view.mas_left).offset([ZPublicManager getIsIpad] ? 10:7);
         }];
         
         [self.topView resetUIWith:[ZPublicManager getIsIpad]];
@@ -103,9 +103,9 @@ static NSInteger zindex = 0;
         
         [self.view addSubview:self.saveView];
         [self.saveView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 80:60);
-            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -20 : -15);
-            make.left.equalTo(self.view.mas_left).offset([ZPublicManager getIsIpad] ? 15:12);
+            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 120:80);
+            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -6 : -4);
+            make.left.equalTo(self.view.mas_left).offset([ZPublicManager getIsIpad] ? 10:7);
         }];
     }
 }

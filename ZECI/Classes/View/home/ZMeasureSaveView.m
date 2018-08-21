@@ -37,10 +37,10 @@
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     titleLabel.textColor = kMainColor;
-    titleLabel.text = @"点击保存";
+    titleLabel.text = @"保存到数据库";
     titleLabel.numberOfLines = 0;
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    [titleLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ?16.0f:13.0f]];
+    [titleLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ?14.0f:12.0f]];
     [self addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
