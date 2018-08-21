@@ -169,8 +169,9 @@
 }
 
 - (void)startAnimationView {
-    [LoadingAnimationView showInView:self.bluetoothSearchView];
-    
+    if ([ZPublicBluetoothManager shareInstance].peripheralState == CBManagerStatePoweredOn){
+        [LoadingAnimationView showInView:self.bluetoothSearchView];
+    }
 }
 
 - (void)stopAnimationView {
