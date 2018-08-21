@@ -32,9 +32,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>prefs</string>
-			</array>
+			<array/>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -47,9 +45,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>是否允许背膘测定仪使用蓝牙？允许此权限才能连接测膘仪测量数据</string>
+	<string>是否允许无线背膘测定仪使用蓝牙？允许此权限才能连接测膘仪测量数据</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>背膘测定仪需要您的同意,才能保存图片到您的相册</string>
+	<string>无线背膘测定仪需要您的同意,才能保存图片到您的相册</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

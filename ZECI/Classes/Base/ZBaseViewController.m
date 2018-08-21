@@ -115,8 +115,8 @@
 
 - (void)handleDeviceOrientationChanged:(NSNotification *)notification
 {
-    NSDictionary *userInfo = [notification userInfo];
-    UIInterfaceOrientation appOrientation = [UIApplication sharedApplication].statusBarOrientation;
+//    NSDictionary *userInfo = [notification userInfo];
+//    UIInterfaceOrientation appOrientation = [UIApplication sharedApplication].statusBarOrientation;
     
     
 //    NSLog(@"\nOrientation:%@\n User Info :%@", @(appOrientation), userInfo);
@@ -124,7 +124,7 @@
 
 - (void)handleWillRotate:(NSNotification *)notification
 {
-    NSDictionary *userInfo = [notification userInfo];
+//    NSDictionary *userInfo = [notification userInfo];
 //    NSLog(@"\nWill Rotate %@", userInfo);
 }
 

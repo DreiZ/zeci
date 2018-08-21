@@ -466,6 +466,7 @@ static NSInteger zindex = 0;
     
     self.selectData = tempPigData;
     if (!tempPigData.earTag || tempPigData.earTag.length == 0) {
+        //预留8位数字，太长手机显示不下
         NSString *zeroStr = @"00000000";
         NSInteger tempCount = [ZHomeViewModel shareInstance].singPigDatas.count;
         tempPigData.earTag = [@"R" stringByAppendingString:[zeroStr substringWithRange:NSMakeRange(0, zeroStr.length - [[NSString stringWithFormat:@"%ld",tempCount] length])]];
