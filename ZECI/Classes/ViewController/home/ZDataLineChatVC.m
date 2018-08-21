@@ -10,12 +10,13 @@
 #import "ZDataLineChatInfomationView.h"
 #import "LFLineChart.h"
 #import "ZShareView.h"
+#import "ZMeasureSaveImageToPhotoView.h"
 
 #import "ZLineChatBrowseVC.h"
 
-#import <UMShare/UMShare.h>
-//微信好友和朋友圈
-#import "WXApi.h"
+//#import <UMShare/UMShare.h>
+////微信好友和朋友圈
+//#import "WXApi.h"
 
 #define firstLevel 12
 #define secondLevel 24
@@ -23,7 +24,8 @@
 @interface ZDataLineChatVC ()
 @property (nonatomic,strong) ZDataLineChatInfomationView *infomationView;
 @property (nonatomic,strong) LFLineChart *lineChart;
-@property (nonatomic,strong) ZShareView *shareView;
+//@property (nonatomic,strong) ZShareView *shareView;
+@property (nonatomic,strong) ZMeasureSaveImageToPhotoView *saveView;
 
 @end
 
@@ -39,27 +41,44 @@
 - (void)setNavgation {
     self.customNavBar.hidden = NO;
     self.customNavBar.title = @"背膘详情";
-    [self.customNavBar wr_setRightButtonWithImage:[UIImage imageNamed:@"fenxiang"]];
-    __weak typeof(self) weakSelf = self;
-    self.customNavBar.onClickRightButton = ^{
-        [weakSelf.view addSubview:weakSelf.shareView];
-    };
+//    [self.customNavBar wr_setRightButtonWithImage:[UIImage imageNamed:@"fenxiang"]];
+//    __weak typeof(self) weakSelf = self;
+//    self.customNavBar.onClickRightButton = ^{
+//        [weakSelf.view addSubview:weakSelf.shareView];
+//    };
 }
 
 - (void)setMainView {
     [self.view addSubview:self.infomationView];
+    
+    [self.view addSubview:self.saveView];
+    
     if (self.isHorizontal) {
         [self.infomationView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.right.equalTo(self.view);
             make.top.equalTo(self.view).offset(kSafeAreaTopHeight+10);
             make.width.mas_equalTo([ZPublicManager getIsIpad] ? 230:180);
         }];
+        
+        [self.saveView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 120:80);
+            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -10 : -5);
+            make.right.equalTo(self.view.mas_right).offset([ZPublicManager getIsIpad] ? -10:-7);
+        }];
+        
     }else{
         [self.infomationView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.equalTo(self.view);
             make.height.mas_equalTo([ZPublicManager getIsIpad] ? 150:130);
         }];
+        
+        [self.saveView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 120:80);
+            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -10 : -5);
+            make.left.equalTo(self.view.mas_left).offset([ZPublicManager getIsIpad] ? 10:7);
+        }];
     }
+    self.infomationView.titleLabel.text = [NSString stringWithFormat:@"耳标编号：%@",self.singlePigData.earTag];
 }
 
 
@@ -72,21 +91,32 @@
     return _infomationView;
 }
 
-- (ZShareView *)shareView {
-    if (!_shareView) {
+- (ZMeasureSaveImageToPhotoView *)saveView {
+    if (!_saveView) {
         __weak typeof(self) weakSelf = self;
-        _shareView = [[ZShareView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH)];
-        _shareView.sureBlock = ^(NSInteger tag) {
-            if(tag == 0){
-                [weakSelf shareImageToPlatformType:UMSocialPlatformType_WechatSession image:[weakSelf screenShot]];
-            }else {
-                [weakSelf shareImageToPlatformType:UMSocialPlatformType_WechatTimeLine image:[weakSelf screenShot]];
-            }
+        _saveView = [[ZMeasureSaveImageToPhotoView alloc] init];
+        _saveView.saveBlock = ^{
+            [weakSelf savePictureToPhotoAlbum];
         };
     }
-    _shareView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
-    return _shareView;
+    return _saveView;
 }
+//
+//- (ZShareView *)shareView {
+//    if (!_shareView) {
+//        __weak typeof(self) weakSelf = self;
+//        _shareView = [[ZShareView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH)];
+//        _shareView.sureBlock = ^(NSInteger tag) {
+//            if(tag == 0){
+//                [weakSelf shareImageToPlatformType:UMSocialPlatformType_WechatSession image:[weakSelf screenShot]];
+//            }else {
+//                [weakSelf shareImageToPlatformType:UMSocialPlatformType_WechatTimeLine image:[weakSelf screenShot]];
+//            }
+//        };
+//    }
+//    _shareView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
+//    return _shareView;
+//}
 
 
 - (void)setLineChat {
@@ -263,8 +293,21 @@
 #pragma mark 截图处理
 
 - (UIImage *)screenShot {
+    ZDataLineChatInfomationView *infomationView = [[ZDataLineChatInfomationView alloc] init];
+    [self.lineChart.scrollView addSubview:infomationView];
+    infomationView.titleLabel.text = [NSString stringWithFormat:@"耳标编号：%@",self.singlePigData.earTag];
+
     UIImage* image = nil;
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.lineChart.scrollView.contentSize.width, self.lineChart.scrollView.height), YES, 0.0);
+    if (self.isHorizontal) {
+        infomationView.frame = CGRectMake(self.lineChart.scrollView.contentSize.width, 10, [ZPublicManager getIsIpad] ? 230:180, self.lineChart.scrollView.height-10);
+        
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.lineChart.scrollView.contentSize.width+([ZPublicManager getIsIpad] ? 230:180), self.lineChart.scrollView.height), YES, 0.0);
+    }else{
+        infomationView.frame = CGRectMake(0,self.lineChart.scrollView.height, self.lineChart.scrollView.contentSize.width, [ZPublicManager getIsIpad] ? 150:130);
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.lineChart.scrollView.contentSize.width, self.lineChart.scrollView.height+([ZPublicManager getIsIpad] ? 150:130)), YES, 0.0);
+    }
+    
+    
     
     //保存collectionView当前的偏移量
     CGPoint savedContentOffset = self.lineChart.scrollView.contentOffset;
@@ -272,7 +315,12 @@
     
     //将collectionView的偏移量设置为(0,0)
     self.lineChart.scrollView.contentOffset = CGPointZero;
-    self.lineChart.scrollView.frame = CGRectMake(0, 0, self.lineChart.scrollView.contentSize.width, self.lineChart.scrollView.height);
+    if (self.isHorizontal) {
+        self.lineChart.scrollView.frame = CGRectMake(0, 0, self.lineChart.scrollView.contentSize.width+([ZPublicManager getIsIpad] ? 230:180), self.lineChart.scrollView.height);
+    }else{
+        self.lineChart.scrollView.frame = CGRectMake(0, 0, self.lineChart.scrollView.contentSize.width, self.lineChart.scrollView.height+([ZPublicManager getIsIpad] ? 150:130));
+    }
+    
     
     //在当前上下文中渲染出collectionView
     [self.lineChart.scrollView.layer renderInContext: UIGraphicsGetCurrentContext()];
@@ -282,6 +330,7 @@
     //恢复collectionView的偏移量
     self.lineChart.scrollView.contentOffset = savedContentOffset;
     self.lineChart.scrollView.frame = saveFrame;
+    [infomationView removeFromSuperview];
     
     UIGraphicsEndImageContext();
     
@@ -292,31 +341,44 @@
     }
 }
 
-
-
-- (void)shareImageToPlatformType:(UMSocialPlatformType)platformType image:(UIImage *)image
-{
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
-    //创建图片内容对象
-    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-    //如果有缩略图，则设置缩略图
-    shareObject.thumbImage = [UIImage imageNamed:@"biceicon"];
-    [shareObject setShareImage:image];
-    
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            NSLog(@"response data is %@",data);
-        }
-    }];
+- (void)savePictureToPhotoAlbum {
+    UIImage * img = [self screenShot];
+    UIImageWriteToSavedPhotosAlbum(img, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error == nil) {
+        [self showSuccessWithMsg:@"截图已保存到系统相册"];
+    } else {
+        [self showErrorWithMsg:@"截图失败"];
+    }
+}
+
+//
+//
+//- (void)shareImageToPlatformType:(UMSocialPlatformType)platformType image:(UIImage *)image
+//{
+//    //创建分享消息对象
+//    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+//
+//    //创建图片内容对象
+//    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+//    //如果有缩略图，则设置缩略图
+//    shareObject.thumbImage = [UIImage imageNamed:@"biceicon"];
+//    [shareObject setShareImage:image];
+//
+//    //分享消息对象设置分享内容对象
+//    messageObject.shareObject = shareObject;
+//
+//    //调用分享接口
+//    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+//        if (error) {
+//            NSLog(@"************Share fail with error %@*********",error);
+//        }else{
+//            NSLog(@"response data is %@",data);
+//        }
+//    }];
+//}
 
 
 
@@ -345,13 +407,29 @@
             make.top.equalTo(self.view).offset(kSafeAreaTopHeight+20);
             make.bottom.equalTo(self.view.mas_bottom).offset(-10);
         }];
+        
+        [self.saveView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 120:80);
+            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -10 : -5);
+            make.right.equalTo(self.view.mas_right).offset([ZPublicManager getIsIpad] ? -10:-7);
+        }];
+        
     }else{
+        
         self.lineChart.frame = CGRectMake(0, kSafeAreaTopHeight+20, kWindowW-12, kWindowH - ([ZPublicManager getIsIpad] ? 150:130) - 20 - kSafeAreaTopHeight);
+        
         [self.lineChart mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view.mas_left).offset(0);
             make.right.equalTo(self.view.mas_right).offset(-12);
             make.top.equalTo(self.view).offset(kSafeAreaTopHeight+20);
             make.bottom.equalTo(self.infomationView.mas_top).offset(0);
+        }];
+        
+        
+        [self.saveView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo([ZPublicManager getIsIpad] ? 120:80);
+            make.bottom.equalTo(self.view.mas_bottom).offset([ZPublicManager getIsIpad] ? -10 : -5);
+            make.left.equalTo(self.view.mas_left).offset([ZPublicManager getIsIpad] ? 10:7);
         }];
     }
     

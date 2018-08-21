@@ -9,8 +9,6 @@
 #import "ZDataLineChatInfomationView.h"
 
 @interface ZDataLineChatInfomationView ()
-@property (nonatomic,strong) UILabel *titleLabel;
-
 @end
 
 @implementation ZDataLineChatInfomationView
@@ -74,7 +72,6 @@
             make.height.width.mas_equalTo([ZPublicManager getIsIpad] ? 14:8);
         }];
     }
-    
 }
 
 - (UILabel *)titleLabel {
@@ -88,5 +85,4 @@
     }
     return _titleLabel;
 }
-
 @end

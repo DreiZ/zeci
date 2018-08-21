@@ -33,7 +33,6 @@
 		5E48F92C20C67FA100422A6F /* ZBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E48F92B20C67FA100422A6F /* ZBaseCell.m */; };
 		5E48F92F20C6800000422A6F /* ZBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E48F92E20C6800000422A6F /* ZBaseNavigationController.m */; };
 		5E48F93220C68D1400422A6F /* ZBaseCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E48F93120C68D1400422A6F /* ZBaseCustomViewController.m */; };
-		5E48F93520C6905A00422A6F /* ZBaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E48F93420C6905A00422A6F /* ZBaseTabBarController.m */; };
 		5E48F93F20C694E000422A6F /* NSArray+LYNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E48F93820C694E000422A6F /* NSArray+LYNil.m */; };
 		5E48F94020C694E000422A6F /* NSDictionary+LYNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E48F93A20C694E000422A6F /* NSDictionary+LYNil.m */; };
 		5E48F94120C694E000422A6F /* NSMutableArray+LYNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E48F93C20C694E000422A6F /* NSMutableArray+LYNil.m */; };
@@ -54,6 +53,8 @@
 		5E543DF5211830A900EB3830 /* UITableViewCell+ZCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF1211830A900EB3830 /* UITableViewCell+ZCategory.m */; };
 		5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF72118331000EB3830 /* ZSpaceCell.m */; };
 		5E5D891B20E1D2EF0096536C /* UIView+Radio.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D891920E1D2EF0096536C /* UIView+Radio.m */; };
+		5E68265B212BA462003C7030 /* ZMeasureSaveImageToPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E68265A212BA462003C7030 /* ZMeasureSaveImageToPhotoView.m */; };
+		5E68265E212BB7FA003C7030 /* ZBluetoothPowerOffView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E68265D212BB7FA003C7030 /* ZBluetoothPowerOffView.m */; };
 		5E71D50F2123C686009FA7E3 /* ZMeasureSaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D50E2123C686009FA7E3 /* ZMeasureSaveView.m */; };
 		5E71D5122123CC7A009FA7E3 /* ZMeasureSaveAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D5112123CC7A009FA7E3 /* ZMeasureSaveAlertView.m */; };
 		5E71D52221241031009FA7E3 /* UserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D51F21241031009FA7E3 /* UserDTO.m */; };
@@ -148,8 +149,6 @@
 		5E48F92E20C6800000422A6F /* ZBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBaseNavigationController.m; sourceTree = "<group>"; };
 		5E48F93020C68D1400422A6F /* ZBaseCustomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBaseCustomViewController.h; sourceTree = "<group>"; };
 		5E48F93120C68D1400422A6F /* ZBaseCustomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBaseCustomViewController.m; sourceTree = "<group>"; };
-		5E48F93320C6905A00422A6F /* ZBaseTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBaseTabBarController.h; sourceTree = "<group>"; };
-		5E48F93420C6905A00422A6F /* ZBaseTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBaseTabBarController.m; sourceTree = "<group>"; };
 		5E48F93720C694E000422A6F /* NSArray+LYNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LYNil.h"; sourceTree = "<group>"; };
 		5E48F93820C694E000422A6F /* NSArray+LYNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LYNil.m"; sourceTree = "<group>"; };
 		5E48F93920C694E000422A6F /* NSDictionary+LYNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+LYNil.h"; sourceTree = "<group>"; };
@@ -191,6 +190,10 @@
 		5E543DF82118331000EB3830 /* ZSpaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSpaceCell.h; sourceTree = "<group>"; };
 		5E5D891920E1D2EF0096536C /* UIView+Radio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Radio.m"; sourceTree = "<group>"; };
 		5E5D891A20E1D2EF0096536C /* UIView+Radio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Radio.h"; sourceTree = "<group>"; };
+		5E682659212BA462003C7030 /* ZMeasureSaveImageToPhotoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureSaveImageToPhotoView.h; sourceTree = "<group>"; };
+		5E68265A212BA462003C7030 /* ZMeasureSaveImageToPhotoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureSaveImageToPhotoView.m; sourceTree = "<group>"; };
+		5E68265C212BB7FA003C7030 /* ZBluetoothPowerOffView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBluetoothPowerOffView.h; sourceTree = "<group>"; };
+		5E68265D212BB7FA003C7030 /* ZBluetoothPowerOffView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBluetoothPowerOffView.m; sourceTree = "<group>"; };
 		5E71D50D2123C686009FA7E3 /* ZMeasureSaveView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureSaveView.h; sourceTree = "<group>"; };
 		5E71D50E2123C686009FA7E3 /* ZMeasureSaveView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureSaveView.m; sourceTree = "<group>"; };
 		5E71D5102123CC7A009FA7E3 /* ZMeasureSaveAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureSaveAlertView.h; sourceTree = "<group>"; };
@@ -445,8 +448,6 @@
 				5E48F92B20C67FA100422A6F /* ZBaseCell.m */,
 				5E48F92D20C6800000422A6F /* ZBaseNavigationController.h */,
 				5E48F92E20C6800000422A6F /* ZBaseNavigationController.m */,
-				5E48F93320C6905A00422A6F /* ZBaseTabBarController.h */,
-				5E48F93420C6905A00422A6F /* ZBaseTabBarController.m */,
 				5E4D81EE20C7CA27002A12E2 /* ZBaseModel.h */,
 				5E4D81EF20C7CA27002A12E2 /* ZBaseModel.m */,
 				5E4D81F120C7CB59002A12E2 /* ZBaseViewModel.h */,
@@ -644,6 +645,10 @@
 				5E71D5112123CC7A009FA7E3 /* ZMeasureSaveAlertView.m */,
 				5E4EB7EB2126CE6200ED201B /* ZBluetoothLostView.h */,
 				5E4EB7EC2126CE6200ED201B /* ZBluetoothLostView.m */,
+				5E682659212BA462003C7030 /* ZMeasureSaveImageToPhotoView.h */,
+				5E68265A212BA462003C7030 /* ZMeasureSaveImageToPhotoView.m */,
+				5E68265C212BB7FA003C7030 /* ZBluetoothPowerOffView.h */,
+				5E68265D212BB7FA003C7030 /* ZBluetoothPowerOffView.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -829,12 +834,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ZECI/Pods-ZECI-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
-				"${PODS_ROOT}/UMCShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -861,6 +864,8 @@
 				5EA183C62121736B009C6675 /* LFChartLineView.m in Sources */,
 				5E71D50F2123C686009FA7E3 /* ZMeasureSaveView.m in Sources */,
 				5EA183A0212119C3009C6675 /* ZDataListVC.m in Sources */,
+				5E68265E212BB7FA003C7030 /* ZBluetoothPowerOffView.m in Sources */,
+				5E68265B212BA462003C7030 /* ZMeasureSaveImageToPhotoView.m in Sources */,
 				5E48F92620C67E8A00422A6F /* ZBaseViewController.m in Sources */,
 				5E48F92F20C6800000422A6F /* ZBaseNavigationController.m in Sources */,
 				5EA183A321211AE7009C6675 /* ZDataListSearchView.m in Sources */,
@@ -893,7 +898,6 @@
 				5E543DF5211830A900EB3830 /* UITableViewCell+ZCategory.m in Sources */,
 				5E4D81E220C7B59D002A12E2 /* ZPublicManager.m in Sources */,
 				5E48F94020C694E000422A6F /* NSDictionary+LYNil.m in Sources */,
-				5E48F93520C6905A00422A6F /* ZBaseTabBarController.m in Sources */,
 				5E4D81F320C7CB59002A12E2 /* ZBaseViewModel.m in Sources */,
 				5E71D52221241031009FA7E3 /* UserDTO.m in Sources */,
 				5E4D81ED20C7C5C2002A12E2 /* NSObject+Hint.m in Sources */,

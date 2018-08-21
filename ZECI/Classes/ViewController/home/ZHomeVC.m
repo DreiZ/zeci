@@ -54,6 +54,10 @@
     if (_iTableView) {
         [_iTableView reloadData];
     }
+    
+    if (![ZPublicBluetoothManager shareInstance].peripherals || [ZPublicBluetoothManager shareInstance].peripherals.count == 0) {
+        [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+    }
 }
 
 - (void)setupNavigationView {

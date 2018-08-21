@@ -11,28 +11,16 @@
 //存放全局宏定义
 #import "Const.h"
 
-//Github排名第一的第三方网络请求类库，封装了系统的NSURLSession+NSOperation
-//#import <AFNetworking.h>
-//对UIKit类添加类拓展，让UIImageView、UIButton等拥有了网络加载图片的功能
-//#import <UIKit+AFNetworking.h>
-
 //改变系统的target+selector模式为 block模式,带来紧凑的代码风格，高效率的回调执行
 #import <BlocksKit.h>
 #import <BlocksKit+MessageUI.h>
 #import <BlocksKit+UIKit.h>
-//优秀的滚动视图头部和脚步刷新效果
-//#import <MJRefresh.h>
-//优秀的Json解析类库
-//#import <MJExtension.h>
 
 //实现安卓toast风格提示，弹出提示框架
 #import <MBProgressHUD.h>
 
 //纯代码书写AutoLayout的第三方类库（链式语法）
 #import <Masonry.h>
-
-//最低只需传两个数组即可完成tabBar搭建
-#import <CYLTabBarController.h>
 
 //第三方扩展
 #import "YYKit.h"
@@ -41,13 +29,11 @@
 #import "NSArray+LYNil.h"
 #import "UIView+Radio.h"
 #import "UITableViewCell+ZCategory.h"
-//#import "UIScrollView+MJRefreshHelper.h"
 //提示框
 #import "NSObject+Hint.h"
 #import <ReactiveObjC.h>
 
 #import "ZCellConfig.h"
-//#import "ZPublicUserManager.h"
 #import "ZPublicManager.h"
 #import "ZPublicDataManager.h"
 #import "ZPublicBluetoothManager.h"

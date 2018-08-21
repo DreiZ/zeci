@@ -9,5 +9,9 @@
 #import "ZBaseView.h"
 
 @interface ZDataLineChatInfomationView : ZBaseView
+@property (nonatomic,strong) UILabel *titleLabel;
 
+@property (nonatomic,strong) void (^saveBlock)(void);
+
+- (void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal;
 @end
