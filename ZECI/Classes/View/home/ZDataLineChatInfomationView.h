@@ -13,5 +13,4 @@
 
 @property (nonatomic,strong) void (^saveBlock)(void);
 
-- (void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal;
 @end

@@ -99,7 +99,7 @@
     };
     
     [ZPublicBluetoothManager shareInstance].testMatchingBlock = ^{
-        [[AppDelegate App] showSuccessWithMsg:@"连接匹配成功"];
+        [[AppDelegate App] showSuccessWithMsg:NSLocalizedString(@"DeviceName", @"设备名称")];
         [weakSelf stopAnimationView];
         ZMeasureVC *svc = [[ZMeasureVC alloc] init];
         [weakSelf.navigationController pushViewController:svc animated:YES];
@@ -117,7 +117,7 @@
                 weakSelf.navView.bluetoothState = YES;
             }else{
                 
-                weakSelf.bluetoothStateLabel.text = [ZPublicManager getIsIpad] ? @"iPad蓝牙未打开":@"手机蓝牙未打开";
+                weakSelf.bluetoothStateLabel.text = [ZPublicManager getIsIpad] ? NSLocalizedString(@"BluetoothStateShowPad", @"iPad蓝牙未打开"):NSLocalizedString(@"BluetoothStateShowPhone", @"手机蓝牙未打开");
                 weakSelf.navView.bluetoothState = NO;
             }
         });
@@ -156,7 +156,7 @@
     } forControlEvents:UIControlEventTouchUpInside];
     [searchBluetoothBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, ([ZPublicManager getIsIpad] ? -34:-26), 0)];
     [searchBluetoothBtn setTitleColor:kFont6Color forState:UIControlStateNormal];
-    [searchBluetoothBtn setTitle:@"刷新" forState:UIControlStateNormal];
+    [searchBluetoothBtn setTitle:NSLocalizedString(@"Refresh", @"刷新") forState:UIControlStateNormal];
     [searchBluetoothBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
     [bluetoothSearchView addSubview:searchBluetoothBtn];
     [searchBluetoothBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -193,7 +193,7 @@
                 [weakSelf.navigationController pushViewController:listVC animated:YES];
             }else{
                 if ([ZPublicBluetoothManager shareInstance].peripheralState != CBManagerStatePoweredOn) {
-                    [weakSelf showSuccessWithMsg:[ZPublicManager getIsIpad] ? @"请先打开iPad蓝牙":@"请先打开手机蓝牙"];
+                    [weakSelf showSuccessWithMsg:[ZPublicManager getIsIpad] ? NSLocalizedString(@"OpenPadBluetoothMsg", @"请先打开iPad蓝牙"):NSLocalizedString(@"OpenPhoneBluetoothMsg", @"请先打开手机蓝牙")];
                 }else{
                     [weakSelf startAnimationView];
                     [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
@@ -289,7 +289,7 @@
         
         UILabel *hintLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         hintLabel.textColor = kFont3Color;
-        hintLabel.text = @"可连接设备";
+        hintLabel.text = NSLocalizedString(@"DeviceName", @"可连接设备") ;
         hintLabel.numberOfLines = 0;
         hintLabel.textAlignment = NSTextAlignmentLeft;
         [hintLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:13]];
@@ -301,7 +301,7 @@
         
         _bluetoothStateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _bluetoothStateLabel.textColor = kMainColor;
-        _bluetoothStateLabel.text = [ZPublicManager getIsIpad] ? @"iPad蓝牙未打开":@"手机蓝牙未打开";
+        _bluetoothStateLabel.text = [ZPublicManager getIsIpad] ? NSLocalizedString(@"BluetoothStateShowPad", @"iPad蓝牙未打开"):NSLocalizedString(@"BluetoothStateShowPhone", @"手机蓝牙未打开");
         _bluetoothStateLabel.numberOfLines = 0;
         _bluetoothStateLabel.textAlignment = NSTextAlignmentLeft;
         [_bluetoothStateLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:13]];
@@ -314,7 +314,7 @@
             self.bluetoothStateLabel.text = @"";
             self.navView.bluetoothState = YES;
         }else{
-            self.bluetoothStateLabel.text = [ZPublicManager getIsIpad] ? @"iPad蓝牙未打开":@"手机蓝牙未打开";
+            self.bluetoothStateLabel.text = [ZPublicManager getIsIpad] ? NSLocalizedString(@"BluetoothStateShowPad", @"iPad蓝牙未打开"):NSLocalizedString(@"BluetoothStateShowPhone", @"手机蓝牙未打开");
             self.navView.bluetoothState = NO;
         }
 

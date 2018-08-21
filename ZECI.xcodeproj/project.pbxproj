@@ -55,6 +55,8 @@
 		5E5D891B20E1D2EF0096536C /* UIView+Radio.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D891920E1D2EF0096536C /* UIView+Radio.m */; };
 		5E68265B212BA462003C7030 /* ZMeasureSaveImageToPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E68265A212BA462003C7030 /* ZMeasureSaveImageToPhotoView.m */; };
 		5E68265E212BB7FA003C7030 /* ZBluetoothPowerOffView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E68265D212BB7FA003C7030 /* ZBluetoothPowerOffView.m */; };
+		5E682672212BD82D003C7030 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E682674212BD82D003C7030 /* InfoPlist.strings */; };
+		5E682679212BD8FA003C7030 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E68267B212BD8FA003C7030 /* Localizable.strings */; };
 		5E71D50F2123C686009FA7E3 /* ZMeasureSaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D50E2123C686009FA7E3 /* ZMeasureSaveView.m */; };
 		5E71D5122123CC7A009FA7E3 /* ZMeasureSaveAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D5112123CC7A009FA7E3 /* ZMeasureSaveAlertView.m */; };
 		5E71D52221241031009FA7E3 /* UserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71D51F21241031009FA7E3 /* UserDTO.m */; };
@@ -194,6 +196,16 @@
 		5E68265A212BA462003C7030 /* ZMeasureSaveImageToPhotoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureSaveImageToPhotoView.m; sourceTree = "<group>"; };
 		5E68265C212BB7FA003C7030 /* ZBluetoothPowerOffView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZBluetoothPowerOffView.h; sourceTree = "<group>"; };
 		5E68265D212BB7FA003C7030 /* ZBluetoothPowerOffView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZBluetoothPowerOffView.m; sourceTree = "<group>"; };
+		5E68266C212BD7ED003C7030 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		5E68266D212BD7ED003C7030 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		5E68266E212BD7F6003C7030 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		5E68266F212BD7F6003C7030 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5E682673212BD82D003C7030 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5E682675212BD831003C7030 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5E682676212BD832003C7030 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5E68267A212BD8FA003C7030 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5E68267C212BD8FC003C7030 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5E68267D212BD8FD003C7030 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5E71D50D2123C686009FA7E3 /* ZMeasureSaveView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureSaveView.h; sourceTree = "<group>"; };
 		5E71D50E2123C686009FA7E3 /* ZMeasureSaveView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMeasureSaveView.m; sourceTree = "<group>"; };
 		5E71D5102123CC7A009FA7E3 /* ZMeasureSaveAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMeasureSaveAlertView.h; sourceTree = "<group>"; };
@@ -319,6 +331,8 @@
 				5E48F90620C66F2800422A6F /* Supporting Files */,
 				5E48F8DD20C6542F00422A6F /* Assets.xcassets */,
 				5E48F8E220C6542F00422A6F /* Info.plist */,
+				5E68267B212BD8FA003C7030 /* Localizable.strings */,
+				5E682674212BD82D003C7030 /* InfoPlist.strings */,
 			);
 			path = ZECI;
 			sourceTree = "<group>";
@@ -767,6 +781,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				ja,
 			);
 			mainGroup = 5E48F8C820C6542E00422A6F;
 			productRefGroup = 5E48F8D220C6542E00422A6F /* Products */;
@@ -785,7 +801,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E682679212BD8FA003C7030 /* Localizable.strings in Resources */,
 				5E48F8E120C6542F00422A6F /* LaunchScreen.storyboard in Resources */,
+				5E682672212BD82D003C7030 /* InfoPlist.strings in Resources */,
 				5E48F8DE20C6542F00422A6F /* Assets.xcassets in Resources */,
 				5E48F8DC20C6542E00422A6F /* Main.storyboard in Resources */,
 			);
@@ -953,6 +971,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				5E48F8DB20C6542E00422A6F /* Base */,
+				5E68266C212BD7ED003C7030 /* zh-Hans */,
+				5E68266E212BD7F6003C7030 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -961,8 +981,30 @@
 			isa = PBXVariantGroup;
 			children = (
 				5E48F8E020C6542F00422A6F /* Base */,
+				5E68266D212BD7ED003C7030 /* zh-Hans */,
+				5E68266F212BD7F6003C7030 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		5E682674212BD82D003C7030 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E682673212BD82D003C7030 /* en */,
+				5E682675212BD831003C7030 /* zh-Hans */,
+				5E682676212BD832003C7030 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5E68267B212BD8FA003C7030 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E68267A212BD8FA003C7030 /* en */,
+				5E68267C212BD8FC003C7030 /* zh-Hans */,
+				5E68267D212BD8FD003C7030 /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -972,6 +1014,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1030,6 +1073,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1088,7 +1132,7 @@
 				DEVELOPMENT_TEAM = 7483HXR3HC;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZECI/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ZECI/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1109,7 +1153,7 @@
 				DEVELOPMENT_TEAM = 7483HXR3HC;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZECI/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ZECI/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

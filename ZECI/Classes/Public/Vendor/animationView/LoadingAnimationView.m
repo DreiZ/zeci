@@ -15,10 +15,10 @@
 -(void)drawRect:(CGRect)rect
 {
 //    UIBezierPath* path = [UIBezierPath bezierPath];
-    CGPoint center = CGPointMake(rect.size.width / 2, rect.size.height / 2);
-    CGFloat radius = rect.size.width / 2 - 17;
-    CGFloat start = - M_PI_2 + self.timeFlag * 1.1*M_PI;
-    CGFloat end = -M_PI_2 + 0.45 * 2 * M_PI  + self.timeFlag * 1.1 *M_PI-1.3333;
+//    CGPoint center = CGPointMake(rect.size.width / 2, rect.size.height / 2);
+//    CGFloat radius = rect.size.width / 2 - 17;
+//    CGFloat start = - M_PI_2 + self.timeFlag * 1.1*M_PI;
+//    CGFloat end = -M_PI_2 + 0.45 * 2 * M_PI  + self.timeFlag * 1.1 *M_PI-1.3333;
     
 //    if (isend)
 //    [path addArcWithCenter:center radius:radius startAngle:0 endAngle:0 clockwise:YES];
