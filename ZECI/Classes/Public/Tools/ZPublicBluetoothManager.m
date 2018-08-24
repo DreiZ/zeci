@@ -91,13 +91,17 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     if (self.peripheralState ==  CBManagerStatePoweredOn)
     {
         [self.centralManager stopScan];
+        [self.peripherals removeAllObjects];
+        if (_findChangeBlock) {
+            _findChangeBlock();
+        }
         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
     } else if (self.peripheralState ==  CBManagerStatePoweredOff){
         
         BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isShowPowerOffAlert"];
         if (!isLoaded ) {
             self.powerOffView.titleLabel.text = @"蓝牙未开启";
-            self.powerOffView.alertLabel.text = [NSString stringWithFormat:@"请检查%@蓝牙是否正常开启，如还需测量，请去【设置】>【蓝牙】中打开蓝牙，打开蓝牙后再扫描蓝牙设备",[ZPublicManager getIsIpad] ?@"iPad":@"手机"];
+            self.powerOffView.alertLabel.text = [NSString stringWithFormat:@"请检查%@蓝牙是否正常开启，如还需测量，请去【设置】>【蓝牙】中打开蓝牙，打开蓝牙后再扫描蓝牙设备",[ZPublicManager getIsIpad] ? @"iPad":@"手机"];
             [[AppDelegate App].window addSubview:self.powerOffView];
         }
         
@@ -200,19 +204,15 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
     [self showMessage:[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]];
-    NSLog(@"%@",[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]);
+//    NSLog(@"%@",[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]);
     
     if (![self.peripherals containsObject:peripheral] && peripheral.name)
     {
-       
         if ([peripheral.name isEqualToString:kBlePeripheralName])
         {
             [self.peripherals addObject:peripheral];
             [self showMessage:[NSString stringWithFormat:@"设备名:%@",peripheral.name]];
             self.cbPeripheral = peripheral;
-            
-//            [self showMessage:@"开始连接"];
-//            [self.centralManager connectPeripheral:peripheral options:nil];
         }
     }
     
@@ -323,7 +323,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     // 遍历所有的特征
     for (CBCharacteristic *characteristic in service.characteristics)
     {
-        NSLog(@"zzz 特征值:%@",characteristic.UUID.UUIDString);
+//        NSLog(@"zzz 特征值:%@",characteristic.UUID.UUIDString);
         if ([characteristic.UUID.UUIDString isEqualToString:kNotifyCharacteristicUUID])
         {
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
@@ -351,7 +351,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
         if (self.testDataBlock) {
             self.testDataBlock(testData);
         }
-        NSLog(@"zzz 特征中数据 ：%@  = %@",data,testData);
+//        NSLog(@"zzz 特征中数据 ：%@  = %@",data,testData);
     }
 }
 

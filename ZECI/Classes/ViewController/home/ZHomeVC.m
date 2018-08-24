@@ -56,7 +56,17 @@
     }
     
     if (![ZPublicBluetoothManager shareInstance].peripherals || [ZPublicBluetoothManager shareInstance].peripherals.count == 0) {
-        [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+       
+    }
+    [self startAnimationView];
+    [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if ([ZPublicBluetoothManager shareInstance].centralManager.isScanning) {
+        [self stopAnimationView];
+        [[ZPublicBluetoothManager shareInstance].centralManager stopScan];
     }
 }
 
@@ -255,11 +265,15 @@
         }
         return cell;
     }else{
-        CBPeripheral *cbPeripheral = [ZPublicBluetoothManager shareInstance].peripherals[indexPath.row];
-        ZHomeBluetoothListCell *cell = [ZHomeBluetoothListCell z_cellWithTableView:tableView];
-        [cell setBluetoothName:cbPeripheral.name];
-        [cell setRSSName:[NSString stringWithFormat:@"%@",cbPeripheral.identifier]];
         
+        ZHomeBluetoothListCell *cell = [ZHomeBluetoothListCell z_cellWithTableView:tableView];
+        if ([ZPublicBluetoothManager shareInstance].peripherals && [ZPublicBluetoothManager shareInstance].peripherals.count > indexPath.row) {
+            CBPeripheral *cbPeripheral = [ZPublicBluetoothManager shareInstance].peripherals[indexPath.row];
+            [cell setBluetoothName:cbPeripheral.name];
+            [cell setRSSName:[NSString stringWithFormat:@"%@",cbPeripheral.identifier]];
+        }
+        
+
         return cell;
     }
 }
@@ -333,8 +347,10 @@
         ZMeasureVC *svc = [[ZMeasureVC alloc] init];
         [self.navigationController pushViewController:svc animated:YES];
     }else{
-        [ZPublicBluetoothManager shareInstance].cbPeripheral = [ZPublicBluetoothManager shareInstance].peripherals[indexPath.row];
-        [[ZPublicBluetoothManager shareInstance] connectToPeripheral];
+        if ([ZPublicBluetoothManager shareInstance].peripherals && [ZPublicBluetoothManager shareInstance].peripherals.count > indexPath.row) {
+            [ZPublicBluetoothManager shareInstance].cbPeripheral = [ZPublicBluetoothManager shareInstance].peripherals[indexPath.row];
+            [[ZPublicBluetoothManager shareInstance] connectToPeripheral];
+        }
     }
 }
 
