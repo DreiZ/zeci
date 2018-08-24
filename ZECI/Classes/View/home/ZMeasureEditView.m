@@ -49,7 +49,7 @@
     [self addSubview:contView];
     [contView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.height.mas_equalTo(CGFloatIn750(530));
+        make.height.mas_equalTo(kWindowW<375? CGFloatIn750(620):CGFloatIn750(530));
         make.width.mas_equalTo(CGFloatIn750(560));
     }];
     

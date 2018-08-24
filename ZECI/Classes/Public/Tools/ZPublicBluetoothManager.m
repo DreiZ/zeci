@@ -200,7 +200,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
     [self showMessage:[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]];
-//    NSLog(@"%@",[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]);
+    NSLog(@"%@",[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]);
     
     if (![self.peripherals containsObject:peripheral] && peripheral.name)
     {
@@ -323,7 +323,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     // 遍历所有的特征
     for (CBCharacteristic *characteristic in service.characteristics)
     {
-//        NSLog(@"zzz 特征值:%@",characteristic.UUID.UUIDString);
+        NSLog(@"zzz 特征值:%@",characteristic.UUID.UUIDString);
         if ([characteristic.UUID.UUIDString isEqualToString:kNotifyCharacteristicUUID])
         {
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
@@ -351,7 +351,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
         if (self.testDataBlock) {
             self.testDataBlock(testData);
         }
-//        NSLog(@"zzz 特征中数据 ：%@  = %@",data,testData);
+        NSLog(@"zzz 特征中数据 ：%@  = %@",data,testData);
     }
 }
 

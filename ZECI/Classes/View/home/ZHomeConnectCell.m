@@ -11,7 +11,7 @@
 @interface ZHomeConnectCell ()
 @property (nonatomic,strong) UILabel *BluetoothLabel;
 @property (nonatomic,strong) UILabel *connectHintLabel;
-
+@property (nonatomic,strong) UILabel *RSSLabel;
 @end
 
 @implementation ZHomeConnectCell
@@ -67,13 +67,21 @@
     [self.connectHintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.left.equalTo(hintLabel.mas_right).offset(4);
+        make.width.mas_equalTo(80);
     }];
     
     
     [self.contentView addSubview:self.BluetoothLabel];
     [self.BluetoothLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.mas_centerY);
+        make.bottom.equalTo(self.mas_centerY).offset(-3);
         make.right.equalTo(arrowImageView.mas_left).offset(-10);
+    }];
+    
+    [self.contentView addSubview:self.RSSLabel];
+    [self.RSSLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_centerY).offset(3);
+        make.right.equalTo(arrowImageView.mas_left).offset(-10);
+        make.left.equalTo(self.connectHintLabel.mas_right).offset(20);
     }];
     
     UIView *bottomLineView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -109,6 +117,19 @@
     return _connectHintLabel;
 }
 
+- (UILabel *)RSSLabel {
+    if (!_RSSLabel) {
+        _RSSLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _RSSLabel.textColor = kFont6Color;
+        _RSSLabel.text = @"";
+        _RSSLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        _RSSLabel.numberOfLines = 1;
+        _RSSLabel.textAlignment = NSTextAlignmentRight;
+        [_RSSLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:13]];
+    }
+    return _RSSLabel;
+}
+
 - (void)setConnectName:(NSString *)connectName {
     _connectName = connectName;
     _BluetoothLabel.text = connectName;
@@ -119,8 +140,13 @@
     }
 }
 
+- (void)setMacAddress:(NSString *)macAddress {
+    _macAddress = macAddress;
+    _RSSLabel.text = macAddress;
+}
+
 + (CGFloat)z_getCellHeight:(id)sender {
-    return [ZPublicManager getIsIpad] ? 80:50;
+    return [ZPublicManager getIsIpad] ? 100:60;
 }
 @end
 

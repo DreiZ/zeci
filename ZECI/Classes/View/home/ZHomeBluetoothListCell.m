@@ -10,7 +10,7 @@
 
 @interface ZHomeBluetoothListCell ()
 @property (nonatomic,strong) UILabel *BluetoothLabel;
-
+@property (nonatomic,strong) UILabel *RSSLabel;
 @end
 
 @implementation ZHomeBluetoothListCell
@@ -45,6 +45,8 @@
     [hintImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.left.equalTo(self.mas_left).offset([ZPublicManager getIsIpad] ? 20:10);
+        make.width.mas_equalTo(10.5);
+        make.height.mas_equalTo(18);
     }];
     
     
@@ -56,10 +58,18 @@
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(self.mas_right).offset([ZPublicManager getIsIpad] ? -20:10);
     }];
+    
     [self.contentView addSubview:self.BluetoothLabel];
     [self.BluetoothLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.mas_centerY);
+        make.bottom.equalTo(self.mas_centerY).offset(-3);
         make.left.equalTo(hintImageView.mas_right).offset([ZPublicManager getIsIpad] ? 20:10);
+    }];
+    
+    [self.contentView addSubview:self.RSSLabel];
+    [self.RSSLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_centerY).offset(3);
+        make.left.equalTo(hintImageView.mas_right).offset([ZPublicManager getIsIpad] ? 20:10);
+        make.right.equalTo(self.contentView.mas_right).offset(-[ZPublicManager getIsIpad] ? 20:10);
     }];
     
     UIView *bottomLineView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -84,11 +94,27 @@
     return _BluetoothLabel;
 }
 
+- (UILabel *)RSSLabel {
+    if (!_RSSLabel) {
+        _RSSLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _RSSLabel.textColor = kFont6Color;
+        _RSSLabel.text = @"";
+        _RSSLabel.numberOfLines = 1;
+        _RSSLabel.textAlignment = NSTextAlignmentLeft;
+        [_RSSLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:13]];
+    }
+    return _RSSLabel;
+}
+
 - (void)setBluetoothName:(NSString *)name {
     _BluetoothLabel.text = name;
 }
 
+- (void)setRSSName:(NSString *)RSSname {
+    _RSSLabel.text = RSSname;
+}
+
 + (CGFloat)z_getCellHeight:(id)sender {
-    return [ZPublicManager getIsIpad] ? 80:50;
+    return [ZPublicManager getIsIpad] ? 100:60;
 }
 @end

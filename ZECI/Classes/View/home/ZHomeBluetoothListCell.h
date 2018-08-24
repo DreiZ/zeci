@@ -10,4 +10,5 @@
 
 @interface ZHomeBluetoothListCell : ZBaseCell
 - (void)setBluetoothName:(NSString *)name;
+- (void)setRSSName:(NSString *)RSSname;
 @end

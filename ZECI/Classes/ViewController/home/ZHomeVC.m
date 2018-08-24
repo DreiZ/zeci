@@ -248,14 +248,18 @@
         ZHomeConnectCell *cell = [ZHomeConnectCell z_cellWithTableView:tableView];
         if (self.connectPeripheral) {
             cell.connectName = self.connectPeripheral.name;
+            cell.macAddress = [NSString stringWithFormat:@"%@",self.connectPeripheral.identifier];
         }else{
             cell.connectName = @"";
+            cell.macAddress = @"";
         }
         return cell;
     }else{
         CBPeripheral *cbPeripheral = [ZPublicBluetoothManager shareInstance].peripherals[indexPath.row];
         ZHomeBluetoothListCell *cell = [ZHomeBluetoothListCell z_cellWithTableView:tableView];
         [cell setBluetoothName:cbPeripheral.name];
+        [cell setRSSName:[NSString stringWithFormat:@"%@",cbPeripheral.identifier]];
+        
         return cell;
     }
 }

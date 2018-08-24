@@ -10,5 +10,5 @@
 
 @interface ZHomeConnectCell : ZBaseCell
 @property (nonatomic,copy) NSString *connectName;
-
+@property (nonatomic,copy) NSString *macAddress;
 @end
