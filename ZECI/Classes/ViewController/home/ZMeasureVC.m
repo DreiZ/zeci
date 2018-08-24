@@ -38,6 +38,7 @@ static NSInteger zindex = 0;
 @property (nonatomic,strong) UILabel *tempLabel;
 
 @property (nonatomic,assign) BOOL isBackSave;
+@property (nonatomic,assign) NSInteger zeroNum;
 @end
 
 @implementation ZMeasureVC
@@ -57,6 +58,8 @@ static NSInteger zindex = 0;
 
 
 - (void)setMainView {
+    _zeroNum = 0;
+    
     [self.view addSubview:self.navView];
     [self.navView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.view);
@@ -125,23 +128,23 @@ static NSInteger zindex = 0;
                 
             }else if ([testData hasPrefix:@"H"] ) {
                 //定格测量数据
-                [self setTestBlueDataWithData:testData withIndex:1];
+                [weakSelf setTestBlueDataWithData:testData withIndex:1];
                 
                 [weakSelf addTestData:weakSelf.testData];
                 weakSelf.testData = nil;
-                
+                weakSelf.zeroNum = 0;
             }else if ([testData hasPrefix:@"D"]){
                 //电量
             }else if ([testData hasPrefix:@"B"]){
                 //实时数据
-                [self setTestBlueDataWithData:testData withIndex:1];
+                [weakSelf setTestBlueDataWithData:testData withIndex:1];
                 
             }else {
                 //以数字开头
                 char commitChar = [testData characterAtIndex:0];
                 //实时数据
                 if ((commitChar>47)&&(commitChar<58)) {
-                    [self setTestBlueDataWithData:testData withIndex:0];
+                    [weakSelf setTestBlueDataWithData:testData withIndex:0];
                 }
             }
         }
@@ -151,6 +154,12 @@ static NSInteger zindex = 0;
 - (void)setTestBlueDataWithData:(NSString *)testData withIndex:(NSInteger)offsetCount{
     
     if (testData.length > 2+offsetCount) {
+        if ([[testData substringWithRange:NSMakeRange(0+offsetCount,2)] integerValue] == 0) {
+            self.zeroNum++;
+            if (self.zeroNum < 100) {
+                return;
+            }
+        }
         self.testData.firstNum = [testData substringWithRange:NSMakeRange(0+offsetCount,2)];
     }
     
