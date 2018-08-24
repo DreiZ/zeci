@@ -49,6 +49,8 @@
 		5E51D6D021250D0E009F6A0E /* ZGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D6CF21250D0E009F6A0E /* ZGuideView.m */; };
 		5E51D6D721251237009F6A0E /* JMHoledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D6D621251236009F6A0E /* JMHoledView.m */; };
 		5E51D6DA212527D6009F6A0E /* ZPublicBluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D6D9212527D6009F6A0E /* ZPublicBluetoothManager.m */; };
+		5E539238212FCFCA0005DF10 /* ZDataNameListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E539237212FCFCA0005DF10 /* ZDataNameListView.m */; };
+		5E53923B212FD4610005DF10 /* ZDataNameListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E53923A212FD4610005DF10 /* ZDataNameListCell.m */; };
 		5E543DEB21182FA200EB3830 /* ZCellConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DEA21182FA200EB3830 /* ZCellConfig.m */; };
 		5E543DF5211830A900EB3830 /* UITableViewCell+ZCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF1211830A900EB3830 /* UITableViewCell+ZCategory.m */; };
 		5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF72118331000EB3830 /* ZSpaceCell.m */; };
@@ -184,6 +186,10 @@
 		5E51D6D621251236009F6A0E /* JMHoledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMHoledView.m; sourceTree = "<group>"; };
 		5E51D6D8212527D6009F6A0E /* ZPublicBluetoothManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZPublicBluetoothManager.h; sourceTree = "<group>"; };
 		5E51D6D9212527D6009F6A0E /* ZPublicBluetoothManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZPublicBluetoothManager.m; sourceTree = "<group>"; };
+		5E539236212FCFCA0005DF10 /* ZDataNameListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataNameListView.h; sourceTree = "<group>"; };
+		5E539237212FCFCA0005DF10 /* ZDataNameListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDataNameListView.m; sourceTree = "<group>"; };
+		5E539239212FD4610005DF10 /* ZDataNameListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataNameListCell.h; sourceTree = "<group>"; };
+		5E53923A212FD4610005DF10 /* ZDataNameListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDataNameListCell.m; sourceTree = "<group>"; };
 		5E543DE921182FA200EB3830 /* ZCellConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCellConfig.h; sourceTree = "<group>"; };
 		5E543DEA21182FA200EB3830 /* ZCellConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCellConfig.m; sourceTree = "<group>"; };
 		5E543DF0211830A900EB3830 /* UITableViewCell+ZCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+ZCategory.h"; sourceTree = "<group>"; };
@@ -663,6 +669,10 @@
 				5E68265A212BA462003C7030 /* ZMeasureSaveImageToPhotoView.m */,
 				5E68265C212BB7FA003C7030 /* ZBluetoothPowerOffView.h */,
 				5E68265D212BB7FA003C7030 /* ZBluetoothPowerOffView.m */,
+				5E539236212FCFCA0005DF10 /* ZDataNameListView.h */,
+				5E539237212FCFCA0005DF10 /* ZDataNameListView.m */,
+				5E539239212FD4610005DF10 /* ZDataNameListCell.h */,
+				5E53923A212FD4610005DF10 /* ZDataNameListCell.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -924,9 +934,11 @@
 				5E3EFF1320C8CE8B005E3E3E /* ZAdvertiseHelper.m in Sources */,
 				5EA1839D2121136A009C6675 /* ZCompanyInfoVC.m in Sources */,
 				5E48F8D620C6542E00422A6F /* AppDelegate.m in Sources */,
+				5E53923B212FD4610005DF10 /* ZDataNameListCell.m in Sources */,
 				5E48F91820C67BD300422A6F /* WRCustomNavigationBar.m in Sources */,
 				5E45CC642122663C00469A30 /* ZShareView.m in Sources */,
 				5EA183C52121736B009C6675 /* LFAxisView.m in Sources */,
+				5E539238212FCFCA0005DF10 /* ZDataNameListView.m in Sources */,
 				5E093040211EE55100AA98DC /* ZHomeConnectCell.m in Sources */,
 				5E4EB7ED2126CE6200ED201B /* ZBluetoothLostView.m in Sources */,
 				5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */,

@@ -7,11 +7,16 @@
 //
 
 #import "ZMeasureEditView.h"
+#import "ZDataNameListView.h"
 
 @interface ZMeasureEditView ()<UITextFieldDelegate>
 @property (nonatomic,strong) UILabel *firstLabel;
 @property (nonatomic,strong) UILabel *secondLabel;
 @property (nonatomic,strong) UILabel *thridLabel;
+@property (nonatomic,strong) ZDataNameListView *nameListView;
+
+@property (nonatomic,strong) UIView *contView;
+
 @end
 
 @implementation ZMeasureEditView
@@ -52,6 +57,7 @@
         make.height.mas_equalTo(kWindowW<375? CGFloatIn750(620):CGFloatIn750(530));
         make.width.mas_equalTo(CGFloatIn750(560));
     }];
+    _contView = contView;
     
     UILabel *hintLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     hintLabel.textColor = kFont3Color;
@@ -135,6 +141,14 @@
         make.height.mas_equalTo(1);
     }];
     
+    [contView addSubview:self.nameListView];
+    [self.nameListView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contView.mas_left).offset(20);
+        make.right.equalTo(self.contView.mas_right).offset(-20);
+        make.top.equalTo(self.contView.mas_top).offset(10);
+        make.bottom.equalTo(self.editTextField.mas_top).offset(-4);
+    }];
+    
     self.editTextField.text = @"";
 }
 
@@ -176,6 +190,22 @@
 }
 
 
+-(ZDataNameListView *)nameListView {
+    __weak typeof(self) weakSelf = self;
+    if (!_nameListView) {
+        _nameListView = [[ZDataNameListView alloc] init];
+        _nameListView.selectBlock = ^(NSString *earTag) {
+            weakSelf.editTextField.text = earTag;
+            [weakSelf.editTextField resignFirstResponder];
+        };
+    }
+    
+    _nameListView.frame = CGRectMake( 20, 10, self.contView.width - 40, self.contView.height - 10 - 96);
+    
+    return _nameListView;
+}
+
+
 - (UITextField *)editTextField {
     if (!_editTextField ) {
         _editTextField  = [[UITextField alloc] init];
@@ -209,12 +239,22 @@
         str = [str substringToIndex:length];
         textField.text = str;
     }
+    [self.nameListView startSearch:textField.text];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
     return YES;
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self.nameListView startSearch:@""];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
+    [self.nameListView startSearch:@""];
 }
 
 - (void)setSingleData:(ZSingleData *)singleData {
