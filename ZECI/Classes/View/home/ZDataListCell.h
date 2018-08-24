@@ -11,5 +11,7 @@
 
 @interface ZDataListCell : ZBaseCell
 @property (nonatomic,strong) ZSingleData *singleData;
+@property (nonatomic,strong) ZSingleData *singlePigData;
 
+@property (nonatomic,strong) void (^selectBlock)(void);
 @end

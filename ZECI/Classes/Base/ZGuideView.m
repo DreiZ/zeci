@@ -37,7 +37,7 @@
         
         _holeFrame = holeFrame;
         [self addHoleRectOnRect:holeFrame];
-        [self addHCustomView:[self viewForGuideWithY:holeFrame.origin.y+10+holeFrame.size.height] onRect:CGRectMake((_holeFrame.origin.x + _holeFrame.size.width/2.0 - 100), holeFrame.origin.y+10+holeFrame.size.height, 200.0f, 50.0f)];
+        [self addHCustomView:[self viewForListGuideWithY:holeFrame.origin.y+10+holeFrame.size.height] onRect:CGRectMake((_holeFrame.origin.x + _holeFrame.size.width/2.0 - 100), holeFrame.origin.y+10+holeFrame.size.height, 200.0f, 120.0f)];
         
         self.sureBtn = [[UIButton alloc] initWithFrame:CGRectMake((_holeFrame.origin.x + _holeFrame.size.width/2.0 - getValueWithoutLimit(140)/2.0f),self.introLabel.bottom+20 , getValueWithoutLimit(140), getValueWithoutLimit(40))];
         self.sureBtn.layer.masksToBounds = YES;
@@ -100,11 +100,36 @@
 }
 
 
+- (UIView *)viewForListGuideWithY:(CGFloat)tempY
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((_holeFrame.origin.x + _holeFrame.size.width/2.0 - 100), tempY, 200.0f, 120.0f)];
+    [label setBackgroundColor:[UIColor clearColor]];
+    label.layer.borderColor = [UIColor whiteColor].CGColor;
+    label.layer.borderWidth = 1.0f;
+    label.layer.cornerRadius = 10.0f;
+    [label setTextColor:[UIColor whiteColor]];
+    label.text = @"点击头像进入测量历史列表，点击头像以外部分进入测量走势图,左滑可删除数据";
+    label.numberOfLines = 0;
+    label.font = [UIFont boldSystemFontOfSize:[ZPublicManager getIsIpad] ? 18:16.0f];
+    label.textAlignment = NSTextAlignmentCenter;
+    _introLabel = label;
+    return label;
+}
+
+
 
 - (void)resetFrame {
     [self removeHoles];
     [self addHoleRectOnRect:_holeFrame];
     [self addHCustomView:[self viewForGuideWithY:_holeFrame.origin.y+10+_holeFrame.size.height] onRect:CGRectMake((_holeFrame.origin.x + _holeFrame.size.width/2.0 - 100), _holeFrame.origin.y+10+_holeFrame.size.height, 200.0f, 50.0f)];
+    
+    self.sureBtn.frame = CGRectMake((_holeFrame.origin.x + _holeFrame.size.width/2.0 - getValueWithoutLimit(140)/2.0f),self.introLabel.bottom+20 , getValueWithoutLimit(140), getValueWithoutLimit(40));
+}
+
+- (void)resetListFrame {
+    [self removeHoles];
+    [self addHoleRectOnRect:_holeFrame];
+    [self addHCustomView:[self viewForListGuideWithY:_holeFrame.origin.y+10+_holeFrame.size.height] onRect:CGRectMake((_holeFrame.origin.x + _holeFrame.size.width/2.0 - 100), _holeFrame.origin.y+10+_holeFrame.size.height, 200.0f, 100.0f)];
     
     self.sureBtn.frame = CGRectMake((_holeFrame.origin.x + _holeFrame.size.width/2.0 - getValueWithoutLimit(140)/2.0f),self.introLabel.bottom+20 , getValueWithoutLimit(140), getValueWithoutLimit(40));
 }

@@ -51,6 +51,7 @@
 		5E51D6DA212527D6009F6A0E /* ZPublicBluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E51D6D9212527D6009F6A0E /* ZPublicBluetoothManager.m */; };
 		5E539238212FCFCA0005DF10 /* ZDataNameListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E539237212FCFCA0005DF10 /* ZDataNameListView.m */; };
 		5E53923B212FD4610005DF10 /* ZDataNameListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E53923A212FD4610005DF10 /* ZDataNameListCell.m */; };
+		5E539241212FEEBB0005DF10 /* ZSingDataListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E539240212FEEBB0005DF10 /* ZSingDataListVC.m */; };
 		5E543DEB21182FA200EB3830 /* ZCellConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DEA21182FA200EB3830 /* ZCellConfig.m */; };
 		5E543DF5211830A900EB3830 /* UITableViewCell+ZCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF1211830A900EB3830 /* UITableViewCell+ZCategory.m */; };
 		5E543DF92118331000EB3830 /* ZSpaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E543DF72118331000EB3830 /* ZSpaceCell.m */; };
@@ -190,6 +191,8 @@
 		5E539237212FCFCA0005DF10 /* ZDataNameListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDataNameListView.m; sourceTree = "<group>"; };
 		5E539239212FD4610005DF10 /* ZDataNameListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDataNameListCell.h; sourceTree = "<group>"; };
 		5E53923A212FD4610005DF10 /* ZDataNameListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDataNameListCell.m; sourceTree = "<group>"; };
+		5E53923F212FEEBB0005DF10 /* ZSingDataListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSingDataListVC.h; sourceTree = "<group>"; };
+		5E539240212FEEBB0005DF10 /* ZSingDataListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSingDataListVC.m; sourceTree = "<group>"; };
 		5E543DE921182FA200EB3830 /* ZCellConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCellConfig.h; sourceTree = "<group>"; };
 		5E543DEA21182FA200EB3830 /* ZCellConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCellConfig.m; sourceTree = "<group>"; };
 		5E543DF0211830A900EB3830 /* UITableViewCell+ZCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+ZCategory.h"; sourceTree = "<group>"; };
@@ -621,6 +624,8 @@
 				5EA183B721216C67009C6675 /* ZDataLineChatVC.m */,
 				5E71D527212427D0009FA7E3 /* ZLineChatBrowseVC.h */,
 				5E71D528212427D0009FA7E3 /* ZLineChatBrowseVC.m */,
+				5E53923F212FEEBB0005DF10 /* ZSingDataListVC.h */,
+				5E539240212FEEBB0005DF10 /* ZSingDataListVC.m */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -879,6 +884,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E539241212FEEBB0005DF10 /* ZSingDataListVC.m in Sources */,
 				5EA183B521213618009C6675 /* ZMeasureEditView.m in Sources */,
 				5EA183A92121252E009C6675 /* ZMeasureVC.m in Sources */,
 				5E48F8D920C6542E00422A6F /* ViewController.m in Sources */,

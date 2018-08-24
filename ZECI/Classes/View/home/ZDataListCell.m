@@ -49,6 +49,20 @@
         make.width.height.mas_equalTo(32);
     }];
     
+    __weak typeof(self) weakSelf = self;
+    UIButton *listBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+    [listBtn bk_addEventHandler:^(id sender) {
+        if (weakSelf.selectBlock ) {
+            weakSelf.selectBlock();
+        }
+    } forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:listBtn];
+    [listBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(self);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(hintImageView.mas_right).offset(20);
+    }];
+    
     
     [self.contentView addSubview:self.timeLabel];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,6 +116,12 @@
     _singleData = singleData;
     _detaiLabel.text = [NSString stringWithFormat:@"%@： %@  %@  %@",singleData.earTag, singleData.firstNum, singleData.secondNum, singleData.thirdNum];
     _timeLabel.text = [ZPublicManager timeWithStr:singleData.testTime format:@"YYYY-MM-dd"];
+}
+
+- (void)setSinglePigData:(ZSingleData *)singlePigData {
+    _singlePigData = singlePigData;
+    _detaiLabel.text = [NSString stringWithFormat:@"%@  %@  %@", singlePigData.firstNum, singlePigData.secondNum, singlePigData.thirdNum];
+    _timeLabel.text = [ZPublicManager timeWithStr:singlePigData.testTime format:@"YYYY-MM-dd"];
 }
 
 + (CGFloat)z_getCellHeight:(id)sender {

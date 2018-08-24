@@ -12,5 +12,6 @@
 -(instancetype)initWithListGuideView:(CGRect)frame holeRect:(CGRect)holeFrame;
 -(instancetype)initWithTestGuideView:(CGRect)frame holeRect:(CGRect)holeFrame;
 -(void)setHoleFrame:(CGRect)holeFrame;
-- (void)resetFrame;
+-(void)resetFrame;
+-(void)resetListFrame;
 @end

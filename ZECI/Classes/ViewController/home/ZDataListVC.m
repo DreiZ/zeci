@@ -13,6 +13,7 @@
 #import "ZHomeViewModel.h"
 
 #import "ZDataLineChatVC.h"
+#import "ZSingDataListVC.h"
 #import "AppDelegate.h"
 #import "ZGuideView.h"
 
@@ -81,7 +82,7 @@
 }
 
 - (void)setGuideView {
-    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isDataListLoaded"];
+    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"2isDataListLoaded"];
     if (!isLoaded && [ZHomeViewModel shareInstance].singPigDatas && [ZHomeViewModel shareInstance].singPigDatas.count > 0) {
         UIWindow *presentView = [[AppDelegate App] window];
         ZGuideView *guideV = [[ZGuideView alloc] initWithListGuideView:presentView.bounds holeRect:CGRectMake(0, ([ZPublicManager getIsIpad] ? 70:55)+kSafeAreaTopHeight+([ZPublicManager getIsIpad] ? 15:10), kWindowW, [ZDataListCell z_getCellHeight:nil])];
@@ -126,6 +127,8 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak typeof(self) weakSelf = self;
+    
     ZDataListCell *cell = [ZDataListCell z_cellWithTableView:tableView];
     ZSinglePig* singlePig;
     if (_isSearchState) {
@@ -136,6 +139,15 @@
     if (singlePig && singlePig.singleList) {
         cell.singleData = [singlePig.singleList lastObject];
     }
+    
+    cell.selectBlock = ^{
+        ZSingDataListVC *dvc = [[ZSingDataListVC alloc] init];
+        dvc.index = indexPath.row;
+        dvc.refreshBlock = ^{
+            [weakSelf.iTableView reloadData];
+        };
+        [self.navigationController pushViewController:dvc animated:YES];
+    };
     return cell;
 }
 
@@ -251,7 +263,7 @@
         UIWindow *presentView = [[AppDelegate App] window];
         _guideV.frame = presentView.bounds;
         [_guideV setHoleFrame:CGRectMake(0, ([ZPublicManager getIsIpad] ? 70:55)+kSafeAreaTopHeight+([ZPublicManager getIsIpad] ? 15:10), kWindowW, [ZDataListCell z_getCellHeight:nil])];
-        [_guideV resetFrame];
+        [_guideV resetListFrame];
     }
 }
 @end
