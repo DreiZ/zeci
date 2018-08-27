@@ -61,6 +61,8 @@
     [arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(self.mas_right).offset(-10);
+        make.width.mas_equalTo(8);
+        make.height.mas_equalTo(15);
     }];
     
     [self.contentView addSubview:self.connectHintLabel];

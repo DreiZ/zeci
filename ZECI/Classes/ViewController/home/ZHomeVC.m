@@ -239,15 +239,20 @@
 
 #pragma mark tableView -------datasource-----
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
-    }else{
+    }else if(section == 1){
         if ([ZPublicBluetoothManager shareInstance].peripherals) {
             return [ZPublicBluetoothManager shareInstance].peripherals.count;
+        }
+        return 0;
+    }else{
+        if (self.connectPeripheral && ![[ZPublicBluetoothManager shareInstance].peripherals containsObject:self.connectPeripheral]) {
+            return 1;
         }
         return 0;
     }
@@ -264,7 +269,7 @@
             cell.macAddress = @"";
         }
         return cell;
-    }else{
+    }else if(indexPath.section == 1){
         
         ZHomeBluetoothListCell *cell = [ZHomeBluetoothListCell z_cellWithTableView:tableView];
         if ([ZPublicBluetoothManager shareInstance].peripherals && [ZPublicBluetoothManager shareInstance].peripherals.count > indexPath.row) {
@@ -274,6 +279,16 @@
         }
         
 
+        return cell;
+    }else{
+        ZHomeBluetoothListCell *cell = [ZHomeBluetoothListCell z_cellWithTableView:tableView];
+        if (self.connectPeripheral) {
+            CBPeripheral *cbPeripheral = self.connectPeripheral;
+            [cell setBluetoothName:cbPeripheral.name];
+            [cell setRSSName:[NSString stringWithFormat:@"%@",cbPeripheral.identifier]];
+        }
+        
+        
         return cell;
     }
 }

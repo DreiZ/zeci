@@ -82,7 +82,7 @@
 }
 
 - (void)setGuideView {
-    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"2isDataListLoaded"];
+    BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isDataListLoaded"];
     if (!isLoaded && [ZHomeViewModel shareInstance].singPigDatas && [ZHomeViewModel shareInstance].singPigDatas.count > 0) {
         UIWindow *presentView = [[AppDelegate App] window];
         ZGuideView *guideV = [[ZGuideView alloc] initWithListGuideView:presentView.bounds holeRect:CGRectMake(0, ([ZPublicManager getIsIpad] ? 70:55)+kSafeAreaTopHeight+([ZPublicManager getIsIpad] ? 15:10), kWindowW, [ZDataListCell z_getCellHeight:nil])];

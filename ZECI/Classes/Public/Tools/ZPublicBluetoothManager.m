@@ -12,6 +12,9 @@
 
 // 蓝牙4.0设备名
 static NSString * const kBlePeripheralName = @"LanQianTech";
+// 蓝牙4.0设备名
+static NSString * const kBlePeripheralNameECI = @"ECI";
+
 // 通知服务
 static NSString * const kNotifyServerUUID = @"FFF0";
 // 通知特征值
@@ -208,7 +211,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     
     if (![self.peripherals containsObject:peripheral] && peripheral.name)
     {
-        if ([peripheral.name isEqualToString:kBlePeripheralName])
+        if ( [peripheral.name hasPrefix:kBlePeripheralName] || [peripheral.name hasPrefix:kBlePeripheralNameECI])
         {
             [self.peripherals addObject:peripheral];
             [self showMessage:[NSString stringWithFormat:@"设备名:%@",peripheral.name]];
