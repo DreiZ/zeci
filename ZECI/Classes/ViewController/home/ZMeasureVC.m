@@ -21,8 +21,8 @@
 
 #import "ZHomeViewModel.h"
 
-#warning 生成测试数据按照每天日期来存，增加测试数据来模拟测量日期增加
-static NSInteger zindex = 0;
+//#warning 生成测试数据按照每天日期来存，增加测试数据来模拟测量日期增加
+//static NSInteger zindex = 0;
 
 @interface ZMeasureVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic,strong) ZMeasureNavView *navView;
@@ -119,7 +119,7 @@ static NSInteger zindex = 0;
     [ZPublicBluetoothManager shareInstance].testDataBlock = ^(NSString *testData) {
         NSInteger tempTime = [ZPublicManager getNowTimestamp];
         
-        weakSelf.testData.testTime = [NSString stringWithFormat:@"%ld",tempTime + zindex * 24*60*60];// + zindex * 24*60*60
+        weakSelf.testData.testTime = [NSString stringWithFormat:@"%ld",tempTime];// + zindex * 24*60*60
         
         if (testData && testData.length > 0 && [testData hasSuffix:@"E"]) {
             if ([testData hasPrefix:@"R"]){
@@ -205,56 +205,56 @@ static NSInteger zindex = 0;
                 }
             }
         };
-#warning 模拟测试日期增加
-        _tempLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _tempLabel.textColor = [UIColor whiteColor];
-        _tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
-        _tempLabel.numberOfLines = 0;
-        _tempLabel.layer.cornerRadius = 4;
-        _tempLabel.layer.masksToBounds = YES;
-        _tempLabel.layer.borderWidth = 1;
-        _tempLabel.layer.borderColor = [UIColor whiteColor].CGColor;
-        _tempLabel.textAlignment = NSTextAlignmentCenter;
-        [_tempLabel setFont:[UIFont systemFontOfSize:16.0f]];
-        [_navView addSubview:_tempLabel];
-        [_tempLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.navView.mas_centerX);
-            make.bottom.equalTo(self.navView.mas_bottom).offset(-10);
-            make.height.mas_equalTo(30);
-            make.width.mas_equalTo(40);
-        }];
-
-        UIButton *te1Btn = [[UIButton alloc] initWithFrame:CGRectZero];
-        [te1Btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [te1Btn.titleLabel setFont:[UIFont systemFontOfSize:13]];
-        [te1Btn setTitle:@"日期减1" forState:UIControlStateNormal];
-        [te1Btn bk_addEventHandler:^(id sender) {
-            zindex--;
-            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
-        } forControlEvents:UIControlEventTouchUpInside];
-        [_navView addSubview:te1Btn];
-        [te1Btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(40);
-            make.width.mas_equalTo(60);
-            make.centerY.equalTo(self.tempLabel.mas_centerY);
-            make.right.equalTo(self.tempLabel.mas_left).offset(-10);
-        }];
-
-        UIButton *te2Btn = [[UIButton alloc] initWithFrame:CGRectZero];
-        [te1Btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [te2Btn.titleLabel setFont:[UIFont systemFontOfSize:13]];
-        [te2Btn setTitle:@"日期加1" forState:UIControlStateNormal];
-        [te2Btn bk_addEventHandler:^(id sender) {
-            zindex++;
-            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
-        } forControlEvents:UIControlEventTouchUpInside];
-        [_navView addSubview:te2Btn];
-        [te2Btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(40);
-            make.width.mas_equalTo(60);
-            make.centerY.equalTo(self.tempLabel.mas_centerY);
-            make.left.equalTo(self.tempLabel.mas_right).offset(10);
-        }];
+//#warning 模拟测试日期增加
+//        _tempLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//        _tempLabel.textColor = [UIColor whiteColor];
+//        _tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
+//        _tempLabel.numberOfLines = 0;
+//        _tempLabel.layer.cornerRadius = 4;
+//        _tempLabel.layer.masksToBounds = YES;
+//        _tempLabel.layer.borderWidth = 1;
+//        _tempLabel.layer.borderColor = [UIColor whiteColor].CGColor;
+//        _tempLabel.textAlignment = NSTextAlignmentCenter;
+//        [_tempLabel setFont:[UIFont systemFontOfSize:16.0f]];
+//        [_navView addSubview:_tempLabel];
+//        [_tempLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerX.equalTo(self.navView.mas_centerX);
+//            make.bottom.equalTo(self.navView.mas_bottom).offset(-10);
+//            make.height.mas_equalTo(30);
+//            make.width.mas_equalTo(40);
+//        }];
+//
+//        UIButton *te1Btn = [[UIButton alloc] initWithFrame:CGRectZero];
+//        [te1Btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [te1Btn.titleLabel setFont:[UIFont systemFontOfSize:13]];
+//        [te1Btn setTitle:@"日期减1" forState:UIControlStateNormal];
+//        [te1Btn bk_addEventHandler:^(id sender) {
+//            zindex--;
+//            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
+//        } forControlEvents:UIControlEventTouchUpInside];
+//        [_navView addSubview:te1Btn];
+//        [te1Btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.height.mas_equalTo(40);
+//            make.width.mas_equalTo(60);
+//            make.centerY.equalTo(self.tempLabel.mas_centerY);
+//            make.right.equalTo(self.tempLabel.mas_left).offset(-10);
+//        }];
+//
+//        UIButton *te2Btn = [[UIButton alloc] initWithFrame:CGRectZero];
+//        [te1Btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [te2Btn.titleLabel setFont:[UIFont systemFontOfSize:13]];
+//        [te2Btn setTitle:@"日期加1" forState:UIControlStateNormal];
+//        [te2Btn bk_addEventHandler:^(id sender) {
+//            zindex++;
+//            self.tempLabel.text = [NSString stringWithFormat:@"%ld",zindex];
+//        } forControlEvents:UIControlEventTouchUpInside];
+//        [_navView addSubview:te2Btn];
+//        [te2Btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.height.mas_equalTo(40);
+//            make.width.mas_equalTo(60);
+//            make.centerY.equalTo(self.tempLabel.mas_centerY);
+//            make.left.equalTo(self.tempLabel.mas_right).offset(10);
+//        }];
     }
     return _navView;
 }

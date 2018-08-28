@@ -155,28 +155,28 @@
         for (ZSingleData *singleData in _singlePigData.singleList) {
 
             NSString *lastTime = nil;
-            if (lastSingleData) {
+//            if (lastSingleData) {
+//
+//                lastTime = lastSingleData.testTime;
+//
+//                NSInteger tempSpaceCount = 0;
                 
-                lastTime = lastSingleData.testTime;
-                
-                NSInteger tempSpaceCount = 0;
-                
-                while (![[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastTime integerValue] + 24 * 50 * 60] format:@"MMdd"] isEqualToString:[ZPublicManager timeWithStr:singleData.testTime format:@"MMdd"]]) {
-                    
-                    //防止中间空数据占太长时间
-                    if (tempSpaceCount > 30) {
-                        break;
-                    }
-                    
-                    [firstDataArr addObject:@""];
-                    [secondDataArr addObject:@""];
-                    [thridDataArr addObject:@""];
-                    
-                    [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastTime integerValue] + 60 * 60 * 24] format:@"MM月dd日"]];
-                    lastTime = [NSString stringWithFormat:@"%ld",[lastTime integerValue] + 60 * 60 * 24];
-                    tempSpaceCount++;
-                }
-            }
+//                while (![[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastTime integerValue] + 24 * 50 * 60] format:@"MMdd"] isEqualToString:[ZPublicManager timeWithStr:singleData.testTime format:@"MMdd"]]) {
+//
+//                    //防止中间空数据占太长时间
+//                    if (tempSpaceCount > 30) {
+//                        break;
+//                    }
+//
+//                    [firstDataArr addObject:@""];
+//                    [secondDataArr addObject:@""];
+//                    [thridDataArr addObject:@""];
+//
+//                    [xValueArr addObject:[ZPublicManager timeWithStr:[NSString stringWithFormat:@"%ld",[lastTime integerValue] + 60 * 60 * 24] format:@"MM月dd日"]];
+//                    lastTime = [NSString stringWithFormat:@"%ld",[lastTime integerValue] + 60 * 60 * 24];
+//                    tempSpaceCount++;
+//                }
+//            }
             
 
             [firstDataArr addObject:singleData.firstNum];

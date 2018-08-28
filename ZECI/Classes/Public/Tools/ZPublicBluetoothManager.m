@@ -207,7 +207,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
     [self showMessage:[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]];
-//    NSLog(@"%@",[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]);
+    NSLog(@"%@",[NSString stringWithFormat:@"发现设备,设备名:%@",peripheral.name]);
     
     if (![self.peripherals containsObject:peripheral] && peripheral.name)
     {
@@ -238,7 +238,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
         self.connectBlock(nil);
     }
     
-    if ([peripheral.name isEqualToString:kBlePeripheralName])
+    if ( [peripheral.name hasPrefix:kBlePeripheralName] || [peripheral.name hasPrefix:kBlePeripheralNameECI])
     {
         [self.centralManager connectPeripheral:peripheral options:nil];
     }
@@ -266,7 +266,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     if (self.connectBlock) {
         self.connectBlock(nil);
     }
-    if ([peripheral.name isEqualToString:kBlePeripheralName])
+    if ( [peripheral.name hasPrefix:kBlePeripheralName] || [peripheral.name hasPrefix:kBlePeripheralNameECI])
     {
         [self.centralManager connectPeripheral:peripheral options:nil];
     }
