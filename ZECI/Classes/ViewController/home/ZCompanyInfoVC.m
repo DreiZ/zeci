@@ -168,11 +168,7 @@
     ZCompanyInfoCell *cell = [ZCompanyInfoCell z_cellWithTableView:tableView];
     cell.nameLabel.text = _listArr[indexPath.row][0];
     cell.rightLabel.text = _listArr[indexPath.row][1];
-    if (indexPath.row == 0) {
-        cell.arrowImageView.hidden = YES;
-    }else{
-        cell.arrowImageView.hidden = NO;
-    }
+    [cell setHiddenArrowImageView:indexPath.row == 0 ? YES:NO];
     return cell;
 }
 

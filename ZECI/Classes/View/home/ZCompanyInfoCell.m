@@ -25,7 +25,7 @@
 
 -(void)setupView
 {
-    self.contentView.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor whiteColor];
     self.backgroundColor = [UIColor clearColor];
     
     [self.contentView addSubview:self.nameLabel];
@@ -70,7 +70,7 @@
         _nameLabel.numberOfLines = 1;
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.textColor = kFont3Color;
-        [_rightLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 18:15]];
+        [_rightLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:14]];
     }
     return _nameLabel;
 }
@@ -85,6 +85,16 @@
         [_rightLabel setFont:[UIFont systemFontOfSize:[ZPublicManager getIsIpad] ? 16:13]];
     }
     return _rightLabel;
+}
+
+- (void)setHiddenArrowImageView:(BOOL)hiddenArrowImageView {
+    _arrowImageView.hidden = hiddenArrowImageView;
+    [_arrowImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.right.equalTo(self.mas_right).offset(hiddenArrowImageView ? -6:-10);
+        make.width.mas_equalTo(hiddenArrowImageView ? 0:8);
+        make.height.mas_equalTo(15);
+    }];
 }
 
 

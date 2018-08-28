@@ -13,4 +13,5 @@
 @property (nonatomic,strong) UILabel *rightLabel;
 @property (nonatomic,strong) UIImageView *arrowImageView;
 
+@property (nonatomic,assign) BOOL hiddenArrowImageView;
 @end
