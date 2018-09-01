@@ -9,8 +9,8 @@
 #import "ZBaseView.h"
 
 @interface ZMeasureSaveAlertView : ZBaseView
-@property (nonatomic,strong) UILabel *titleLabel;
-@property (nonatomic,strong) UILabel *alertLabel;
+@property (nonatomic,strong) NSString *title;
+@property (nonatomic,strong) NSString *alert;
 
 @property (nonatomic,strong) void (^sureBlock)(NSInteger);
 @end

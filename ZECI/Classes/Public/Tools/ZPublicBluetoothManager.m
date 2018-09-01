@@ -100,11 +100,11 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     } else if (self.peripheralState ==  CBManagerStatePoweredOff){
         
         BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isShowPowerOffAlert"];
-//        if (!isLoaded ) {
-            self.powerOffView.titleLabel.text = @"蓝牙未开启";
-            self.powerOffView.alertLabel.text = [NSString stringWithFormat:@"请检查%@蓝牙是否正常开启，如还需测量，请去【设置】>【蓝牙】中打开蓝牙，打开蓝牙后再扫描蓝牙设备",[ZPublicManager getIsIpad] ? @"iPad":@"手机"];
+        if (!isLoaded ) {
+            self.powerOffView.title = @"蓝牙未开启";
+            self.powerOffView.alert = [NSString stringWithFormat:@"请检查%@蓝牙是否正常开启，如还需测量，请去【设置】>【蓝牙】中打开蓝牙，打开蓝牙后再扫描蓝牙设备",[ZPublicManager getIsIpad] ? @"iPad":@"手机"];
             [[AppDelegate App].window addSubview:self.powerOffView];
-//        }
+        }
         
     }
 }
@@ -256,8 +256,8 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
  
 //    [[AppDelegate App].window showSuccessWithMsg:@"断开连接"];
     if (!self.isConnectLost) {
-        self.lostView.titleLabel.text = @"设备已断开连接";
-        self.lostView.alertLabel.text = @"请检查设备是否正常开启，如还需测量，请重新连接扫描蓝牙设备,并连接设备";
+        self.lostView.title = @"设备已断开连接";
+        self.lostView.alert = @"请检查设备是否正常开启，如还需测量，请重新连接扫描蓝牙设备,并连接设备";
         [[AppDelegate App].window addSubview:self.lostView];
     }
     

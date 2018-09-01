@@ -531,8 +531,8 @@
 - (void)saveTestPigsData {
     self.isBackSave = NO;
     if ([[ZHomeViewModel shareInstance] checkTestDataIsHadSameData]) {
-        self.saveAlertView.alertLabel.text = @"数据列表中有相同耳标的测量数据，同一耳标只会取最新一条测量数据保存，确定保存吗？";
-        self.saveAlertView.titleLabel.text = @"提示";
+        self.saveAlertView.alert = @"数据列表中有相同耳标的测量数据，同一耳标只会取最新一条测量数据保存，确定保存吗？";
+        self.saveAlertView.title = @"提示";
         [self.view addSubview:self.saveAlertView];
     }else{
 //        self.saveAlertView.alertLabel.text = @"确定保存测量数据列表数据到数据库吗？";
@@ -546,12 +546,12 @@
 
 - (void)backSaveTestPigsData {
     self.isBackSave = YES;
-    self.saveAlertView.titleLabel.text = @"测量数据还未保存";
+    self.saveAlertView.title = @"测量数据还未保存";
     if ([[ZHomeViewModel shareInstance] checkTestDataIsHadSameData]) {
-        self.saveAlertView.alertLabel.text = @"数据列表中有相同耳标的测量数据，同一耳标只会取一条数据保存，确定保存吗？";
+        self.saveAlertView.alert = @"数据列表中有相同耳标的测量数据，同一耳标只会取一条数据保存，确定保存吗？";
         [self.view addSubview:self.saveAlertView];
     }else{
-        self.saveAlertView.alertLabel.text = @"确定保存测量数据列表数据到数据库吗？";
+        self.saveAlertView.alert = @"确定保存测量数据列表数据到数据库吗？";
         [self.view addSubview:self.saveAlertView];
     }
 }

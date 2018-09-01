@@ -9,7 +9,9 @@
 #import "ZMeasureSaveAlertView.h"
 
 @interface ZMeasureSaveAlertView ()
-
+@property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic,strong) UILabel *alertLabel;
+@property (nonatomic,strong) UIView *contView;
 @end
 
 @implementation ZMeasureSaveAlertView
@@ -44,6 +46,7 @@
     contView.backgroundColor = [UIColor whiteColor];
     contView.layer.masksToBounds = YES;
     contView.layer.cornerRadius = 6;
+    _contView = contView;
     [self addSubview:contView];
     [contView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
@@ -150,6 +153,32 @@
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [label.text length])];
     [label setAttributedText:attributedString];
     [label sizeToFit];
+}
+
+
+- (void)setTitle:(NSString *)title {
+    _titleLabel.text = title;
+}
+
+- (void)setAlert:(NSString *)alert {
+    _alertLabel.text = alert;
+    [self setLineSpacing:4 label:self.alertLabel];
+    
+    CGSize tempSize = [ZPublicManager stringSizeWithString:alert Font:[ZPublicManager getIsIpad]? 16:14 limitSize:CGSizeMake(200, 1000)];
+    CGSize oneSize = [ZPublicManager stringSizeWithString:@"提示" Font:[ZPublicManager getIsIpad]? 16:14 limitSize:CGSizeMake(200, 1000)];
+    
+    CGFloat tempHeight = 140;
+    if (tempSize.height > 18) {
+        tempHeight += tempSize.height/oneSize.height * 4 + tempSize.height;
+    }else{
+        tempHeight += tempSize.height;
+    }
+    
+    [_contView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+        make.height.mas_equalTo(tempHeight);
+        make.width.mas_equalTo(250);
+    }];
 }
 @end
 

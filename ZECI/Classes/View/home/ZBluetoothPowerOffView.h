@@ -9,6 +9,6 @@
 #import "ZBaseView.h"
 
 @interface ZBluetoothPowerOffView : ZBaseView
-@property (nonatomic,strong) UILabel *titleLabel;
-@property (nonatomic,strong) UILabel *alertLabel;
+@property (nonatomic,strong) NSString *title;
+@property (nonatomic,strong) NSString *alert;
 @end
