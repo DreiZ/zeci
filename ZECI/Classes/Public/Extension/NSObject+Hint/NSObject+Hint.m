@@ -26,7 +26,7 @@
     [self hideLoad];
     MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:[self currentView] animated:YES];
     progressHUD.mode = MBProgressHUDModeText;
-    progressHUD.labelText = msg.description;
+    progressHUD.detailsLabel.text = msg.description;
     [progressHUD hide:YES afterDelay:kToastDuration];
 }
 - (void)showErrorWithMsg:(NSObject *)msg {

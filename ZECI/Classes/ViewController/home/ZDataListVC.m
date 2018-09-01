@@ -259,6 +259,7 @@
 }
 
 - (void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
+    [super reLayoutSubViewsWithIsHorizontal:isHorizontal];
     if (_guideV) {
         UIWindow *presentView = [[AppDelegate App] window];
         _guideV.frame = presentView.bounds;

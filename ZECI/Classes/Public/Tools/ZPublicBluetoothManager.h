@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-
+#import "ZBluetoothLostView.h"
+#import "ZBluetoothPowerOffView.h"
 
 @interface ZPublicBluetoothManager : NSObject
 /// 中央管理者 -->管理设备的扫描 --连接
@@ -19,7 +20,8 @@
 @property (nonatomic, strong) CBPeripheral *cbPeripheral;
 // 蓝牙状态
 @property (nonatomic, assign) CBManagerState peripheralState;
-
+@property (nonatomic,strong) ZBluetoothLostView *lostView;
+@property (nonatomic,strong) ZBluetoothPowerOffView *powerOffView;
 //蓝牙状态
 @property (nonatomic,strong) void (^bluetoothChangeBlock)(void);
 //发现设备

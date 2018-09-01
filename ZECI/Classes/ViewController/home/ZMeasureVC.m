@@ -48,6 +48,17 @@
     [self setupNavigationView];
     [self setMainView];
     [self setTestBluetooth];
+    
+    
+    
+    NSArray *tempArr = @[@"234",@"32"];
+    NSArray *sss = [tempArr bk_map:^id(id obj) {
+        if ([obj isEqualToString:@"32"]) {
+            return obj;
+        }
+        return nil;
+    }];
+    NSLog(@"ss %@",sss);
 }
 
 
@@ -432,6 +443,7 @@
 
 #pragma mark 翻转屏幕修改布局
 -(void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
+    [super reLayoutSubViewsWithIsHorizontal:isHorizontal];
     if (!_topView || !_iTableView) {
         return;
     }
@@ -477,6 +489,14 @@
             [_guideV resetFrame];
         }
     }
+    if (_editView) {
+        _editView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
+    }
+    
+    if (_saveAlertView) {
+        _saveAlertView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
+    }
+    
 }
 
 #pragma mark test data

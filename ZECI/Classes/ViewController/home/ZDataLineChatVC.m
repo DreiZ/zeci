@@ -383,6 +383,7 @@
 
 
 -(void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
+    [super reLayoutSubViewsWithIsHorizontal:isHorizontal];
     if (!_infomationView || !_lineChart) {
         return;
     }

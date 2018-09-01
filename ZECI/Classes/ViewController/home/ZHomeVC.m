@@ -159,6 +159,11 @@
             [weakSelf stopAnimationView];
             [[ZPublicBluetoothManager shareInstance].centralManager stopScan];
         }else{
+            if ([ZPublicBluetoothManager shareInstance].peripheralState
+                != CBManagerStatePoweredOn) {
+                [weakSelf showSuccessWithMsg:@"蓝牙状态未打开，提示啥的"];
+                return ;
+            }
             [weakSelf startAnimationView];
             [[ZPublicBluetoothManager shareInstance] scanForPeripherals];
         }
@@ -372,6 +377,7 @@
 #pragma mark 屏幕旋转处理
 //获取设备方向 更新 UI
 -(void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
+    [super reLayoutSubViewsWithIsHorizontal:isHorizontal];
     if (isHorizontal) {
         
     }else{

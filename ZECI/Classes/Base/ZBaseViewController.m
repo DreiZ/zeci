@@ -146,6 +146,12 @@
 }
 
 - (void)reLayoutSubViewsWithIsHorizontal:(BOOL)isHorizontal {
+    if ([ZPublicBluetoothManager shareInstance].lostView) {
+        [ZPublicBluetoothManager shareInstance].lostView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
+    }
     
+    if ([ZPublicBluetoothManager shareInstance].powerOffView) {
+        [ZPublicBluetoothManager shareInstance].powerOffView.frame = CGRectMake(0, 0, kWindowW, kWindowH);
+    }
 }
 @end

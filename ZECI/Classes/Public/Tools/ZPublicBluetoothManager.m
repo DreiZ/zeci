@@ -7,8 +7,7 @@
 //
 
 #import "ZPublicBluetoothManager.h"
-#import "ZBluetoothLostView.h"
-#import "ZBluetoothPowerOffView.h"
+
 
 // 蓝牙4.0设备名
 static NSString * const kBlePeripheralName = @"LanQianTech";
@@ -23,8 +22,7 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
 
 
 @interface ZPublicBluetoothManager ()<CBCentralManagerDelegate,CBPeripheralDelegate>
-@property (nonatomic,strong) ZBluetoothLostView *lostView;
-@property (nonatomic,strong) ZBluetoothPowerOffView *powerOffView;
+
 @property (nonatomic,assign) BOOL isConnectLost;
 @end
 
@@ -102,11 +100,11 @@ static NSString * const kNotifyCharacteristicUUID = @"FFF1";
     } else if (self.peripheralState ==  CBManagerStatePoweredOff){
         
         BOOL isLoaded = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"isShowPowerOffAlert"];
-        if (!isLoaded ) {
+//        if (!isLoaded ) {
             self.powerOffView.titleLabel.text = @"蓝牙未开启";
             self.powerOffView.alertLabel.text = [NSString stringWithFormat:@"请检查%@蓝牙是否正常开启，如还需测量，请去【设置】>【蓝牙】中打开蓝牙，打开蓝牙后再扫描蓝牙设备",[ZPublicManager getIsIpad] ? @"iPad":@"手机"];
             [[AppDelegate App].window addSubview:self.powerOffView];
-        }
+//        }
         
     }
 }
