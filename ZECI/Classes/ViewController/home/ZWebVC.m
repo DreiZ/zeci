@@ -45,7 +45,7 @@
     [_iWebView setBackgroundColor:[UIColor whiteColor]];
     
   
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.eacenic.cn"]];
     [_iWebView loadRequest:request];
     [self.view addSubview:_iWebView];
     [_iWebView mas_makeConstraints:^(MASConstraintMaker *make) {

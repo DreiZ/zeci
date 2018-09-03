@@ -48,6 +48,8 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
 	</dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>是否允许无线背膘测定仪使用蓝牙？允许此权限才能连接测膘仪测量数据</string>

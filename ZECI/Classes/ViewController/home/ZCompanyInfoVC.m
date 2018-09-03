@@ -196,7 +196,7 @@
         }
     }else if(indexPath.row == 2){
         ZWebVC *wvc = [[ZWebVC alloc] init];
-        wvc.url = @"http://www.eacenic.cn/";
+        wvc.url = @"https://www.eacenic.cn/";
         [self.navigationController pushViewController:wvc animated:YES];
     }
 }
